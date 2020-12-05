@@ -55,7 +55,7 @@ export class MapComponent implements OnInit {
       zoom: that.zoom, // starting zoom
     });
 
-    Papa.parse("assets/nodes_mericourt.csv", {
+    Papa.parse("assets/objets_carte.csv", {
       download: true,
       dynamicTyping: true,
       header: true,
