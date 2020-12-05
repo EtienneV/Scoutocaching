@@ -1,0 +1,54 @@
+<div class="page-single">
+
+
+
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col col-login mx-auto">
+        <div class="text-center">
+          <img src="assets/Witti_logo.png" class="" alt="" style="margin:50px;">
+        </div>
+        <form class="card">
+          <div class="card-body p-6">
+            <h5 class="card-title">Connexion</h5>
+            <br>
+            <div class="form-group">
+              <label class="form-label">Identifiant</label>
+              <input type="email" class="form-control" id="email-login" name="email" aria-describedby="emailHelp"
+                placeholder="Identifiant" autocomplete="off" [(ngModel)]="email" required>
+              <div class="invalid-feedback">
+                Renseignez un identifiant.
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="form-label">
+                Mot de passe
+              </label>
+              <input type="password" class="form-control" id="pwd-login" name="password" placeholder="Password"
+                autocomplete="off" [(ngModel)]="mdp">
+              <div class="invalid-feedback">
+                Entrez votre mot de passe.
+              </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block" (click)="login()">Connexion</button>
+
+          </div>
+        </form>
+        <!--<div class="text-center text-muted">
+          Don't have account yet? <a href="./register.html">Sign up</a>
+        </div>-->
+
+        <div class="alert alert-primary show" role="alert" *ngIf="showAlertForgotPw">
+          Un email vous a été envoyé avec le nouveau mot de passe.
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

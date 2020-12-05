@@ -1,0 +1,15 @@
+::ng-deep  table.dataTable tbody tr.greenClass {
+  background-color: #9ACA8D;
+}
+
+::ng-deep  table.dataTable tbody tr.redClass {
+  background-color: #EE96A7;
+}
+
+::ng-deep  table.dataTable tbody tr.orangeClass {
+  background-color: rgb(255, 203, 107);
+}
+
+table {
+  cursor: pointer;
+}

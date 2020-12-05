@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <br>
+  <h1 style="text-align: center;">Site de {{nameSite}}</h1>
+</div>
+
+<div class="row">
+  <div class="col-12 pl-5 pr-5 p-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 pl-5 pr-5" style="background-color: white;">
+            <div class="row">
+              <div class="col-10">
+                <!--<div class="row">&nbsp;</div>-->
+                <div class="row">
+                  <div class="col-12">
+                    <h3><b>Noeuds actifs : </b> {{nbActiveNodes}} / {{nodesSite.length}}</h3>
+                    <p>Démarrage du serveur : {{startServer}}</p>
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+              </div>
+              <div class="col-2">
+                <div class="row" *ngFor="let gw of gateways">
+                  <div class="col-12">
+                    <b>{{gw.name}} : </b> <span *ngIf="gw.active">En ligne</span> <span
+                      *ngIf="!gw.active">Hors ligne</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 pl-5 pr-5 p-3">
+
+    <div class="card">
+      <div class="card-body">
+        <table id="nodes_tab" class="table"></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 pl-5 pr-5 p-3">
+
+    <app-map [tabNodes]="nodesSite" [tabGateways]="gateways" [nodesFile]="nodesFile" [position]="position" [zoom]="zoom"></app-map>
+
+  </div>
+</div>

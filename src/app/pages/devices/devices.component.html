@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <h1>Devices</h1>
+
+  <button type="button" class="btn btn-primary" (click)="maintenance(true)">Maintenance On</button>
+  <button type="button" class="btn btn-primary" (click)="maintenance(false)">Maintenance Off</button>
+  <button type="button" class="btn btn-primary" (click)="light(true)">Light On</button>
+  <button type="button" class="btn btn-primary" (click)="light(false)">Light Off</button>
+
+  <div class="list-group">
+
+    <div class="list-group-item" *ngFor="let device of devices; let index = index">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{device.name}}</h5>
+
+        <small class="align-self-center">Last message : {{device.last_message}}</small>
+
+        <div class="form-check form-switch align-self-center">
+          <input class="form-check-input" type="checkbox" id="device-item-{{index}}" [(ngModel)]="device.state" (change)="switchDevice(index, device.state)">
+          <label class="form-check-label" for="device-item-{{index}}">Allumer</label>
+        </div>
+      </div>
+      <small>MAC address : {{device.mac}}</small> <br>
+
+    </div>
+
+  </div>
+
+</div>
