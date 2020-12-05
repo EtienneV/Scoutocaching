@@ -59,7 +59,7 @@ export class MapComponent implements OnInit {
 
     this.map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/chipsondulee/ckgtmaya02ak019paoafa40df', //43.244442, 5.398040
+      style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
       center: JSON.parse(that.position), // starting position [lng, lat]
       zoom: that.zoom, // starting zoom
     });
@@ -82,7 +82,7 @@ export class MapComponent implements OnInit {
 
         for (let i = 0; i < results.data.length; i++) {
           const element = results.data[i];
-          let coord = element["coords.coordinates"];
+          let coord = element["coords"]; // ! COORD
           //console.log(coord)
 
           if (coord !== undefined) {
@@ -102,12 +102,12 @@ export class MapComponent implements OnInit {
                 }
               }
 
-              if (element["core.type"] == "GenericSensor") {
+              if (element["type"] == "GenericSensor") { // ! TYPE
                 that.sensorsGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords.coordinates"])
+                    "coordinates": JSON.parse(element["coords"])
                   },
                   "properties": {
                     "name": element["name"],
@@ -116,12 +116,12 @@ export class MapComponent implements OnInit {
                   }
                 })
               }
-              else if (element["core.type"] == "AccessPoint") {
+              else if (element["type"] == "Groupe") {
                 that.gatewaysGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords.coordinates"])
+                    "coordinates": JSON.parse(element["coords"])
                   },
                   "properties": {
                     "name": element["name"],
@@ -130,22 +130,17 @@ export class MapComponent implements OnInit {
                   }
                 })
               }
-              else if (element["core.type"] == "LightPoint") {
+              else if (element["type"] == "Cache") {
                 that.lightsGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords.coordinates"])
+                    "coordinates": JSON.parse(element["coords"])
                   },
                   "properties": {
-                    "name": element["name"],
-                    "id": element["configuration.wittiNodeName"],
+                    "name": element["name"], // ! NAME
+                    "id": element["id"], // ! ID
                     street: streetName,
-                    mac_gateway: element.mac_gateway,
-                    gateway: "",//element.gateway,
-                    node: element.node,
-                    last_message: element.date,
-                    group: element["core.groupPath"]
                   }
                 })
               }
