@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "micro-cms-everywarecloud"
+    }
+  },
+  "defaultProject": "micro-cms-everywarecloud",
+  "cli": {
+    "analytics": false
+  }
 }

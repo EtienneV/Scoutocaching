@@ -83,11 +83,13 @@ export class MapComponent implements OnInit {
         for (let i = 0; i < results.data.length; i++) {
           const element = results.data[i];
           let coord = element["coords"]; // ! COORD
-          //console.log(coord)
+
+          coord = coord.split(' ');
+          coord = [parseFloat(coord[1]), parseFloat(coord[0])];
 
           if (coord !== undefined) {
 
-            that.reverseGeoCoding(JSON.parse(coord)[1], JSON.parse(coord)[0]).then((resp: any) => {
+            that.reverseGeoCoding(coord[1], coord[0]).then((resp: any) => {
               //console.log(resp)
 
               let streetName = '';
@@ -107,7 +109,7 @@ export class MapComponent implements OnInit {
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords"])
+                    "coordinates": coord
                   },
                   "properties": {
                     "name": element["name"],
@@ -121,11 +123,12 @@ export class MapComponent implements OnInit {
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords"])
+                    "coordinates": coord
                   },
                   "properties": {
                     "name": element["name"],
                     "id": element["id"],
+                    "icon": element["icon"],
                     street: streetName
                   }
                 })
@@ -135,7 +138,7 @@ export class MapComponent implements OnInit {
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
-                    "coordinates": JSON.parse(element["coords"])
+                    "coordinates": coord
                   },
                   "properties": {
                     "name": element["name"], // ! NAME
@@ -236,7 +239,7 @@ export class MapComponent implements OnInit {
           'type': 'symbol',
           'source': 'gateways',
           'layout': {
-            'icon-image': 'gateway-red',
+            'icon-image': ['get', 'icon'],
             'icon-size': 0.5,
             'icon-allow-overlap': true,
             'icon-ignore-placement': true,
@@ -266,7 +269,7 @@ export class MapComponent implements OnInit {
 
           'layout': {
             'icon-padding': 0,
-            'icon-image': 'light-red',
+            'icon-image': 'treasure',
             'icon-size': 0.5,
             'icon-allow-overlap': true,
             'icon-ignore-placement': true,
@@ -545,9 +548,11 @@ export class MapComponent implements OnInit {
         that.loadMapIcon("light-selected.png", "light-green").then(() => {
           that.loadMapIcon("light-red.png", "light-red").then(() => {
             that.loadMapIcon("gateway-red.png", "gateway-red").then(() => {
-              that.loadMapIcon("gateway-green.png", "gateway-green").then(() => {
-                that.loadMapIcon("sensor.png", "sensor").then(() => {
-                  resolve();
+              that.loadMapIcon("presquile.png", "presquile").then(() => {
+                that.loadMapIcon("treasure.png", "treasure").then(() => {
+                  that.loadMapIcon("sacre_coeur.png", "sacre-coeur").then(() => {
+                    resolve();
+                  })
                 })
               })
             })
