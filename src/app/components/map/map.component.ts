@@ -123,6 +123,7 @@ export class MapComponent implements OnInit {
                     "name": element["name"], // ! NAME
                     "id": element["id"], // ! ID
                     street: streetName,
+                    indice: element["indice"]
                   }
                 })
               }
@@ -253,32 +254,18 @@ export class MapComponent implements OnInit {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-
-
     console.log(e.features[0]) //id, name, street
 
     let node = e.features[0].properties;
 
     let html = "<b>Nom : </b>" + node.name + "<br>";
-    html += "<b>Groupe : </b>" + node.group + "<br>";
-    html += "<b>Rue : </b>" + node.street + "<br>";
-    html += "<b>Gateway : </b>" + node.gateway + " (" + node.mac_gateway + ")<br>";
-    html += "<b>MAC : </b>" + node.node + "<br>";
-    html += "<b>Dernière activité : </b>" + node.last_message + "<br>";
-    html += '<button id="pilot-light-' + node.node + '">Piloter le luminaire</button>'
-
+    html += "<b>Indice : </b>" + node.indice + "<br>";
+    
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(html)
       .addTo(that.map);
 
-    document.getElementById('pilot-light-' + node.node).addEventListener('click', function (e) {
-      //let coord = JSON.parse(decodeURI($(e.target).attr('coord')));
-
-      //console.log(node.node)
-
-      that.router.navigate(["node/" + encodeURI(node.mac_gateway) + "/" + encodeURI(node.gateway) + "/" + encodeURI(node.node) + "/" + encodeURI(node.name)]);
-    });
   }
 
   loadMapIcon(file, name) {
