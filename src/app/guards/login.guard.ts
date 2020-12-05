@@ -16,7 +16,7 @@ export class LoginGuard implements CanActivateChild {
     state: RouterStateSnapshot): boolean {
     let url: string = state.url;
 
-    console.log(url);
+    /*console.log(url);
 
     if(this.authService.isLogged()) {
       return true;
@@ -24,7 +24,9 @@ export class LoginGuard implements CanActivateChild {
     else {
       this.router.navigate(['login']);
       return false;
-    }
+    }*/
+
+    return true;
   }
 
   canActivateChild(
