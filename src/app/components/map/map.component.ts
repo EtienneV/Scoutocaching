@@ -26,6 +26,8 @@ export class MapComponent implements OnInit {
   csvRecords: any[] = [];
   header = false;
 
+  groupes = [];
+
   lightsGeoJson = {
     "type": "FeatureCollection",
     "features": []
@@ -79,6 +81,8 @@ export class MapComponent implements OnInit {
          })*/
 
         console.log(results);
+
+        that.groupes = results.data;
 
         for (let i = 0; i < results.data.length; i++) {
           const element = results.data[i];
@@ -174,181 +178,183 @@ export class MapComponent implements OnInit {
     this.map.on('load', function () {
 
       that.loadMapIcons().then(() => {
-        // Sources
-        that.map.addSource('lights', {
-          type: 'geojson',
-          data: that.lightsGeoJson
-        });
+        that.loadMapFoulards().then(() => {
+          // Sources
+          that.map.addSource('lights', {
+            type: 'geojson',
+            data: that.lightsGeoJson
+          });
 
-        that.map.addSource('gateways', {
-          type: 'geojson',
-          data: that.gatewaysGeoJson
-        });
+          that.map.addSource('gateways', {
+            type: 'geojson',
+            data: that.gatewaysGeoJson
+          });
 
-        that.map.addSource('sensors', {
-          type: 'geojson',
-          data: that.sensorsGeoJson
-        });
+          that.map.addSource('sensors', {
+            type: 'geojson',
+            data: that.sensorsGeoJson
+          });
 
-        let labelsGeoJson = { ...that.lightsGeoJson };
-        labelsGeoJson.features = labelsGeoJson.features.concat(that.gatewaysGeoJson.features);
-        labelsGeoJson.features = labelsGeoJson.features.concat(that.sensorsGeoJson.features);
+          let labelsGeoJson = { ...that.lightsGeoJson };
+          labelsGeoJson.features = labelsGeoJson.features.concat(that.gatewaysGeoJson.features);
+          labelsGeoJson.features = labelsGeoJson.features.concat(that.sensorsGeoJson.features);
 
-        console.log(labelsGeoJson)
+          console.log(labelsGeoJson)
 
-        that.map.addSource('labels', {
-          type: 'geojson',
-          data: labelsGeoJson
-        });
+          that.map.addSource('labels', {
+            type: 'geojson',
+            data: labelsGeoJson
+          });
 
-        // Layers
-        that.map.addLayer({
-          'id': 'labels',
-          'type': 'symbol',
-          'source': 'labels',
-          'layout': {
-            'text-allow-overlap': false,
-            'text-ignore-placement': false,
-            'text-field': ['get', 'name'],
-            'text-font': ["Open Sans Regular", "Arial Unicode MS Regular"],
-            'text-offset': [1.3, 0],
-            'text-anchor': 'left',
-            'text-size': 13
-          }
-        });
+          // Layers
+          that.map.addLayer({
+            'id': 'labels',
+            'type': 'symbol',
+            'source': 'labels',
+            'layout': {
+              'text-allow-overlap': false,
+              'text-ignore-placement': false,
+              'text-field': ['get', 'name'],
+              'text-font': ["Open Sans Regular", "Arial Unicode MS Regular"],
+              'text-offset': [1.3, 0],
+              'text-anchor': 'left',
+              'text-size': 13
+            }
+          });
 
-        that.map.addLayer({
-          'id': 'sensors',
-          'type': 'symbol',
-          'source': 'sensors',
-          'layout': {
-            'icon-image': 'sensor',
-            'icon-size': 0.5,
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true,
-            'text-allow-overlap': false,
-            'text-ignore-placement': false,
-            'icon-anchor': 'center',
-            // get the title name from the source's "title" property
-          },
-          "filter": ["!in", "id", ""]
-        });
+          that.map.addLayer({
+            'id': 'sensors',
+            'type': 'symbol',
+            'source': 'sensors',
+            'layout': {
+              'icon-image': 'sensor',
+              'icon-size': 0.5,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'text-allow-overlap': false,
+              'text-ignore-placement': false,
+              'icon-anchor': 'center',
+              // get the title name from the source's "title" property
+            },
+            "filter": ["!in", "id", ""]
+          });
 
-        that.map.addLayer({
-          'id': 'gateways-inactive',
-          'type': 'symbol',
-          'source': 'gateways',
-          'layout': {
-            'icon-image': ['get', 'icon'],
-            'icon-size': 0.5,
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true,
-            'icon-anchor': 'center',
-          },
-          "filter": ["!in", "id", ""]
-        });
+          that.map.addLayer({
+            'id': 'gateways-inactive',
+            'type': 'symbol',
+            'source': 'gateways',
+            'layout': {
+              'icon-image': ['get', 'icon'],
+              'icon-size': 0.5,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+            },
+            "filter": ["!in", "id", ""]
+          });
 
-        that.map.addLayer({
-          'id': 'gateways-active',
-          'type': 'symbol',
-          'source': 'gateways',
-          'layout': {
-            'icon-image': 'gateway-green',
-            'icon-size': 0.5,
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true,
-            'icon-anchor': 'center',
-          },
-          "filter": ["in", "id", ""]
-        });
+          that.map.addLayer({
+            'id': 'gateways-active',
+            'type': 'symbol',
+            'source': 'gateways',
+            'layout': {
+              'icon-image': 'gateway-green',
+              'icon-size': 0.5,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+            },
+            "filter": ["in", "id", ""]
+          });
 
-        that.map.addLayer({
-          'id': 'light-points',
-          'type': 'symbol',
-          'source': 'lights',
+          that.map.addLayer({
+            'id': 'tresors',
+            'type': 'symbol',
+            'source': 'lights',
 
-          'layout': {
-            'icon-padding': 0,
-            'icon-image': 'treasure',
-            'icon-size': 0.5,
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true,
-            'icon-anchor': 'center',
-          },
-          "filter": ["!in", "id", ""]
-        });
+            'layout': {
+              'icon-padding': 0,
+              'icon-image': 'treasure',
+              'icon-size': 0.5,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+            },
+            "filter": ["!in", "id", ""]
+          });
 
-        that.map.addLayer({
-          'id': 'light-points-selected',
-          'type': 'symbol',
-          'source': 'lights',
+          that.map.addLayer({
+            'id': 'light-points-selected',
+            'type': 'symbol',
+            'source': 'lights',
 
-          'layout': {
-            'icon-padding': 0,
-            'icon-image': 'light-green',
-            'icon-size': 0.5,
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true,
-            'icon-anchor': 'center',
-          },
-          "filter": ["in", "id", ""]
-        });
+            'layout': {
+              'icon-padding': 0,
+              'icon-image': 'light-green',
+              'icon-size': 0.5,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'icon-anchor': 'center',
+            },
+            "filter": ["in", "id", ""]
+          });
 
-        /*
-        // When a click event occurs on a feature in the light-points layer, open a popup at the
-        // location of the feature, with description HTML from its properties.
-        that.map.on('click', 'light-points', function (e) {
-          that.clickOnLight(e);
-        });
+          /*
+          // When a click event occurs on a feature in the tresors layer, open a popup at the
+          // location of the feature, with description HTML from its properties.
+          that.map.on('click', 'tresors', function (e) {
+            that.clickOnLight(e);
+          });
+  
+          // Change the cursor to a pointer when the mouse is over the tresors layer.
+          that.map.on('mouseenter', 'tresors', function () {
+            that.map.getCanvas().style.cursor = 'pointer';
+          });
+  
+          // Change it back to a pointer when it leaves.
+          that.map.on('mouseleave', 'tresors', function () {
+            that.map.getCanvas().style.cursor = '';
+          });
+          */
 
-        // Change the cursor to a pointer when the mouse is over the light-points layer.
-        that.map.on('mouseenter', 'light-points', function () {
-          that.map.getCanvas().style.cursor = 'pointer';
-        });
 
-        // Change it back to a pointer when it leaves.
-        that.map.on('mouseleave', 'light-points', function () {
-          that.map.getCanvas().style.cursor = '';
+          that.map.on('click', 'light-points-selected', function (e) {
+            that.clickOnLight(e);
+          });
+
+          // Change the cursor to a pointer when the mouse is over the light-points-selected layer.
+          that.map.on('mouseenter', 'light-points-selected', function () {
+            that.map.getCanvas().style.cursor = 'pointer';
+          });
+
+          // Change it back to a pointer when it leaves.
+          that.map.on('mouseleave', 'light-points-selected', function () {
+            that.map.getCanvas().style.cursor = '';
+          });
+
+          /*
+          that.map.on("wheel", event => {
+            if (event.originalEvent.ctrlKey) {
+                return;
+            }
+  
+            if (event.originalEvent.metaKey) {
+                return;
+            }
+  
+            if (event.originalEvent.altKey) {
+                return;
+            }
+  
+            event.preventDefault();
         });
         */
 
+          that.mapLoaded = true;
+          that.updateActiveNodes();
+        })
 
-        that.map.on('click', 'light-points-selected', function (e) {
-          that.clickOnLight(e);
-        });
-
-        // Change the cursor to a pointer when the mouse is over the light-points-selected layer.
-        that.map.on('mouseenter', 'light-points-selected', function () {
-          that.map.getCanvas().style.cursor = 'pointer';
-        });
-
-        // Change it back to a pointer when it leaves.
-        that.map.on('mouseleave', 'light-points-selected', function () {
-          that.map.getCanvas().style.cursor = '';
-        });
-
-        /*
-        that.map.on("wheel", event => {
-          if (event.originalEvent.ctrlKey) {
-              return;
-          }
-
-          if (event.originalEvent.metaKey) {
-              return;
-          }
-
-          if (event.originalEvent.altKey) {
-              return;
-          }
-
-          event.preventDefault();
       });
-      */
-
-        that.mapLoaded = true;
-        that.updateActiveNodes();
-      })
-
     });
   }
 
@@ -413,7 +419,7 @@ export class MapComponent implements OnInit {
     filter2 = filter2.concat(lightsTab)
 
     this.map.setFilter("light-points-selected", filter);
-    this.map.setFilter("light-points", filter2);
+    this.map.setFilter("tresors", filter2);
 
     // Extraction of unique lights
     this.selectedLights = [...new Set(lightsTab)]
@@ -520,7 +526,7 @@ export class MapComponent implements OnInit {
     filter2 = filter2.concat(activeLights)
 
     this.map.setFilter("light-points-selected", filter);
-    this.map.setFilter("light-points", filter2);
+    this.map.setFilter("tresors", filter2);
 
   }
 
@@ -547,20 +553,49 @@ export class MapComponent implements OnInit {
       that.loadMapIcon("light.png", "lightbulb").then(() => {
         that.loadMapIcon("light-selected.png", "light-green").then(() => {
           that.loadMapIcon("light-red.png", "light-red").then(() => {
-            that.loadMapIcon("gateway-red.png", "gateway-red").then(() => {
-              that.loadMapIcon("presquile.png", "presquile").then(() => {
-                that.loadMapIcon("treasure.png", "treasure").then(() => {
-                  that.loadMapIcon("sacre_coeur.png", "sacre-coeur").then(() => {
-                    resolve();
-                  })
-                })
-              })
+            that.loadMapIcon("treasure.png", "treasure").then(() => {
+              resolve();
             })
           })
         })
       })
     })
   }
+
+
+  loadFoulard(file, name) {
+    const that = this;
+    return new Promise((resolve, reject) => {
+      that.map.loadImage(
+        "assets/foulards/" + file,
+        (error, image) => {
+          if (error) reject(error);
+          if (!that.map.hasImage(name)) {
+            that.map.addImage(name, image);
+          }
+          resolve();
+        }
+      )
+    })
+  }
+
+  loadMapFoulards() {
+    const that = this;
+
+    return new Promise(async (resolve, reject) => {
+
+      for (const groupe of this.groupes) {
+        if (groupe["type"] == "Groupe") {
+          await that.loadFoulard(groupe["icon"] + ".png", groupe["icon"])
+        }
+      }
+
+      resolve();
+    });
+  }
+
+
+
 
 
 

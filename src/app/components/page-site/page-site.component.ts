@@ -20,7 +20,6 @@ export class PageSiteComponent implements OnInit {
   @Input() position;
   @Input() zoom;
 
-  socket;
 
   nodesSite = [];
   nodesTable;
@@ -38,8 +37,6 @@ export class PageSiteComponent implements OnInit {
 
     //console.log(this.nodesFile)
 
-    //this.socket = io('http://localhost:8085');
-    this.socket = io();
 
     this.processListNodes(this.nodesSite);
 
@@ -105,11 +102,6 @@ export class PageSiteComponent implements OnInit {
         const itemClicked = that.nodesTable.row($(this).parent()).data();
         e.stopPropagation();
 
-        that.socket.emit('refresh', JSON.stringify({
-          mac_gateway: itemClicked.mac_gateway,
-          gateway: itemClicked.gateway,
-          node: itemClicked.node
-        }));
       });
 
       $("#nodes_tab").on("click", "tbody tr td", function () {
@@ -117,21 +109,6 @@ export class PageSiteComponent implements OnInit {
 
         that.router.navigate(["node/" + encodeURI(itemClicked.mac_gateway) + "/" + encodeURI(itemClicked.gateway) + "/" + encodeURI(itemClicked.node) + "/" + encodeURI(itemClicked.name)]);
       });
-
-      that.socket.on(that.socketThread, message => {
-        message = JSON.parse(message)
-        //console.log(message)
-        that.nodesSite = that.processListNodes(message);
-
-        that.nodesTable.clear(); // Suppression de toutes les données du tableau
-        that.nodesTable.rows.add(that.nodesSite); // Chargement de la liste
-        that.nodesTable.draw(false); // Rendu des lignes
-      })
-
-      that.socket.on("start_server", message => {
-        let date = moment(message)
-        that.startServer = date.format("DD/MM/YYYY HH:mm:ss");
-      })
     });
   }
 
