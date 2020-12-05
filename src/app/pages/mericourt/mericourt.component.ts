@@ -6,20 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mericourt.component.scss']
 })
 export class MericourtComponent implements OnInit {
-  gateways = [
-    {
-      name: "Mericourt1",
-      active : false
-    },
-    {
-      name: "Mericourt2",
-      active : false
-    },
-    {
-      name: "Mericourt3",
-      active : false
-    }
-  ];
 
   constructor() { }
 

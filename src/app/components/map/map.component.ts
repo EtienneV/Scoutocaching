@@ -14,9 +14,6 @@ declare var turf: any;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  @Input() nodesFile;
-  @Input() tabNodes;
-  @Input() tabGateways;
   @Input() position;
   @Input() zoom;
 
@@ -28,20 +25,16 @@ export class MapComponent implements OnInit {
 
   groupes = [];
 
-  lightsGeoJson = {
+  tresorsGeoJson = {
     "type": "FeatureCollection",
     "features": []
   };
 
-  gatewaysGeoJson = {
+  groupesGeoJson = {
     "type": "FeatureCollection",
     "features": []
   };
 
-  sensorsGeoJson = {
-    "type": "FeatureCollection",
-    "features": []
-  };
 
   selectedLights = [];
 
@@ -55,10 +48,6 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     const that = this;
 
-    console.log(this.tabNodes)
-    console.log(this.tabGateways)
-    console.log(this.nodesFile)
-
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
@@ -66,7 +55,7 @@ export class MapComponent implements OnInit {
       zoom: that.zoom, // starting zoom
     });
 
-    Papa.parse("assets/" + that.nodesFile, {
+    Papa.parse("assets/nodes_mericourt.csv", {
       download: true,
       dynamicTyping: true,
       header: true,
@@ -108,22 +97,8 @@ export class MapComponent implements OnInit {
                 }
               }
 
-              if (element["type"] == "GenericSensor") { // ! TYPE
-                that.sensorsGeoJson.features.push({
-                  "type": "Feature",
-                  "geometry": {
-                    "type": "Point",
-                    "coordinates": coord
-                  },
-                  "properties": {
-                    "name": element["name"],
-                    "id": element["id"],
-                    street: streetName
-                  }
-                })
-              }
-              else if (element["type"] == "Groupe") {
-                that.gatewaysGeoJson.features.push({
+              if (element["type"] == "Groupe") {
+                that.groupesGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
@@ -138,7 +113,7 @@ export class MapComponent implements OnInit {
                 })
               }
               else if (element["type"] == "Cache") {
-                that.lightsGeoJson.features.push({
+                that.tresorsGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
@@ -157,7 +132,7 @@ export class MapComponent implements OnInit {
 
         }
 
-        console.log(that.lightsGeoJson)
+        console.log(that.tresorsGeoJson)
 
         that.loadMap();
 
@@ -166,10 +141,6 @@ export class MapComponent implements OnInit {
   }
 
   ngOnChanges() {
-    //console.log(this.tabNodes)
-    //console.log(this.tabGateways)
-
-    this.updateActiveNodes();
   }
 
   loadMap() {
@@ -180,26 +151,19 @@ export class MapComponent implements OnInit {
       that.loadMapIcons().then(() => {
         that.loadMapFoulards().then(() => {
           // Sources
-          that.map.addSource('lights', {
+          that.map.addSource('tresors', {
             type: 'geojson',
-            data: that.lightsGeoJson
+            data: that.tresorsGeoJson
           });
 
-          that.map.addSource('gateways', {
+          that.map.addSource('groupes', {
             type: 'geojson',
-            data: that.gatewaysGeoJson
+            data: that.groupesGeoJson
           });
 
-          that.map.addSource('sensors', {
-            type: 'geojson',
-            data: that.sensorsGeoJson
-          });
-
-          let labelsGeoJson = { ...that.lightsGeoJson };
-          labelsGeoJson.features = labelsGeoJson.features.concat(that.gatewaysGeoJson.features);
-          labelsGeoJson.features = labelsGeoJson.features.concat(that.sensorsGeoJson.features);
-
-          console.log(labelsGeoJson)
+          // Labels
+          let labelsGeoJson = { ...that.tresorsGeoJson };
+          labelsGeoJson.features = labelsGeoJson.features.concat(that.groupesGeoJson.features);
 
           that.map.addSource('labels', {
             type: 'geojson',
@@ -223,26 +187,9 @@ export class MapComponent implements OnInit {
           });
 
           that.map.addLayer({
-            'id': 'sensors',
+            'id': 'groupes',
             'type': 'symbol',
-            'source': 'sensors',
-            'layout': {
-              'icon-image': 'sensor',
-              'icon-size': 0.5,
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'text-allow-overlap': false,
-              'text-ignore-placement': false,
-              'icon-anchor': 'center',
-              // get the title name from the source's "title" property
-            },
-            "filter": ["!in", "id", ""]
-          });
-
-          that.map.addLayer({
-            'id': 'gateways-inactive',
-            'type': 'symbol',
-            'source': 'gateways',
+            'source': 'groupes',
             'layout': {
               'icon-image': ['get', 'icon'],
               'icon-size': 0.5,
@@ -254,23 +201,9 @@ export class MapComponent implements OnInit {
           });
 
           that.map.addLayer({
-            'id': 'gateways-active',
-            'type': 'symbol',
-            'source': 'gateways',
-            'layout': {
-              'icon-image': 'gateway-green',
-              'icon-size': 0.5,
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-            },
-            "filter": ["in", "id", ""]
-          });
-
-          that.map.addLayer({
             'id': 'tresors',
             'type': 'symbol',
-            'source': 'lights',
+            'source': 'tresors',
 
             'layout': {
               'icon-padding': 0,
@@ -283,83 +216,31 @@ export class MapComponent implements OnInit {
             "filter": ["!in", "id", ""]
           });
 
-          that.map.addLayer({
-            'id': 'light-points-selected',
-            'type': 'symbol',
-            'source': 'lights',
 
-            'layout': {
-              'icon-padding': 0,
-              'icon-image': 'light-green',
-              'icon-size': 0.5,
-              'icon-allow-overlap': true,
-              'icon-ignore-placement': true,
-              'icon-anchor': 'center',
-            },
-            "filter": ["in", "id", ""]
-          });
-
-          /*
           // When a click event occurs on a feature in the tresors layer, open a popup at the
           // location of the feature, with description HTML from its properties.
           that.map.on('click', 'tresors', function (e) {
-            that.clickOnLight(e);
+            that.clickOnTresor(e);
           });
-  
+
           // Change the cursor to a pointer when the mouse is over the tresors layer.
           that.map.on('mouseenter', 'tresors', function () {
             that.map.getCanvas().style.cursor = 'pointer';
           });
-  
+
           // Change it back to a pointer when it leaves.
           that.map.on('mouseleave', 'tresors', function () {
             that.map.getCanvas().style.cursor = '';
           });
-          */
-
-
-          that.map.on('click', 'light-points-selected', function (e) {
-            that.clickOnLight(e);
-          });
-
-          // Change the cursor to a pointer when the mouse is over the light-points-selected layer.
-          that.map.on('mouseenter', 'light-points-selected', function () {
-            that.map.getCanvas().style.cursor = 'pointer';
-          });
-
-          // Change it back to a pointer when it leaves.
-          that.map.on('mouseleave', 'light-points-selected', function () {
-            that.map.getCanvas().style.cursor = '';
-          });
-
-          /*
-          that.map.on("wheel", event => {
-            if (event.originalEvent.ctrlKey) {
-                return;
-            }
-  
-            if (event.originalEvent.metaKey) {
-                return;
-            }
-  
-            if (event.originalEvent.altKey) {
-                return;
-            }
-  
-            event.preventDefault();
-        });
-        */
 
           that.mapLoaded = true;
-          that.updateActiveNodes();
         })
-
       });
     });
   }
 
 
-  clickOnLight(e) {
+  clickOnTresor(e) {
     const that = this;
 
     var coordinates = e.features[0].geometry.coordinates.slice();
@@ -372,16 +253,7 @@ export class MapComponent implements OnInit {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    /*
-    * "name": element["name"],
-                    "id": element["configuration.wittiNodeName"],
-                  *  street: streetName,
-                  *  mac_gateway: element.mac_gateway,
-                  *  gateway: element.gateway,
-                  *  node: element.node,
-                  *  last_message: element.date,
-                  *  group: element["core.groupPath"]
-    */
+
 
     console.log(e.features[0]) //id, name, street
 
@@ -409,128 +281,6 @@ export class MapComponent implements OnInit {
     });
   }
 
-
-
-  selectLightPoints(lightsTab) {
-    let filter = ['in', 'id'];
-    filter = filter.concat(lightsTab)
-
-    let filter2 = ['!in', 'id'];
-    filter2 = filter2.concat(lightsTab)
-
-    this.map.setFilter("light-points-selected", filter);
-    this.map.setFilter("tresors", filter2);
-
-    // Extraction of unique lights
-    this.selectedLights = [...new Set(lightsTab)]
-
-    console.log(this.selectedLights)
-    //alert(JSON.stringify(this.selectedLights))
-  }
-
-
-
-  /*
-  ** UPDATE NODES STATUS
-  */
-
-  updateActiveNodes() {
-    if (this.mapLoaded) {
-      this.updateGateways();
-      this.updateLights();
-    }
-  }
-
-  updateGateways() {
-    let activeGateways = [];
-
-    // Pour chaque Gateway affichée
-    for (const gateway of this.gatewaysGeoJson.features) {
-      // Recherche dans le tableau des gw mis à jour
-      let gw_e = this.tabGateways.find(elt => {
-        if (elt.name == gateway.properties.name) {
-          return true;
-        }
-        else return false;
-      })
-
-      if (gw_e !== undefined) {
-        // Si la gw est active
-        if (gw_e.active) {
-          console.log(gw_e.name)
-
-          activeGateways.push(gw_e.name)
-        }
-      }
-    }
-
-    let filter = ['in', 'name'];
-    filter = filter.concat(activeGateways)
-
-    let filter2 = ['!in', 'name'];
-    filter2 = filter2.concat(activeGateways)
-
-    this.map.setFilter("gateways-active", filter);
-    this.map.setFilter("gateways-inactive", filter2);
-
-  }
-
-  updateLights() {
-    const that = this;
-
-    let activeLights = [];
-
-    // Pour chaque Luminaire affichée
-    for (let i = 0; i < this.lightsGeoJson.features.length; i++) {
-      let light = this.lightsGeoJson.features[i];
-
-      //console.log(this.tabNodes)
-
-      // Recherche dans le tableau des gw mis à jour
-      let light_e = this.tabNodes.find(elt => {
-        if (elt.node == light.properties.id) {
-          return true;
-        }
-        else return false;
-      })
-
-      if (light_e !== undefined) {
-        //console.log(light_e)
-
-        // Si la gw est active
-        if (light_e.active) {
-          //console.log(light_e.node)
-
-          //console.log(light_e.gateway)
-
-          light.properties.gateway = light_e.gateway;
-          light.properties.mac_gateway = light_e.mac_gateway;
-          light.properties.node = light_e.node;
-          light.properties.last_message = light_e.date;
-
-          activeLights.push(light_e.node)
-        }
-      }
-
-
-    }
-
-    console.log(this.lightsGeoJson)
-
-    this.map.getSource('lights').setData(this.lightsGeoJson);
-
-    let filter = ['in', 'id'];
-    filter = filter.concat(activeLights)
-
-    let filter2 = ['!in', 'id'];
-    filter2 = filter2.concat(activeLights)
-
-    this.map.setFilter("light-points-selected", filter);
-    this.map.setFilter("tresors", filter2);
-
-  }
-
-
   loadMapIcon(file, name) {
     const that = this;
     return new Promise((resolve, reject) => {
@@ -550,18 +300,11 @@ export class MapComponent implements OnInit {
   loadMapIcons() {
     const that = this;
     return new Promise((resolve, reject) => {
-      that.loadMapIcon("light.png", "lightbulb").then(() => {
-        that.loadMapIcon("light-selected.png", "light-green").then(() => {
-          that.loadMapIcon("light-red.png", "light-red").then(() => {
-            that.loadMapIcon("treasure.png", "treasure").then(() => {
-              resolve();
-            })
-          })
-        })
+      that.loadMapIcon("treasure.png", "treasure").then(() => {
+        resolve();
       })
     })
   }
-
 
   loadFoulard(file, name) {
     const that = this;
