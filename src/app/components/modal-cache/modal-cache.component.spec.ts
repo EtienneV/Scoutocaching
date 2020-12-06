@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DevicesComponent } from './devices.component';
+import { ModalCacheComponent } from './modal-cache.component';
 
-describe('DevicesComponent', () => {
-  let component: DevicesComponent;
-  let fixture: ComponentFixture<DevicesComponent>;
+describe('ModalCacheComponent', () => {
+  let component: ModalCacheComponent;
+  let fixture: ComponentFixture<ModalCacheComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DevicesComponent ]
+      declarations: [ ModalCacheComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DevicesComponent);
+    fixture = TestBed.createComponent(ModalCacheComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

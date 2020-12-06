@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
 
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
@@ -38,7 +41,7 @@ export class MapComponent implements OnInit {
 
   selectedLights = [];
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal) {
     const that = this;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
@@ -75,15 +78,14 @@ export class MapComponent implements OnInit {
 
         for (let i = 0; i < results.data.length; i++) {
           const element = results.data[i];
-          let coord = element["coords"]; // ! COORD
-
-          coord = coord.split(' ');
-          coord = [parseFloat(coord[1]), parseFloat(coord[0])];
+          let coord = element["coords"]; // ? COORD
 
           if (coord !== undefined) {
 
+            coord = coord.split(' ');
+            coord = [parseFloat(coord[1]), parseFloat(coord[0])];
+
             that.reverseGeoCoding(coord[1], coord[0]).then((resp: any) => {
-              //console.log(resp)
 
               let streetName = '';
 
@@ -91,8 +93,6 @@ export class MapComponent implements OnInit {
                 const element = resp.features[i];
 
                 if (element.place_type[0] === 'address') {
-                  //console.log('Rue : ' + element.text)
-
                   streetName = element.text;
                 }
               }
@@ -221,7 +221,19 @@ export class MapComponent implements OnInit {
           // When a click event occurs on a feature in the tresors layer, open a popup at the
           // location of the feature, with description HTML from its properties.
           that.map.on('click', 'tresors', function (e) {
-            that.clickOnTresor(e);
+            //that.clickOnTresor(e);
+
+
+            const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
+            //modalRef.componentInstance.idRapport = idRapport;
+            modalRef.result.then((result) => {
+              //this.init()
+            }, (reason) => {
+              //console.log(reason);
+            });
+
+
+
           });
 
           // Change the cursor to a pointer when the mouse is over the tresors layer.
@@ -260,7 +272,7 @@ export class MapComponent implements OnInit {
 
     let html = "<b>Nom : </b>" + node.name + "<br>";
     html += "<b>Indice : </b>" + node.indice + "<br>";
-    
+
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(html)
