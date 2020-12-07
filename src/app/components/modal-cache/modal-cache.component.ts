@@ -26,6 +26,15 @@ export class ModalCacheComponent implements OnInit {
       type: "video",
       url: "https://www.youtube.com/embed/1Rk1K5Mmnbg",
       trustedUrl: {}
+    },
+    {
+      type: "titre",
+      text: "Image"
+    },
+    {
+      type: "image",
+      url: "https://www.woopets.fr/assets/img/008/141/og-image/perroquet.jpg",
+      trustedUrl: {}
     }
   ]
 
@@ -35,7 +44,7 @@ export class ModalCacheComponent implements OnInit {
     for (let i = 0; i < this.indice.length; i++) {
       const element = this.indice[i];
 
-      if(element.type == "video") {
+      if(element.type == "video" || element.type == "image") {
         element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
       }
     }

@@ -20,7 +20,9 @@
       <iframe width="560" height="315" [src]="item.trustedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-
+    <div *ngIf="item.type == 'image'">
+      <img style="width: 100%" [src]="item.trustedUrl">
+    </div>
 
 
 
