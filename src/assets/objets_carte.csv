@@ -1,21 +1,33 @@
-id;type;name;coords;icon
-1;Groupe;Sacre-Coeur;45.758307364362096 4.869409148708134;sacrecoeur
-2;Cache;Cache 1;45.7619746779048 4.834945767912271;
-3;Groupe;Presqu'île;45.75608485326355 4.832188003085623;presquile
-4;Groupe;St Pothin;45.766172421950294, 4.846091036600093;stpothin
-5;Groupe;La Guillotière;45.74664447933739, 4.8392979099123545;guillotiere
-6;Group;Saint Vincent de Croix Rousse;45.77636542111537, 4.824826111286139;croixrousse
-8;Groupe;Saint Nom de Jésus;45.76819585428337, 4.852575625127017;saintnomdejesus
-9;Groupe;Saint Eucher;45.77971826550136, 4.831579998144369;sainteucher
-10;Groupe;Immaculée Conception Saint sacrement;45.75807840076235, 4.851240726979787;immac
-11;Groupe;Saint Joseph des Brotteaux;45.77143781862568, 4.854763941975285;saintjoseph
-13;Groupe;Saint Priest;45.693918618237575, 4.933132184649935;saintpriest
-14;Groupe;4 Châteaux;45.61408384427664, 5.015602913483462;4chateaux
-15;Groupe;Gandhi;45.7317460133789, 4.867112913487394;gandhi
-16;Groupe;Bron;45.73351591845975, 4.911941455815134;bron
-18;Groupe;La Nativité;45.75705594718653, 4.891019998143626;lanativite
-19;Groupe;Montchat;45.75147087962312, 4.879679269307238;monchat
-20;Groupe;Wangari Mathai;45.78219581013603, 4.922681455816754;vaulxenvelin
-22;Groupe;Charpennes;45.771333458928396, 4.881719998144095;charpennes
-23;Groupe;Genas Chassieu;45.73597595584529, 5.014692913487545;genaschassieu
-24;Groupe;Meyzieu;45.76695843705774, 5.003639269307781;meyzieu
+id;type;name;coords;icon;terre;indice_title;indice_text;indice_image;indice_video;story
+1;Groupe;Sacre-Coeur;45.758307364362096 4.869409148708134;sacrecoeur;;;;;;
+2;Cache;Cache 1;45.7619746779048 4.834945767912271;;canuts;Cache1;Test;;;
+3;Groupe;Presqu'île;45.75608485326355 4.832188003085623;presquile;;;;;;
+4;Groupe;St Pothin;45.766172421950294, 4.846091036600093;stpothin;;;;;;
+5;Groupe;La Guillotière;45.74664447933739, 4.8392979099123545;guillotiere;;;;;;
+6;Group;Saint Vincent de Croix Rousse;45.77636542111537, 4.824826111286139;croixrousse;;;;;;
+8;Groupe;Saint Nom de Jésus;45.76819585428337, 4.852575625127017;saintnomdejesus;;;;;;
+9;Groupe;Saint Eucher;45.77971826550136, 4.831579998144369;sainteucher;;;;;;
+10;Groupe;Immaculée Conception Saint sacrement;45.75807840076235, 4.851240726979787;immac;;;;;;
+11;Groupe;Saint Joseph des Brotteaux;45.77143781862568, 4.854763941975285;saintjoseph;;;;;;
+13;Groupe;Saint Priest;45.693918618237575, 4.933132184649935;saintpriest;;;;;;
+14;Groupe;4 Châteaux;45.61408384427664, 5.015602913483462;4chateaux;;;;;;
+15;Groupe;Gandhi;45.7317460133789, 4.867112913487394;gandhi;;;;;;
+16;Groupe;Bron;45.73351591845975, 4.911941455815134;bron;;;;;;
+18;Groupe;La Nativité;45.75705594718653, 4.891019998143626;lanativite;;;;;;
+19;Groupe;Montchat;45.75147087962312, 4.879679269307238;monchat;;;;;;
+20;Groupe;Wangari Mathai;45.78219581013603, 4.922681455816754;vaulxenvelin;;;;;;
+22;Groupe;Charpennes;45.771333458928396, 4.881719998144095;charpennes;;;;;;
+23;Groupe;Genas Chassieu;45.73597595584529, 5.014692913487545;genaschassieu;;;;;;
+24;Groupe;Meyzieu;45.76695843705774, 5.003639269307781;meyzieu;;;;;;
+25;Cache;Decines;45.774203318406194, 4.951723321339614;;lumieres;Lumieres A;;;https://www.youtube.com/embed/1Rk1K5Mmnbg;
+26;Cache;Gratte-Ciel;45.770780998339404, 4.882447618560946;;lumieres;Lumieres B;;https://www.woopets.fr/assets/img/008/141/og-image/perroquet.jpg;;
+27;Cache;Montchat;45.75085116679938, 4.879670852466887;;lumieres;Lumieres C;;;;
+28;Cache;La Soie;45.7591931208145, 4.921945294840356;;lumieres;Lumieres D;;;;
+29;Cache;Bellecombe;45.765152978333475, 4.866998094635761;;lumieres;Lumieres E;;;;<h2>Jeanne Lumiere</h2><br/><p>J'etais au salon</p>
+30;Cache;Avenue Félix Faure;45.752121, 4.847156;;gones;;Photo ticket de stationnement;;;
+31;Cache;La confluence;45.740629, 4,814588;;gones;;Vid�o d'une main en train de sortir la cache;;;
+32;Cache;Parc de Gerland;45.725458, 4.829558;;gones;;Direction � partir d'un point en mode boussole (ex: 6 pas NO);;;
+33;Cache;Kiosque Monplaisir;45.744698, 4.871189;;gones;;23�me barreau gauche;;;
+34;Cache;Parc de Parilly;45.723318, 4.906573;;gones;;Dessin arbre + renard sur chemin + scout sur chemin;;;
+35;Cache;Fort de Bron;45.732264, 4.920239;;gones;;;;;
+36;Cache;Saint Priest;45.694271, 4.940963;;gones;;;;;

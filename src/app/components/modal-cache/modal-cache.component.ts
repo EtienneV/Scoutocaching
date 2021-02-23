@@ -1,14 +1,15 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {NgbActiveModal, NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DomSanitizer} from '@angular/platform-browser';
-
+import { BarcodeFormat } from '@zxing/library';
 @Component({
   selector: 'app-modal-cache',
   templateUrl: './modal-cache.component.html',
-  styleUrls: ['./modal-cache.component.scss']
+  styleUrls: ['./modal-cache.component.scss'],
 })
 export class ModalCacheComponent implements OnInit {
-
+  
+  // @Input() indice : any;
   indice = [
     {
       type: "titre",
@@ -37,21 +38,74 @@ export class ModalCacheComponent implements OnInit {
       trustedUrl: {}
     }
   ]
+  id=-1;
+  title="";
+  story=null;
+  coord={lat:0.00000, lng:0.00000};
+  found=false;
+  formatsEnabled: BarcodeFormat = BarcodeFormat.QR_CODE;
+  availableDevices: MediaDeviceInfo[];
+  currentDevice: MediaDeviceInfo = null;
+  
+  qrResultString: {};
 
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < this.indice.length; i++) {
-      const element = this.indice[i];
-
-      if(element.type == "video" || element.type == "image") {
-        element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+    if(this.found==false){
+      const elementsToBeRemoved=[];
+      for (let i = 0; i < this.indice.length; i++) {
+        const element = this.indice[i];
+        if (element.type == "titre" || element.type=="paragraphe" ){
+          if (element.text!=null){
+                  element.text=element.text.replace('\"','"')
+          }
+          else{
+                elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+        }
+        if(element.type == "video" || element.type == "image") {
+          if(element.url!=null){
+          element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+          }else{
+                elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+        }
+      }
+      for (var i = elementsToBeRemoved.length-1; i>=0 ; i--) {
+          this.indice.splice(elementsToBeRemoved[i],1);
       }
     }
-  }
+    else if(this.story!=""){
+      console.log(this.story);
+    // else if(this.found===true && this.qrcodeScanned=true){
 
+    }
+  }
   youtubeURL(video) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(video);
+  }
+
+  clearResult(): void {
+    this.qrResultString = null;
+  }
+
+  onCodeResult(resultString: string) {
+    this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
+    this.found=true;
+    this.activeModal.close(0);
+  }
+  onScanError(e){
+    this.qrResultString = "QR Code illisible";
+  }
+
+  onClickMe(id){
+    this.id=id;
+    this.indice=null;
+    this.coord={lat:0.00000, lng:0.00000};
+    this.formatsEnabled = BarcodeFormat.QR_CODE;
+    // this.activeModal.close(this.id);
+    // this.thisTreasure.properties.status="treasureFound";
   }
 
 

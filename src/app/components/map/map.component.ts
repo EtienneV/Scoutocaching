@@ -4,13 +4,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
-
+import {ModalOnBoardingComponent} from '../modal-onboarding/modal-onboarding.component';
+import {CookieService} from 'ngx-cookie-service';  
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 declare var $: any;
 declare var Papa: any;
 declare var MapboxDraw: any;
 declare var turf: any;
+declare var tipContent:any;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -19,16 +21,19 @@ declare var turf: any;
 export class MapComponent implements OnInit {
   @Input() position;
   @Input() zoom;
-
   map;
   mapLoaded = false;
-
+  terreChoosed = "lumieres";
   csvRecords: any[] = [];
   header = false;
 
   groupes = [];
 
-  tresorsGeoJson = {
+  activeTresorsGeoJson = {
+    "type": "FeatureCollection",
+    "features": []
+  };
+  allTresorsGeoJson = {
     "type": "FeatureCollection",
     "features": []
   };
@@ -41,11 +46,11 @@ export class MapComponent implements OnInit {
 
   selectedLights = [];
 
-  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal) {
+  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal, private cookieService: CookieService) {
     const that = this;
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
-
+    this.terreChoosed = this.cookieService.get('scoutocaching_terre');
   }
 
   ngOnInit(): void {
@@ -56,8 +61,7 @@ export class MapComponent implements OnInit {
       style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
       center: JSON.parse(that.position), // starting position [lng, lat]
       zoom: that.zoom, // starting zoom
-    });
-
+    });    
     Papa.parse("assets/objets_carte.csv", {
       download: true,
       dynamicTyping: true,
@@ -96,7 +100,6 @@ export class MapComponent implements OnInit {
                   streetName = element.text;
                 }
               }
-
               if (element["type"] == "Groupe") {
                 that.groupesGeoJson.features.push({
                   "type": "Feature",
@@ -113,7 +116,12 @@ export class MapComponent implements OnInit {
                 })
               }
               else if (element["type"] == "Cache") {
-                that.tresorsGeoJson.features.push({
+                var status = that.cookieService.get('scoutocaching_caches_'.concat(element["id"].toString()));
+                if(status==="undefined" || status===""){
+                  status="treasureNotFound";
+                  that.cookieService.set('scoutocaching_caches_'.concat(element["id"].toString()),status);
+                }
+                that.allTresorsGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
                     "type": "Point",
@@ -122,8 +130,22 @@ export class MapComponent implements OnInit {
                   "properties": {
                     "name": element["name"], // ! NAME
                     "id": element["id"], // ! ID
+                    "status": status,
+                    "terre":element["terre"],
+                    "story":element["story"],
                     street: streetName,
-                    indice: element["indice"]
+                    indice: [{type: "titre",
+                      text: element["indice_title"]
+                    },
+                    {
+                      type: "paragraphe",text: element["indice_text"]
+                    },
+                    {
+                      type: "image",url: element["indice_image"], trustedUrl: {}
+                    },
+                    {
+                      type: "video",url: element["indice_video"],  trustedUrl: {}
+                    }]
                   }
                 })
               }
@@ -132,21 +154,22 @@ export class MapComponent implements OnInit {
           }
 
         }
-
-        console.log(that.tresorsGeoJson)
-
+        console.log(that.allTresorsGeoJson)
         that.loadMap();
-
+                
       }
     });
   }
 
-  ngOnChanges() {
+  refreshMap(){
+    const that =this;
+    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element =>  element.properties  .terre == that.terreChoosed);
+    console.log(that.activeTresorsGeoJson);
+    that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
   }
 
   loadMap() {
     const that = this;
-
     this.map.on('load', function () {
 
       that.loadMapIcons().then(() => {
@@ -154,7 +177,7 @@ export class MapComponent implements OnInit {
           // Sources
           that.map.addSource('tresors', {
             type: 'geojson',
-            data: that.tresorsGeoJson
+            data: that.allTresorsGeoJson
           });
 
           that.map.addSource('groupes', {
@@ -163,7 +186,7 @@ export class MapComponent implements OnInit {
           });
 
           // Labels
-          let labelsGeoJson = { ...that.tresorsGeoJson };
+          let labelsGeoJson = { ...that.allTresorsGeoJson };
           labelsGeoJson.features = labelsGeoJson.features.concat(that.groupesGeoJson.features);
 
           that.map.addSource('labels', {
@@ -208,28 +231,47 @@ export class MapComponent implements OnInit {
 
             'layout': {
               'icon-padding': 0,
-              'icon-image': 'treasure',
-              'icon-size': 0.5,
+              'icon-image': ['get', 'status'],
+              'icon-size': 0.25,
               'icon-allow-overlap': true,
               'icon-ignore-placement': true,
               'icon-anchor': 'center',
             },
             "filter": ["!in", "id", ""]
           });
-
-
+                      
           // When a click event occurs on a feature in the tresors layer, open a popup at the
           // location of the feature, with description HTML from its properties.
           that.map.on('click', 'tresors', function (e) {
             //that.clickOnTresor(e);
+            const thisTreature = that.activeTresorsGeoJson.features.reduce(function(prev, curr) {
+              return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat))< (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
+            });          
+            const modalRef = that.modalService.open(ModalCacheComponent, {size: 'lg'});           
+            modalRef.componentInstance.id=thisTreature.properties['id'];
+            modalRef.componentInstance.indice=thisTreature.properties['indice'];
+            modalRef.componentInstance.title=thisTreature.properties['name'];
+            if(thisTreature.properties.status==="treasureFound"){
+              modalRef.componentInstance.found=true;
+              modalRef.componentInstance.indice=null;
+              modalRef.componentInstance.story=thisTreature.properties['story'];
+              console.log(modalRef.componentInstance.story);
+              if(modalRef.componentInstance.story===null){
+                modalRef.componentInstance.story="<h2>Cache trouvée </h2>";
+              }
+            }
 
-
-            const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
+            modalRef.componentInstance.coord=e.lngLat;
             //modalRef.componentInstance.idRapport = idRapport;
             modalRef.result.then((result) => {
+              if(modalRef.componentInstance.id===thisTreature.properties['id'] && result===0){              
+                thisTreature.properties.status="treasureFound";
+                that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()),thisTreature.properties.status);
+                that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
+              }
               //this.init()
             }, (reason) => {
-              //console.log(reason);
+              console.log(reason);
             });
 
 
@@ -247,11 +289,28 @@ export class MapComponent implements OnInit {
           });
 
           that.mapLoaded = true;
+          if(that.terreChoosed===""){
+            const onboarding = that.modalService.open(ModalOnBoardingComponent, {size: 'lg', centered: true }); 
+            onboarding.result.then((result) => {
+              console.log(result);
+              that.terreChoosed=result;
+              that.cookieService.set('scoutocaching_terre',that.terreChoosed);
+              that.refreshMap();
+              //this.init()
+            }, (reason) => {
+              console.log(reason);
+            });
+          }else{
+            that.refreshMap();
+          }
         })
       });
     });
+    
   }
 
+  ngOnChanges() {
+  }
 
   clickOnTresor(e) {
     const that = this;
@@ -299,7 +358,8 @@ export class MapComponent implements OnInit {
   loadMapIcons() {
     const that = this;
     return new Promise((resolve, reject) => {
-      that.loadMapIcon("treasure.png", "treasure").then(() => {
+      that.loadMapIcon("treasureNotFound.png", "treasureNotFound");
+      that.loadMapIcon("treasureFound.png", "treasureFound").then(() => {
         resolve();
       })
     })

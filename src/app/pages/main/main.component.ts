@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mericourt',
-  templateUrl: './mericourt.component.html',
-  styleUrls: ['./mericourt.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
 export class MericourtComponent implements OnInit {
 

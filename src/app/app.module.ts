@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MericourtComponent } from './pages/mericourt/mericourt.component';
+import { MericourtComponent } from './pages/main/main.component';
 import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './authentification/login/login.component';
 import { PageSiteComponent } from './components/page-site/page-site.component';
 import { ModalCacheComponent } from './components/modal-cache/modal-cache.component';
+import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MapComponent,
     LoginComponent,
     PageSiteComponent,
-    ModalCacheComponent
+    ModalCacheComponent,
+    ModalOnBoardingComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    ZXingScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MericourtComponent } from './mericourt.component';
+import { ModalOnBoardingComponent } from './modal-onboarding.component';
 
-describe('MericourtComponent', () => {
-  let component: MericourtComponent;
-  let fixture: ComponentFixture<MericourtComponent>;
+describe('ModalOnBoardingComponent', () => {
+  let component: ModalOnBoardingComponent;
+  let fixture: ComponentFixture<ModalOnBoardingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MericourtComponent ]
+      declarations: [ ModalOnBoardingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MericourtComponent);
+    fixture = TestBed.createComponent(ModalOnBoardingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

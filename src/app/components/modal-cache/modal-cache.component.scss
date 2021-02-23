@@ -1,0 +1,52 @@
+.modal-footer > button {
+    text-align: center;
+    background-color:  #ff8300!important;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 50%;
+}
+.modal-header > button{
+    float: left;
+}
+
+.modal-header, .modal-body{
+    color:#013a5d;
+}
+
+.modal-coordinates{
+    display: flex;
+    align-items:center;
+    vertical-align: middle;
+}
+.modal-icon{
+    float: left;
+    margin: 0px 15px 0px 0px;
+}
+:host zxing-scanner::ng-deep video {
+    padding: 0.3rem 0.3rem;
+    padding-bottom: 0%;
+}
+
+:host zxing-scanner::after
+{
+    content: '';
+    position: absolute;
+    width: 214px;
+    height: 214px;
+    margin:0;
+    top: 44%;
+    left: 50%;
+    margin-left: -107px;
+    margin-top: -107px;
+    background-image: url("/assets/icons/Scan.png");
+}
+.results{
+    text-align: center;
+}
