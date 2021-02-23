@@ -51,6 +51,8 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     const that = this;
 
+    this.initLocalStorage();
+
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
@@ -143,6 +145,54 @@ export class MapComponent implements OnInit {
 
   ngOnChanges() {
   }
+
+
+
+
+
+  initLocalStorage() {
+
+    /*
+    parcours_selectionne = 'canuts'
+
+    parcours = [
+      {
+        id: 'canuts',
+        tresors: [
+          {
+            id: 0,
+            solved: false
+          },
+          ...
+        ]
+      },
+      ...
+    ]
+    */
+
+
+    let localVariable;
+
+    if (localStorage.length > 0) { // Si la bdd local storage a été initialisée
+
+      // Récupération des variables
+      localVariable = localStorage.getItem("local_variable");
+
+      // Si la variable n'est pas définie
+      if (localVariable === null) {
+        localStorage.setItem("local_variable", "hello");
+      }
+    } else {
+      localStorage.setItem("local_variable", "hello");
+    }
+  }
+
+
+
+
+
+
+
 
   loadMap() {
     const that = this;
@@ -290,7 +340,7 @@ export class MapComponent implements OnInit {
           if (!that.map.hasImage(name)) {
             that.map.addImage(name, image);
           }
-          resolve();
+          resolve("");
         }
       )
     })
@@ -300,7 +350,7 @@ export class MapComponent implements OnInit {
     const that = this;
     return new Promise((resolve, reject) => {
       that.loadMapIcon("treasure.png", "treasure").then(() => {
-        resolve();
+        resolve("");
       })
     })
   }
@@ -315,7 +365,7 @@ export class MapComponent implements OnInit {
           if (!that.map.hasImage(name)) {
             that.map.addImage(name, image);
           }
-          resolve();
+          resolve("");
         }
       )
     })
@@ -332,7 +382,7 @@ export class MapComponent implements OnInit {
         }
       }
 
-      resolve();
+      resolve("");
     });
   }
 
