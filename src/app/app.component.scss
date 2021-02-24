@@ -8,6 +8,7 @@ nav {
 }
 
 .navbar-dark .navbar-toggler-icon{
+  // display: none;
   background-image: url("/assets/icons/more_vert-24px.png");
 }
 .navbar-toggler {
@@ -21,5 +22,5 @@ nav {
   padding-right: 0px;
 }
 .dropdown-toggle::after{
-  display: none;
+  display: none;  
 }

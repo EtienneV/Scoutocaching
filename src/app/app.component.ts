@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { AuthentificationService } from './services/authentification.service';
+import {CookieService} from 'ngx-cookie-service';  
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,22 @@ import { AuthentificationService } from './services/authentification.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'micro-cms-everywarecloud';
-
-  constructor(private AuthentificationService: AuthentificationService) {
+  title = 'Scoutocaching';
+  terreChoosed='';
+  constructor(private modalService: NgbModal, private cookieService: CookieService) {
+    this.terreChoosed = this.cookieService.get('scoutocaching_terre');
 
   }
 
-  logout() {
-    this.AuthentificationService.deconnexion();
+  changeTerre():void{
+    const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
+    onboarding.result.then((result) => {
+      console.log(result);
+      this.terreChoosed=result;
+      this.cookieService.set('scoutocaching_terre',this.terreChoosed);
+      //this.init()
+    }, (reason) => {
+      console.log(reason);
+    });
   }
 }

@@ -19,7 +19,7 @@ declare var tipContent:any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   @Input() position;
   @Input() zoom;
   map;
@@ -234,23 +234,27 @@ export class MapComponent implements OnInit {
       this.map.setCenter([pos.lng,pos.lat]);
     });
   }
+
   updateUserPosition(){
     this.locationService.getPosition().then(pos=>{
-      this.userPositionGeoJson.features[0]={
+      this.userPositionGeoJson.features=[{
         "type": "Feature",
         "geometry": {
           "type": "Point",
           "coordinates": [pos.lng,pos.lat]
         }
-      }
+      }];
       this.map.setCenter([pos.lng,pos.lat]);
     });
   }
 
   refreshMap(){
     const that =this;
+    if(that.terreChoosed!=this.cookieService.get('scoutocaching_terre')){
+      that.terreChoosed= this.cookieService.get('scoutocaching_terre');
+    }
     that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element =>  element.properties.terre == that.terreChoosed);
-    console.log(that.activeTresorsGeoJson);
+    // console.log(that.activeTresorsGeoJson);
     that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
   }
 
@@ -258,12 +262,13 @@ export class MapComponent implements OnInit {
     const that = this;
     this.map.on('load', function () {
       window.setInterval(function () {
+        that.refreshMap();
         that.updateUserPosition();
         // update the drone symbol's location on the map
-        that.map.getSource('userPoint').setData(this.userPositionGeoJson);
-      
+        that.map.getSource('userPoint').setData(that.userPositionGeoJson);
+        console.log(that.userPositionGeoJson.features)
         // fly the map to the drone's current location
-        this.map.flyTo({center: this.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
+        that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
       }, 2000);
       that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
       that.map.addSource('userPoint', {

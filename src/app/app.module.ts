@@ -14,6 +14,7 @@ import { ModalCacheComponent } from './components/modal-cache/modal-cache.compon
 import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     LoginComponent,
     PageSiteComponent,
     ModalCacheComponent,
-    ModalOnBoardingComponent
+    ModalOnBoardingComponent,
+    ModalChangeTerreComponent
   ],
   imports: [
     BrowserModule,
