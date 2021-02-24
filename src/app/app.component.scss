@@ -6,3 +6,20 @@ main {
 nav {
   background-color: #013a5d!important;
 }
+
+.navbar-dark .navbar-toggler-icon{
+  background-image: url("/assets/icons/more_vert-24px.png");
+}
+.navbar-toggler {
+  border: 0px solid transparent;
+  border-radius: 0.25rem;
+}
+.navbar-toggler:focus{
+  outline: 0px solid transparent;
+}
+.navbar{
+  padding-right: 0px;
+}
+.dropdown-toggle::after{
+  display: none;
+}

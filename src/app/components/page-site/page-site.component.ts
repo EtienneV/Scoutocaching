@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { LocationService } from 'src/app/services/location.service';
 import { environment } from '../../../environments/environment';
 
 import * as moment from 'moment';
@@ -17,13 +18,15 @@ export class PageSiteComponent implements OnInit {
   @Input() zoom;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private locationService : LocationService) { }
 
   ngOnChanges() {
     //console.log(this.gateways)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    const that = this;
+    that.locationService.getPosition().then(pos => {that.position=[pos.lng, pos.lat].toString(); console.log(pos); console.log(that.position);});
  
   }
 

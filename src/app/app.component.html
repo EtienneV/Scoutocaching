@@ -1,13 +1,31 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Scoutocaching</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="d-flex align-items-center justify-content-center">
+      <img class="ml-auto pr-2"  src="assets/icons/Groupe_67.png" width="auto"/><a class="navbar-brand" href="#">Scoutocaching</a>
+  </div>
+    <!-- <button class="navbar-toggler dropdown" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-    </div>
+    <!-- <div class="collapse navbar-collapse justify-content-right" id="navbarsExampleDefault">
+        <ul>Coucou</ul>
+    </div> -->
+    
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown>
+      <a dropdownToggle mdbWavesEffect type="button" class="navbar-toggler dropdown nav-link dropdown-toggle waves-light" mdbWavesEffect>
+      <!-- Basic dropdown<span class="caret"></span> -->
+      <span class="navbar-toggler-icon"></span>
+    </a>
+      <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+      </div>
+      </li>
+    </ul>
   </div>
 </nav>
 

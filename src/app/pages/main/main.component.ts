@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MericourtComponent implements OnInit {
+  userPosition='[0, 0]';
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-    const that = this;
-
+  ngOnInit(): void {  
+    
   }
 
 }

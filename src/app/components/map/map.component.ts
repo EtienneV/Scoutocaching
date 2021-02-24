@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
 import {ModalOnBoardingComponent} from '../modal-onboarding/modal-onboarding.component';
+import {LocationService} from '../../services/location.service';
 import {CookieService} from 'ngx-cookie-service';  
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
@@ -26,9 +27,12 @@ export class MapComponent implements OnInit {
   terreChoosed = "lumieres";
   csvRecords: any[] = [];
   header = false;
-
+  userPulsingDot;
   groupes = [];
-
+  userPositionGeoJson = {
+    "type": "FeatureCollection",
+    "features": []
+  };
   activeTresorsGeoJson = {
     "type": "FeatureCollection",
     "features": []
@@ -44,13 +48,11 @@ export class MapComponent implements OnInit {
   };
 
 
-  selectedLights = [];
-
-  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal, private cookieService: CookieService) {
-    const that = this;
-
+  constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal, private cookieService: CookieService, private locationService: LocationService) {
+    
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
     this.terreChoosed = this.cookieService.get('scoutocaching_terre');
+
   }
 
   ngOnInit(): void {
@@ -62,6 +64,65 @@ export class MapComponent implements OnInit {
       center: JSON.parse(that.position), // starting position [lng, lat]
       zoom: that.zoom, // starting zoom
     });    
+    var size = 200;
+    this.userPulsingDot = {
+      width: size,
+      height: size,
+      data: new Uint8Array(size * size * 4),
+       
+      // get rendering context for the map canvas when layer is added to the map
+      onAdd: function () {
+      var canvas = document.createElement('canvas');
+      canvas.width = this.width;
+      canvas.height = this.height;
+      this.context = canvas.getContext('2d');
+      },
+       
+      // called once before every frame where the icon will be used
+      render: function () {
+      var duration = 1000;
+      var t = (performance.now() % duration) / duration;
+       
+      var radius = (size / 2) * 0.3;
+      var outerRadius = (size / 2) * 0.7 * t + radius;
+      var context = this.context;
+       
+      // draw outer circle
+      context.clearRect(0, 0, this.width, this.height);
+      context.beginPath();
+      context.arc(this.width / 2,this.height / 2,outerRadius,0, Math.PI * 2);
+      // context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+      context.fillStyle = 'rgba(1, 116, 186,' + (1 - t) + ')';
+      context.fill();
+       
+      // draw inner circle
+      context.beginPath();
+      context.arc(
+      this.width / 2,
+      this.height / 2,
+      radius,
+      0,
+      Math.PI * 2
+      );
+      // context.fillStyle = 'rgba(255, 100, 100, 1)';
+      context.fillStyle = 'rgba(4, 58, 93, 1)';
+      context.strokeStyle = 'white';
+      context.lineWidth = 2 + 4 * (1 - t);
+      context.fill();
+      context.stroke();
+       
+      // update this image's data with data from the canvas
+      this.data = context.getImageData(0,0,this.width,this.height).data;
+       
+      // continuously repaint the map, resulting in the smooth animation of the dot
+      that.map.triggerRepaint();
+       
+      // return `true` to let the map know that the image was updated
+      return true;
+      }
+      };
+      that.getUserPosition();
+      
     Papa.parse("assets/objets_carte.csv", {
       download: true,
       dynamicTyping: true,
@@ -161,9 +222,34 @@ export class MapComponent implements OnInit {
     });
   }
 
+  getUserPosition(){
+    this.locationService.getPosition().then(pos=>{
+      this.userPositionGeoJson.features.push({
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [pos.lng,pos.lat]
+        }
+      })
+      this.map.setCenter([pos.lng,pos.lat]);
+    });
+  }
+  updateUserPosition(){
+    this.locationService.getPosition().then(pos=>{
+      this.userPositionGeoJson.features[0]={
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [pos.lng,pos.lat]
+        }
+      }
+      this.map.setCenter([pos.lng,pos.lat]);
+    });
+  }
+
   refreshMap(){
     const that =this;
-    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element =>  element.properties  .terre == that.terreChoosed);
+    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element =>  element.properties.terre == that.terreChoosed);
     console.log(that.activeTresorsGeoJson);
     that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
   }
@@ -171,7 +257,27 @@ export class MapComponent implements OnInit {
   loadMap() {
     const that = this;
     this.map.on('load', function () {
-
+      window.setInterval(function () {
+        that.updateUserPosition();
+        // update the drone symbol's location on the map
+        that.map.getSource('userPoint').setData(this.userPositionGeoJson);
+      
+        // fly the map to the drone's current location
+        this.map.flyTo({center: this.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
+      }, 2000);
+      that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
+      that.map.addSource('userPoint', {
+        'type': 'geojson',
+        'data': that.userPositionGeoJson
+      });
+      that.map.addLayer({
+        'id': 'userPoint',
+        'type': 'symbol',
+        'source': 'userPoint',
+        'layout': {
+          'icon-image': 'pulsing-dot'
+        } 
+        });
       that.loadMapIcons().then(() => {
         that.loadMapFoulards().then(() => {
           // Sources
