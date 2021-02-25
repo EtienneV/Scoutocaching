@@ -34,11 +34,19 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!found && indice === null">
-      
-      <zxing-scanner class="qr-scanner" [formats]="formatsEnabled" (scanSuccess)="onCodeResult($event)" (scanError)="onScanError($event)"
-      (scanFailure)="onScanError($event)"></zxing-scanner>
-      <div class="modal-footer d-flex justify-content-center" *ngIf="qrResultString">
+    <div *ngIf="!found && indice === null" style="text-align: center;" ><!-- </div>class="d-flex  align-items-center"> -->
+      <h5 class="ml-auto mr-auto" style="padding: 1.5vh;">Scannez le QR Code </h5>
+      <!-- <zxing-scanner *ngIf="hasDevices" #scanner  start="true" [device]="currentDevice"  class="qr-scanner" [formats]="formatsEnabled" (scanSuccess)="onCodeResult($event)" (scanError)="onScanError($event)"
+      (scanFailure)="onScanError($event)"></zxing-scanner> -->
+      <div class="video-background">
+        <span id="video-background">
+          <zxing-scanner #scanner start="true" [device]="currentDevice" (scanSuccess)="onCodeResult($event)" (scanError)="onScanError($event)"
+          (scanFailure)="onScanError($event)" [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']">
+        </zxing-scanner></span>
+        <img class="img-fluid cover-text" src="assets/icons/Scan.png"/>
+    </div>
+      <!-- <button (click)="enableScanner()" *ngIf="!scannerEnabled" type="button" class="btn btn-success">Activer le scanner de QR Code</button> -->
+      <div class="modal-footer d-flex justify-content-center">
         <div>
           <!-- <small>Result</small> -->
           <span style="text-decoration: underline;">{{ qrResultString }}</span>

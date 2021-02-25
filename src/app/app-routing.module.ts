@@ -9,7 +9,8 @@ import { LoginComponent } from './authentification/login/login.component';
 const routes: Routes = [
   // { path: '',   redirectTo: '/main', pathMatch: 'full' },
   // { path: 'login', pathMatch: 'full', component: LoginComponent},
-  { path: '', component: MericourtComponent}
+  { path: '', component: MericourtComponent},
+  // { path: '', component : }
 ];
 
 @NgModule({

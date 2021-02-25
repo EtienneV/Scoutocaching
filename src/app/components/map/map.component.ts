@@ -27,7 +27,7 @@ export class MapComponent implements OnInit, OnChanges {
   terreChoosed = "lumieres";
   csvRecords: any[] = [];
   header = false;
-  userPulsingDot;
+  geolocate;
   groupes = [];
   userPositionGeoJson = {
     "type": "FeatureCollection",
@@ -64,64 +64,70 @@ export class MapComponent implements OnInit, OnChanges {
       center: JSON.parse(that.position), // starting position [lng, lat]
       zoom: that.zoom, // starting zoom
     });    
-    var size = 200;
-    this.userPulsingDot = {
-      width: size,
-      height: size,
-      data: new Uint8Array(size * size * 4),
-       
-      // get rendering context for the map canvas when layer is added to the map
-      onAdd: function () {
-      var canvas = document.createElement('canvas');
-      canvas.width = this.width;
-      canvas.height = this.height;
-      this.context = canvas.getContext('2d');
+    this.geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
       },
+      trackUserLocation: true
+    })
+    // var size = 200;
+    // this.userPulsingDot = {
+    //   width: size,
+    //   height: size,
+    //   data: new Uint8Array(size * size * 4),
        
-      // called once before every frame where the icon will be used
-      render: function () {
-      var duration = 1000;
-      var t = (performance.now() % duration) / duration;
+    //   // get rendering context for the map canvas when layer is added to the map
+    //   onAdd: function () {
+    //   var canvas = document.createElement('canvas');
+    //   canvas.width = this.width;
+    //   canvas.height = this.height;
+    //   this.context = canvas.getContext('2d');
+    //   },
        
-      var radius = (size / 2) * 0.3;
-      var outerRadius = (size / 2) * 0.7 * t + radius;
-      var context = this.context;
+    //   // called once before every frame where the icon will be used
+    //   render: function () {
+    //   var duration = 1000;
+    //   var t = (performance.now() % duration) / duration;
        
-      // draw outer circle
-      context.clearRect(0, 0, this.width, this.height);
-      context.beginPath();
-      context.arc(this.width / 2,this.height / 2,outerRadius,0, Math.PI * 2);
-      // context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-      context.fillStyle = 'rgba(1, 116, 186,' + (1 - t) + ')';
-      context.fill();
+    //   var radius = (size / 2) * 0.3;
+    //   var outerRadius = (size / 2) * 0.7 * t + radius;
+    //   var context = this.context;
        
-      // draw inner circle
-      context.beginPath();
-      context.arc(
-      this.width / 2,
-      this.height / 2,
-      radius,
-      0,
-      Math.PI * 2
-      );
-      // context.fillStyle = 'rgba(255, 100, 100, 1)';
-      context.fillStyle = 'rgba(4, 58, 93, 1)';
-      context.strokeStyle = 'white';
-      context.lineWidth = 2 + 4 * (1 - t);
-      context.fill();
-      context.stroke();
+    //   // draw outer circle
+    //   context.clearRect(0, 0, this.width, this.height);
+    //   context.beginPath();
+    //   context.arc(this.width / 2,this.height / 2,outerRadius,0, Math.PI * 2);
+    //   // context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+    //   context.fillStyle = 'rgba(1, 116, 186,' + (1 - t) + ')';
+    //   context.fill();
        
-      // update this image's data with data from the canvas
-      this.data = context.getImageData(0,0,this.width,this.height).data;
+    //   // draw inner circle
+    //   context.beginPath();
+    //   context.arc(
+    //   this.width / 2,
+    //   this.height / 2,
+    //   radius,
+    //   0,
+    //   Math.PI * 2
+    //   );
+    //   // context.fillStyle = 'rgba(255, 100, 100, 1)';
+    //   context.fillStyle = 'rgba(4, 58, 93, 1)';
+    //   context.strokeStyle = 'white';
+    //   context.lineWidth = 2 + 4 * (1 - t);
+    //   context.fill();
+    //   context.stroke();
        
-      // continuously repaint the map, resulting in the smooth animation of the dot
-      that.map.triggerRepaint();
+    //   // update this image's data with data from the canvas
+    //   this.data = context.getImageData(0,0,this.width,this.height).data;
        
-      // return `true` to let the map know that the image was updated
-      return true;
-      }
-      };
-      that.getUserPosition();
+    //   // continuously repaint the map, resulting in the smooth animation of the dot
+    //   that.map.triggerRepaint();
+       
+    //   // return `true` to let the map know that the image was updated
+    //   return true;
+    //   }
+    //   };
+      // that.getUserPosition();
       
     Papa.parse("assets/objets_carte.csv", {
       download: true,
@@ -222,31 +228,31 @@ export class MapComponent implements OnInit, OnChanges {
     });
   }
 
-  getUserPosition(){
-    this.locationService.getPosition().then(pos=>{
-      this.userPositionGeoJson.features.push({
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [pos.lng,pos.lat]
-        }
-      })
-      this.map.setCenter([pos.lng,pos.lat]);
-    });
-  }
+  // getUserPosition(){
+  //   this.locationService.getPosition().then(pos=>{
+  //     this.userPositionGeoJson.features.push({
+  //       "type": "Feature",
+  //       "geometry": {
+  //         "type": "Point",
+  //         "coordinates": [pos.lng,pos.lat]
+  //       }
+  //     })
+  //     this.map.setCenter([pos.lng,pos.lat]);
+  //   });
+  // }
 
-  updateUserPosition(){
-    this.locationService.getPosition().then(pos=>{
-      this.userPositionGeoJson.features=[{
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [pos.lng,pos.lat]
-        }
-      }];
-      this.map.setCenter([pos.lng,pos.lat]);
-    });
-  }
+  // updateUserPosition(){
+  //   this.locationService.getPosition().then(pos=>{
+  //     this.userPositionGeoJson.features=[{
+  //       "type": "Feature",
+  //       "geometry": {
+  //         "type": "Point",
+  //         "coordinates": [pos.lng,pos.lat]
+  //       }
+  //     }];
+  //     this.map.setCenter([pos.lng,pos.lat]);
+  //   });
+  // }
 
   refreshMap(){
     const that =this;
@@ -260,29 +266,26 @@ export class MapComponent implements OnInit, OnChanges {
 
   loadMap() {
     const that = this;
-    this.map.on('load', function () {
-      window.setInterval(function () {
-        that.refreshMap();
-        that.updateUserPosition();
+    that.map.addControl(that.geolocate);
+    that.map.on('load', function () {
+      that.geolocate.trigger();
+                // that.updateUserPosition();
         // update the drone symbol's location on the map
-        that.map.getSource('userPoint').setData(that.userPositionGeoJson);
-        console.log(that.userPositionGeoJson.features)
+        // that.map.getSource('userPoint').setData(that.userPositionGeoJson);
+        // console.log(that.userPositionGeoJson.features)
         // fly the map to the drone's current location
-        that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
-      }, 2000);
-      that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
-      that.map.addSource('userPoint', {
-        'type': 'geojson',
-        'data': that.userPositionGeoJson
-      });
-      that.map.addLayer({
-        'id': 'userPoint',
-        'type': 'symbol',
-        'source': 'userPoint',
-        'layout': {
-          'icon-image': 'pulsing-dot'
-        } 
-        });
+        // that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
+      // }, 2000);
+      // that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
+      
+      // that.map.addLayer({
+      //   'id': 'userPoint',
+      //   'type': 'symbol',
+      //   'source': 'userPoint',
+      //   'layout': {
+      //     'icon-image': 'pulsing-dot'
+      //   } 
+      //   });
       that.loadMapIcons().then(() => {
         that.loadMapFoulards().then(() => {
           // Sources
@@ -400,6 +403,7 @@ export class MapComponent implements OnInit, OnChanges {
           });
 
           that.mapLoaded = true;
+          window.setInterval(function () {that.refreshMap();}, 500);
           if(that.terreChoosed===""){
             const onboarding = that.modalService.open(ModalOnBoardingComponent, {size: 'lg', centered: true }); 
             onboarding.result.then((result) => {

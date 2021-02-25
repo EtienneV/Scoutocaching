@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import {NgbActiveModal, NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DomSanitizer} from '@angular/platform-browser';
-import { BarcodeFormat } from '@zxing/library';
+import { BarcodeFormat, Result } from '@zxing/library';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 @Component({
   selector: 'app-modal-cache',
   templateUrl: './modal-cache.component.html',
@@ -43,11 +44,22 @@ export class ModalCacheComponent implements OnInit {
   story=null;
   coord={lat:0.00000, lng:0.00000};
   found=false;
-  formatsEnabled: BarcodeFormat = BarcodeFormat.QR_CODE;
-  availableDevices: MediaDeviceInfo[];
-  currentDevice: MediaDeviceInfo = null;
+  scannerEnabled=false;
+
   
-  qrResultString: {};
+  @ViewChild('scanner', { static: false })
+  scanner: ZXingScannerComponent;
+
+  hasDevices: boolean;
+  hasPermission: boolean;
+  qrResultString: string;
+  qrResult: Result;
+
+  information="";
+  formatsEnabled: BarcodeFormat = BarcodeFormat.QR_CODE;
+  currentDevice: MediaDeviceInfo = null;
+  availableDevices: MediaDeviceInfo[];
+  
 
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
 
@@ -81,24 +93,44 @@ export class ModalCacheComponent implements OnInit {
     // else if(this.found===true && this.qrcodeScanned=true){
 
     }
+    this.initializeScanner();
   }
   youtubeURL(video) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(video);
   }
+  initializeScanner(): void{
+    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
+    this.hasDevices = true;
+    this.availableDevices = devices;
 
+      // selects the devices's back camera by default
+      for (const device of devices) {
+          if (/back|rear|environment/gi.test(device.label)) {
+              // this.scanner.changeDevice(device);
+              this.currentDevice = device;
+              break;
+          }
+      }
+    });
+
+    this.scanner.camerasNotFound.subscribe(() => this.hasDevices = false);
+    this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
+    this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
+  }
   clearResult(): void {
     this.qrResultString = null;
   }
 
   onCodeResult(resultString: string) {
-    this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
+    console.debug('Result: ', resultString);
+    // this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
     this.found=true;
     this.activeModal.close(0);
   }
   onScanError(e){
     this.qrResultString = "QR Code illisible";
   }
-
+  
   onClickMe(id){
     this.id=id;
     this.indice=null;

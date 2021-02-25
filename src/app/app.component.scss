@@ -1,15 +1,21 @@
 
 main {
-  margin-top: 50px;
+  margin-top: 0px; //50px;
+  height: 100%;
 }
 
 nav {
   background-color: #013a5d!important;
 }
-
+.nav-link.dropdown-toggle.waves-effect.waves-light{
+  margin-right: -1vw;
+}
+// app-page-site > .row {
+//   height: 100vh;
+// }
 .navbar-dark .navbar-toggler-icon{
   // display: none;
-  background-image: url("/assets/icons/more_vert-24px.png");
+  // background-image: url("./assets/icons/more_vert-24px.png");
 }
 .navbar-toggler {
   border: 0px solid transparent;

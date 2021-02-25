@@ -12,9 +12,9 @@ import { LoginComponent } from './authentification/login/login.component';
 import { PageSiteComponent } from './components/page-site/page-site.component';
 import { ModalCacheComponent } from './components/modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
+import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 
 @NgModule({
   declarations: [
