@@ -15,6 +15,7 @@ import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-on
 import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     NgbModule,
     ZXingScannerModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {NgbActiveModal, NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {DomSanitizer} from '@angular/platform-browser';
+import lumieres_loader from '@assets/content/lumieres_loader.json';
+import canuts_loader from '@assets/content/canuts_loader.json';
+import gones_loader from '@assets/content/gones_loader.json';
 import { BarcodeFormat } from '@zxing/library';
 @Component({
   selector: 'app-modal-changeTerre',
@@ -10,8 +13,12 @@ import { BarcodeFormat } from '@zxing/library';
 export class ModalChangeTerreComponent implements OnInit {
   
   showStart=true
+  showTerreContent=false
   showTerreChoice=false
+  header:any;
+  footer:any;
   title="Territoire Lyon levant"
+  choice:string;
   content = [
     // {
     //   type: "titre",
@@ -53,6 +60,34 @@ export class ModalChangeTerreComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    this.start();
+  }
+
+  validContent():void{
+    const elementsToBeRemoved=[];
+    for (let i = 0; i < this.content.length; i++) {
+      const element = this.content[i];
+      if (element.type == "titre" || element.type=="paragraphe" ){
+        if (element.text!=null){
+                element.text=element.text.replace('\"','"')
+        }
+        else{
+              elementsToBeRemoved.push(this.content.indexOf(element))
+        }
+      }
+      if(element.type == "video" || element.type == "image") {
+        if(element.url!=null){
+        element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+        }else{
+              elementsToBeRemoved.push(this.content.indexOf(element))
+        }
+      }
+    }
+    for (var i = elementsToBeRemoved.length-1; i>=0 ; i--) {
+        this.content.splice(elementsToBeRemoved[i],1);
+    }
+  }
+  start():void{
     this.showStart=false;
     this.showTerreChoice=true;
     this.title="Changer de Terre"
@@ -71,22 +106,44 @@ export class ModalChangeTerreComponent implements OnInit {
       text: "Terre des Lumieres",
       url: "assets/icons/Composant 6 – 2.png"
     } ]
+    this.validContent();
   }
 
   selectTerre(e):void{
-    var choice="";
     if (e==="Terre des Gones"){
-      choice="gones";
-      // console.log("Gones");
+      this.choice="gones";
+      this.content=gones_loader;
     }
     else if(e==="Terre des Lumieres"){
-      choice="lumieres";
+      this.choice="lumieres";
+      this.content=lumieres_loader;
       // console.log("Lumières");
     }
     else{
-      choice="canuts";
+      this.choice="canuts";
+      this.content=canuts_loader;
+      // const json:any = lumiere_loader;
       // console.log("Canuts");
     }
-    this.activeModal.close(choice);
+    this.title=e;
+    this.validContent();
+    this.showTerreChoice=false;
+    this.showTerreContent=true;
+    this.header=this.content.splice(0,1)[0];
+    this.footer=this.content.pop();
+    console.log(this.header);
+    console.log(this.content);
+    console.log(this.footer);
+  }
+  go(e):void{
+    this.activeModal.close(this.choice);
+  }
+  goBackToTerreChoice(e):void{
+    this.header=null;
+    this.footer=null;
+    this.showTerreContent=false;
+    this.showStart=false;
+    this.showTerreChoice=true;
+    this.start();
   }
 }

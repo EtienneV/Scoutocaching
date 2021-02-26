@@ -1,16 +1,16 @@
-
 <div *ngIf="showStart">
   <div class="modal-header d-flex align-items-center justify-content-center">
     <!-- <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <img src="assets/icons/clear-24px.png"/>
     </button> -->
-    <img class="ml-auto pr-2"  src="assets/icons/Groupe_67blue.png" width="auto"/><h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
+    <img class="ml-auto pr-2" src="assets/icons/Groupe_67blue.png" width="auto" />
+    <h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
   </div>
   <div class="modal-body">
-    <div  class="modal-coordinates d-flex justify-content-center flex-column">
+    <div class="modal-coordinates d-flex justify-content-center flex-column">
       <div *ngFor="let item of content">
         <div *ngIf="item.type == 'titre'">
-          <b>{{item.text}}</b><br/>
+          <b>{{item.text}}</b><br />
         </div>
 
         <div *ngIf="item.type == 'paragraphe'">
@@ -18,7 +18,9 @@
         </div>
 
         <div *ngIf="item.type == 'video'">
-          <iframe width="inherit" [src]="item.trustedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
         </div>
 
         <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
@@ -28,8 +30,11 @@
     </div>
 
   </div>
-  <div class="modal-footer d-flex justify-content-center">
+  <div *ngIf="alreadyStarted === false" class="modal-footer d-flex justify-content-center">
     <button (click)="start()">Démarrer</button>
+  </div>
+  <div *ngIf="alreadyStarted" class="modal-footer d-flex justify-content-center">
+    <button (click)="start()">C'est reparti</button>
   </div>
 </div>
 <div *ngIf="showTerreChoice">
@@ -37,32 +42,72 @@
     <!-- <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <img src="assets/icons/clear-24px.png"/>
     </button> -->
-    <img class="ml-auto pr-2"  src="assets/icons/Groupe_67blue.png" width="auto"/><h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
+    <img class="ml-auto pr-2" src="assets/icons/Groupe_67blue.png" width="auto" />
+    <h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
   </div>
   <div class="modal-body">
     <div *ngFor="let item of content" class="modal-coordinates d-flex justify-content-center flex-column">
-        <div *ngIf="item.type == 'titre'">
-          <b>{{item.text}}</b><br/>
-        </div>
-
-        <div *ngIf="item.type == 'paragraphe'">
-          <p>{{item.text}}</p>
-        </div>
-
-        <div *ngIf="item.type == 'video'">
-          <iframe width="inherit" [src]="item.trustedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
-          <img [src]="item.trustedUrl">
-        </div>
-        <div *ngIf="item.type == 'bouton'">
-          <button (click)="selectTerre(item.text)"><img [src]="item.url"/> {{item.text}}</button>
-        </div>
+      <div *ngIf="item.type == 'titre'">
+        <b>{{item.text}}</b><br />
       </div>
+
+      <div *ngIf="item.type == 'paragraphe'">
+        <p>{{item.text}}</p>
+      </div>
+
+      <div *ngIf="item.type == 'video'">
+        <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+
+      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
+        <img [src]="item.trustedUrl">
+      </div>
+      <div *ngIf="item.type == 'bouton'">
+        <button (click)="selectTerre(item.text)"><img [src]="item.url" /> {{item.text}}</button>
+      </div>
+    </div>
 
   </div>
   <!-- <div class="modal-footer d-flex justify-content-center">
     <button (click)="start()">Démarrer</button>
   </div> -->
 </div>
+<div *ngIf="showTerreContent" class="modal-coordinates d-flex justify-content-center flex-column">
+  <div class="modal-header terreContent d-flex align-items-center justify-content-center">
+        <p style="width: inherit;"><img class="terreContent modal-title d-flex justify-content-center" [src]="header.trustedUrl" style="width: inherit;"/></p>
+        <button type="button" class="back terreContent modal-title d-flex justify-content-center" aria-label="Close" (click)="goBackToTerreChoice()">
+          <img src="assets/icons/back.png"/></button>
+  </div>
+  <div class="modal-body terreContent" style="width: 100%">
+    <div *ngFor="let item of content" class="modal-coordinates d-flex justify-content-center flex-column">
+      <div *ngIf="item.type == 'titre'">
+        <b>{{item.text}}</b><br />
+      </div>
+
+      <div *ngIf="item.type == 'paragraphe'">
+        <p>{{item.text}}</p>
+      </div>
+
+      <div *ngIf="item.type == 'video'">
+        <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+
+      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
+        <img [src]="item.trustedUrl">
+      </div>
+      <div *ngIf="item.type == 'bouton'">
+        <button (click)="selectTerre(item.text)"><img [src]="item.url" /> {{item.text}}</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-center align-items-center justify-content-center" style="width: 100%;">
+    <button (click)="go()">{{footer.text}} <img [src]="footer.url" /> </button>
+  </div>
+</div>
+<!-- <div class="modal-footer d-flex justify-content-center">
+    <button (click)="start()">Démarrer</button>
+  </div> -->

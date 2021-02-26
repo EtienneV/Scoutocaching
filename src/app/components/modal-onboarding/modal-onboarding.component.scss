@@ -16,6 +16,9 @@
     padding:1rem;
     text-align: center;
 }
+.modal-footer > button.terreContent{
+    padding: 10px 32px;
+}
 .modal-body > div > div > button {
     text-align: center;
     background-color:  #013a5d!important;
@@ -30,7 +33,41 @@
     width: 90%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+div.modal-header.terreContent{
+    max-height: 70vh;
+    overflow-y: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex !important;
+    padding: 0;
+    border-bottom: 0px;
+    // display: contents;
+    // height:100%;
+    // height: max-content;
+    // display: flex;
+}
+div.modal-header > img.terreContent{
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+    object-fit: cover;
+    width: fit-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    max-height: 40vh;
+    display: list-item;
+    overflow-y: hidden;
+}
+div.modal-header > button.terreContent{
+    position: absolute;
+    top: 1rem;
+    left: 0.5rem;
+    z-index: 99;
+    background-color: transparent;
+    border: 0;
 
+}
 .modal-header > button{
     float: left;
 }
@@ -47,4 +84,8 @@
 .modal-icon{
     float: left;
     margin: 0px 15px 0px 0px;
+}
+
+.modal-body.terreContent{
+    z-index: 99;
 }

@@ -24,7 +24,8 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() zoom;
   map;
   mapLoaded = false;
-  terreChoosed = "lumieres";
+  alreadyStarted = "";
+  terreChoosed = "";
   csvRecords: any[] = [];
   header = false;
   geolocate;
@@ -52,6 +53,7 @@ export class MapComponent implements OnInit, OnChanges {
     
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
     this.terreChoosed = this.cookieService.get('scoutocaching_terre');
+    this.alreadyStarted = this.cookieService.get('alreadyStarted');
 
   }
 
@@ -366,6 +368,8 @@ export class MapComponent implements OnInit, OnChanges {
             modalRef.componentInstance.indice=thisTreature.properties['indice'];
             modalRef.componentInstance.title=thisTreature.properties['name'];
             if(thisTreature.properties.status==="treasureFound"){
+              // TO DO Charger le contenu des personnages 
+              that.cookieService.set('avoidOnBoarding', '',);
               modalRef.componentInstance.found=true;
               modalRef.componentInstance.indice=null;
               modalRef.componentInstance.story=thisTreature.properties['story'];
@@ -404,11 +408,17 @@ export class MapComponent implements OnInit, OnChanges {
 
           that.mapLoaded = true;
           window.setInterval(function () {that.refreshMap();}, 500);
-          if(that.terreChoosed===""){
+          if(!that.cookieService.check('avoidOnBoarding')){
             const onboarding = that.modalService.open(ModalOnBoardingComponent, {size: 'lg', centered: true }); 
             onboarding.result.then((result) => {
               console.log(result);
               that.terreChoosed=result;
+              const now = new Date();
+              // console.log(now.getHours());
+              const expiredDate = new Date();
+              expiredDate.setMinutes(now.getMinutes() + 3);
+              console.log(now.getMinutes(),expiredDate.getMinutes());
+              that.cookieService.set("alreadyStarted","true",{expires:expiredDate});
               that.cookieService.set('scoutocaching_terre',that.terreChoosed);
               that.refreshMap();
               //this.init()
@@ -416,7 +426,7 @@ export class MapComponent implements OnInit, OnChanges {
               console.log(reason);
             });
           }else{
-            that.refreshMap();
+             that.refreshMap();
           }
         })
       });

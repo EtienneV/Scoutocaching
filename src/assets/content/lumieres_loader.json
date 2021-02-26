@@ -1,0 +1,29 @@
+[
+  
+  {
+    "type": "image",
+    "url": "assets/images/lumieres_loader.jpg",
+    "trustedUrl": {}
+  },
+  { "type":"title",
+    "text": "Qui a cassé le cinématographe des frères Lumière ?"
+  },
+  {
+    "type": "paragraphe",
+    "text": "Nous sommes à Paris, le 27 décembre 1895, la première projection publique du cinématographe a lieu demain."
+  },
+  {
+    "type": "paragraphe",
+    "text": "Pour l’occasion, toute la famille est venue ; Antoine le père, les enfants : Auguste, Louis, Jeanne, Mélina, Francine, Pétrus. On note aussi que différents grands personnages comme Pierre de Coubertin, ou encore le jeune Léon Blum ainsi que Marcel Proust ont déjà acheté le place pour le prix de 1 franc. Des personnes étrangères ont aussi fait le déplacement, notamment le célèbre Thomas Edison ainsi que les frères Orville et Wilbur Wright."
+  },
+  {
+  "type": "paragraphe",
+  "text": "Vers 16h, au moment de faire les réglages, Charles Moisson, l’ingénieur chargé de fabriquer le cinématographe et chef mécanicien, réalise qu’il manque une pièce cruciale : les griffes rondes qui permettent de dérouler la bobine… Il est bien embêté ! Il est pourtant certain de les avoir prises au moment de partir de l’usine.   Qui a bien pu prendre les griffes rondes pour rendre le nouvel appareil inutilisable et ridiculiser la famille Lumière ?"
+  },
+  {
+    "type": "bouton",
+    "text": "Commencer",
+    "url": "assets/icons/east-24px.png"
+  }
+  ]
+
