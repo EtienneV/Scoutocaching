@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,9 +16,13 @@ import { PageSiteComponent } from './components/page-site/page-site.component';
 import { ModalCacheComponent } from './components/modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
 import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-import { CookieService } from 'ngx-cookie-service';
+import {ItemComponent} from '@content/item/item.component';
+import {SimpleComponent} from '@content/item/simple/simple.component';
+import {FeatureComponent} from '@content/item/feature/feature.component';
+import {UnrecognizedComponent} from '@content/item/unrecognized/unrecognized.component';
+import {WidgetComponent} from '@content/item/widget/widget.component';
+import {ItemService} from "@app/services/item.service";
+import {JSONComponent} from "@content/json/json.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +33,13 @@ import { CookieService } from 'ngx-cookie-service';
     PageSiteComponent,
     ModalCacheComponent,
     ModalOnBoardingComponent,
-    ModalChangeTerreComponent
+    ModalChangeTerreComponent,
+    JSONComponent,
+    ItemComponent,
+     SimpleComponent,
+     FeatureComponent,
+     UnrecognizedComponent,
+     WidgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +50,7 @@ import { CookieService } from 'ngx-cookie-service';
     NgbModule,
     ZXingScannerModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

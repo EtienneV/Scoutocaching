@@ -4,7 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@content/*": ["src/app/components/content/*"],
+      "@app/*":["src/app/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
