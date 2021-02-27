@@ -2,18 +2,20 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
-import {ModalOnBoardingComponent} from '../modal-onboarding/modal-onboarding.component';
-import {LocationService} from '../../services/location.service';
-import {CookieService} from 'ngx-cookie-service';  
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import { ModalOnBoardingComponent } from '../modal-onboarding/modal-onboarding.component';
+import { LocationService } from '../../services/location.service';
+
 
 declare var $: any;
 declare var Papa: any;
 declare var MapboxDraw: any;
 declare var turf: any;
-declare var tipContent:any;
+declare var tipContent: any;
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -22,14 +24,17 @@ declare var tipContent:any;
 export class MapComponent implements OnInit, OnChanges {
   @Input() position;
   @Input() zoom;
+
   map;
   mapLoaded = false;
+
   alreadyStarted = "";
   terreChoosed = "";
   csvRecords: any[] = [];
   header = false;
   geolocate;
   groupes = [];
+
   userPositionGeoJson = {
     "type": "FeatureCollection",
     "features": []
@@ -42,7 +47,6 @@ export class MapComponent implements OnInit, OnChanges {
     "type": "FeatureCollection",
     "features": []
   };
-
   groupesGeoJson = {
     "type": "FeatureCollection",
     "features": []
@@ -50,11 +54,12 @@ export class MapComponent implements OnInit, OnChanges {
 
 
   constructor(private httpClient: HttpClient, private router: Router, private modalService: NgbModal, private cookieService: CookieService, private locationService: LocationService) {
-    
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
+
+    // Cookies selection terre
     this.terreChoosed = this.cookieService.get('scoutocaching_terre');
     this.alreadyStarted = this.cookieService.get('alreadyStarted');
-
   }
 
   ngOnInit(): void {
@@ -65,19 +70,21 @@ export class MapComponent implements OnInit, OnChanges {
       style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
       center: JSON.parse(that.position), // starting position [lng, lat]
       zoom: that.zoom, // starting zoom
-    });    
+    });
+
     this.geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true
       },
       trackUserLocation: true
-    })
+    });
+
     // var size = 200;
     // this.userPulsingDot = {
     //   width: size,
     //   height: size,
     //   data: new Uint8Array(size * size * 4),
-       
+
     //   // get rendering context for the map canvas when layer is added to the map
     //   onAdd: function () {
     //   var canvas = document.createElement('canvas');
@@ -85,16 +92,16 @@ export class MapComponent implements OnInit, OnChanges {
     //   canvas.height = this.height;
     //   this.context = canvas.getContext('2d');
     //   },
-       
+
     //   // called once before every frame where the icon will be used
     //   render: function () {
     //   var duration = 1000;
     //   var t = (performance.now() % duration) / duration;
-       
+
     //   var radius = (size / 2) * 0.3;
     //   var outerRadius = (size / 2) * 0.7 * t + radius;
     //   var context = this.context;
-       
+
     //   // draw outer circle
     //   context.clearRect(0, 0, this.width, this.height);
     //   context.beginPath();
@@ -102,7 +109,7 @@ export class MapComponent implements OnInit, OnChanges {
     //   // context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
     //   context.fillStyle = 'rgba(1, 116, 186,' + (1 - t) + ')';
     //   context.fill();
-       
+
     //   // draw inner circle
     //   context.beginPath();
     //   context.arc(
@@ -118,19 +125,20 @@ export class MapComponent implements OnInit, OnChanges {
     //   context.lineWidth = 2 + 4 * (1 - t);
     //   context.fill();
     //   context.stroke();
-       
+
     //   // update this image's data with data from the canvas
     //   this.data = context.getImageData(0,0,this.width,this.height).data;
-       
+
     //   // continuously repaint the map, resulting in the smooth animation of the dot
     //   that.map.triggerRepaint();
-       
+
     //   // return `true` to let the map know that the image was updated
     //   return true;
     //   }
     //   };
-      // that.getUserPosition();
-      
+    // that.getUserPosition();
+
+    // Chargement de la position des groupes et des caches
     Papa.parse("assets/objets_carte.csv", {
       download: true,
       dynamicTyping: true,
@@ -149,7 +157,7 @@ export class MapComponent implements OnInit, OnChanges {
 
         that.groupes = results.data;
 
-        for (let i = 0; i < results.data.length; i++) {
+        for (let i = 0; i < results.data.length; i++) { // Pour chaque element
           const element = results.data[i];
           let coord = element["coords"]; // ? COORD
 
@@ -158,10 +166,11 @@ export class MapComponent implements OnInit, OnChanges {
             coord = coord.split(' ');
             coord = [parseFloat(coord[1]), parseFloat(coord[0])];
 
+            // Recherche de l'adresse
+            // ! Nécessaire ?
             that.reverseGeoCoding(coord[1], coord[0]).then((resp: any) => {
 
-              let streetName = '';
-
+              let streetName = ''; // Adresse
               for (let i = 0; i < resp.features.length; i++) {
                 const element = resp.features[i];
 
@@ -169,6 +178,8 @@ export class MapComponent implements OnInit, OnChanges {
                   streetName = element.text;
                 }
               }
+
+              // Si l'élément est un groupe
               if (element["type"] == "Groupe") {
                 that.groupesGeoJson.features.push({
                   "type": "Feature",
@@ -184,12 +195,19 @@ export class MapComponent implements OnInit, OnChanges {
                   }
                 })
               }
+              // Si l'élément est une cache
               else if (element["type"] == "Cache") {
+
+                // Statut de la cache (trouvee ou pas)
                 var status = that.cookieService.get('scoutocaching_caches_'.concat(element["id"].toString()));
-                if(status==="undefined" || status===""){
-                  status="treasureNotFound";
-                  that.cookieService.set('scoutocaching_caches_'.concat(element["id"].toString()),status);
+
+                // Initialisation du cookie
+                if (status === "undefined" || status === "") {
+                  status = "treasureNotFound";
+                  that.cookieService.set('scoutocaching_caches_'.concat(element["id"].toString()), status);
                 }
+
+                // Ajout de la cache au géoJson global des caches
                 that.allTresorsGeoJson.features.push({
                   "type": "Feature",
                   "geometry": {
@@ -200,20 +218,21 @@ export class MapComponent implements OnInit, OnChanges {
                     "name": element["name"], // ! NAME
                     "id": element["id"], // ! ID
                     "status": status,
-                    "terre":element["terre"],
-                    "story":element["story"],
+                    "terre": element["terre"],
+                    "story": element["story"],
                     street: streetName,
-                    indice: [{type: "titre",
+                    indice: [{
+                      type: "titre",
                       text: element["indice_title"]
                     },
                     {
-                      type: "paragraphe",text: element["indice_text"]
+                      type: "paragraphe", text: element["indice_text"]
                     },
                     {
-                      type: "image",url: element["indice_image"], trustedUrl: {}
+                      type: "image", url: element["indice_image"], trustedUrl: {}
                     },
                     {
-                      type: "video",url: element["indice_video"],  trustedUrl: {}
+                      type: "video", url: element["indice_video"], trustedUrl: {}
                     }]
                   }
                 })
@@ -223,11 +242,16 @@ export class MapComponent implements OnInit, OnChanges {
           }
 
         }
+
+        console.log(that.groupesGeoJson)
         console.log(that.allTresorsGeoJson)
+
         that.loadMap();
-                
       }
     });
+  }
+
+  ngOnChanges() {
   }
 
   // getUserPosition(){
@@ -256,40 +280,47 @@ export class MapComponent implements OnInit, OnChanges {
   //   });
   // }
 
-  refreshMap(){
-    const that =this;
-    if(that.terreChoosed!=this.cookieService.get('scoutocaching_terre')){
-      that.terreChoosed= this.cookieService.get('scoutocaching_terre');
-    }
-    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element =>  element.properties.terre == that.terreChoosed);
-    // console.log(that.activeTresorsGeoJson);
-    that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
-  }
+
+
+
+
+
+
+  /*
+  ** MAP
+  */
+
 
   loadMap() {
     const that = this;
-    that.map.addControl(that.geolocate);
+
+    that.map.addControl(that.geolocate); // Bouton de géolocalisation // ! PAS VISIBLE : caché par la barre de menu
+
     that.map.on('load', function () {
       that.geolocate.trigger();
-                // that.updateUserPosition();
-        // update the drone symbol's location on the map
-        // that.map.getSource('userPoint').setData(that.userPositionGeoJson);
-        // console.log(that.userPositionGeoJson.features)
-        // fly the map to the drone's current location
-        // that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
+
+      // that.updateUserPosition();
+      // update the drone symbol's location on the map
+      // that.map.getSource('userPoint').setData(that.userPositionGeoJson);
+      // console.log(that.userPositionGeoJson.features)
+      // fly the map to the drone's current location
+      // that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
       // }, 2000);
       // that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
-      
+
       // that.map.addLayer({
       //   'id': 'userPoint',
       //   'type': 'symbol',
       //   'source': 'userPoint',
       //   'layout': {
       //     'icon-image': 'pulsing-dot'
-      //   } 
+      //   }
       //   });
+
+      // Chargement des icones a afficher sur la carte
       that.loadMapIcons().then(() => {
         that.loadMapFoulards().then(() => {
+
           // Sources
           that.map.addSource('tresors', {
             type: 'geojson',
@@ -355,44 +386,54 @@ export class MapComponent implements OnInit, OnChanges {
             },
             "filter": ["!in", "id", ""]
           });
-                      
+
           // When a click event occurs on a feature in the tresors layer, open a popup at the
           // location of the feature, with description HTML from its properties.
           that.map.on('click', 'tresors', function (e) {
             //that.clickOnTresor(e);
-            const thisTreature = that.activeTresorsGeoJson.features.reduce(function(prev, curr) {
-              return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat))< (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
-            });          
-            const modalRef = that.modalService.open(ModalCacheComponent, {size: 'lg'});           
-            modalRef.componentInstance.id=thisTreature.properties['id'];
-            modalRef.componentInstance.indice=thisTreature.properties['indice'];
-            modalRef.componentInstance.title=thisTreature.properties['name'];
-            if(thisTreature.properties.status==="treasureFound"){
-              // TO DO Charger le contenu des personnages 
+
+            // Récupération de la cache
+            const thisTreature = that.activeTresorsGeoJson.features.reduce(function (prev, curr) {
+              return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat)) < (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
+            });
+
+            // Ouverture de la modale de la cache
+            const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
+            modalRef.componentInstance.id = thisTreature.properties['id'];
+            modalRef.componentInstance.indice = thisTreature.properties['indice'];
+            modalRef.componentInstance.title = thisTreature.properties['name'];
+
+            // Si il est trouvé
+            if (thisTreature.properties.status === "treasureFound") {
+
+              // ! TO DO Charger le contenu des personnages
+
               that.cookieService.set('avoidOnBoarding', '',);
-              modalRef.componentInstance.found=true;
-              modalRef.componentInstance.indice=null;
-              modalRef.componentInstance.story=thisTreature.properties['story'];
+
+              modalRef.componentInstance.found = true;
+              modalRef.componentInstance.indice = null;
+              modalRef.componentInstance.story = thisTreature.properties['story'];
+
               console.log(modalRef.componentInstance.story);
-              if(modalRef.componentInstance.story===null){
-                modalRef.componentInstance.story="<h2>Cache trouvée </h2>";
+
+              if (modalRef.componentInstance.story === null) { // Si aucun contenu à afficher
+                modalRef.componentInstance.story = "<h2>Cache trouvée </h2>";
               }
             }
 
-            modalRef.componentInstance.coord=e.lngLat;
+            modalRef.componentInstance.coord = e.lngLat;
             //modalRef.componentInstance.idRapport = idRapport;
+
             modalRef.result.then((result) => {
-              if(modalRef.componentInstance.id===thisTreature.properties['id'] && result===0){              
-                thisTreature.properties.status="treasureFound";
-                that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()),thisTreature.properties.status);
+              if (modalRef.componentInstance.id === thisTreature.properties['id'] && result === 0) {
+                thisTreature.properties.status = "treasureFound";
+                that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()), thisTreature.properties.status);
                 that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
               }
               //this.init()
             }, (reason) => {
               console.log(reason);
             });
-
-
 
           });
 
@@ -407,35 +448,71 @@ export class MapComponent implements OnInit, OnChanges {
           });
 
           that.mapLoaded = true;
-          window.setInterval(function () {that.refreshMap();}, 500);
-          if(!that.cookieService.check('avoidOnBoarding')){
-            const onboarding = that.modalService.open(ModalOnBoardingComponent, {size: 'lg', centered: true }); 
+
+          window.setInterval(function () {
+            that.refreshMap();
+          }, 500);
+
+          if (!that.cookieService.check('avoidOnBoarding')) {
+            const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
+
             onboarding.result.then((result) => {
               console.log(result);
-              that.terreChoosed=result;
+
+              that.terreChoosed = result;
+
               const now = new Date();
               // console.log(now.getHours());
+
               const expiredDate = new Date();
               expiredDate.setMinutes(now.getMinutes() + 3);
-              console.log(now.getMinutes(),expiredDate.getMinutes());
-              that.cookieService.set("alreadyStarted","true",{expires:expiredDate});
-              that.cookieService.set('scoutocaching_terre',that.terreChoosed);
+
+              console.log(now.getMinutes(), expiredDate.getMinutes());
+
+              that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
+              that.cookieService.set('scoutocaching_terre', that.terreChoosed);
+
               that.refreshMap();
+
               //this.init()
             }, (reason) => {
               console.log(reason);
             });
-          }else{
-             that.refreshMap();
+          } else {
+            that.refreshMap();
           }
         })
       });
     });
-    
+
   }
 
-  ngOnChanges() {
+  refreshMap() {
+    const that = this;
+
+    // Maj du cookie de la terre sélectionnée
+    if (that.terreChoosed != this.cookieService.get('scoutocaching_terre')) {
+      that.terreChoosed = this.cookieService.get('scoutocaching_terre');
+    }
+
+    // Géojson des caches à afficher : celles correspondant à la terre
+    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element => element.properties.terre == that.terreChoosed);
+    // console.log(that.activeTresorsGeoJson);
+
+    // Maj des caches sur la carte
+    that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
   }
+
+
+
+
+
+
+
+
+  /*
+  ** Map interactions
+  */
 
   clickOnTresor(e) {
     const that = this;
@@ -461,8 +538,25 @@ export class MapComponent implements OnInit, OnChanges {
       .setLngLat(coordinates)
       .setHTML(html)
       .addTo(that.map);
-
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+** Load map icons
+*/
+
+
 
   loadMapIcon(file, name) {
     const that = this;
@@ -474,7 +568,7 @@ export class MapComponent implements OnInit, OnChanges {
           if (!that.map.hasImage(name)) {
             that.map.addImage(name, image);
           }
-          resolve();
+          resolve("");
         }
       )
     })
@@ -485,7 +579,7 @@ export class MapComponent implements OnInit, OnChanges {
     return new Promise((resolve, reject) => {
       that.loadMapIcon("treasureNotFound.png", "treasureNotFound");
       that.loadMapIcon("treasureFound.png", "treasureFound").then(() => {
-        resolve();
+        resolve("");
       })
     })
   }
@@ -500,7 +594,7 @@ export class MapComponent implements OnInit, OnChanges {
           if (!that.map.hasImage(name)) {
             that.map.addImage(name, image);
           }
-          resolve();
+          resolve("");
         }
       )
     })
@@ -517,7 +611,7 @@ export class MapComponent implements OnInit, OnChanges {
         }
       }
 
-      resolve();
+      resolve("");
     });
   }
 
