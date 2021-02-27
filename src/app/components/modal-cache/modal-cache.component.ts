@@ -1,15 +1,16 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import {NgbActiveModal, NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {DomSanitizer} from '@angular/platform-browser';
+import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+
 @Component({
   selector: 'app-modal-cache',
   templateUrl: './modal-cache.component.html',
   styleUrls: ['./modal-cache.component.scss'],
 })
 export class ModalCacheComponent implements OnInit {
-  
+
   // @Input() indice : any;
   indice = [
     {
@@ -39,106 +40,165 @@ export class ModalCacheComponent implements OnInit {
       trustedUrl: {}
     }
   ]
-  id=-1;
-  title="";
-  story=null;
-  coord={lat:0.00000, lng:0.00000};
-  found=false;
-  scannerEnabled=false;
 
-  
+  id = -1;
+  title = "";
+  story = null;
+  coord = { lat: 0.00000, lng: 0.00000 };
+  found = false;
+  scannerEnabled = false;
+
   @ViewChild('scanner', { static: false })
-  scanner: ZXingScannerComponent;
+
+  scanner = ZXingScannerComponent as any;
 
   hasDevices: boolean;
   hasPermission: boolean;
   qrResultString: string;
   qrResult: Result;
 
-  information="";
+  information = "";
   formatsEnabled: BarcodeFormat = BarcodeFormat.QR_CODE;
   currentDevice: MediaDeviceInfo = null;
   availableDevices: MediaDeviceInfo[];
-  
+
 
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    if(this.found==false){
-      const elementsToBeRemoved=[];
+
+    if (this.found == false) {
+      const elementsToBeRemoved = [];
+
       for (let i = 0; i < this.indice.length; i++) {
         const element = this.indice[i];
-        if (element.type == "titre" || element.type=="paragraphe" ){
-          if (element.text!=null){
-                  element.text=element.text.replace('\"','"')
+
+        if (element.type == "titre" || element.type == "paragraphe") {
+
+          if (element.text != null) {
+            element.text = element.text.replace('\"', '"')
           }
-          else{
-                elementsToBeRemoved.push(this.indice.indexOf(element))
+          else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
           }
+
         }
-        if(element.type == "video" || element.type == "image") {
-          if(element.url!=null){
-          element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
-          }else{
-                elementsToBeRemoved.push(this.indice.indexOf(element))
+        if (element.type == "video" || element.type == "image") {
+
+          if (element.url != null) {
+            element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+          } else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
           }
+
         }
       }
-      for (var i = elementsToBeRemoved.length-1; i>=0 ; i--) {
-          this.indice.splice(elementsToBeRemoved[i],1);
+
+      for (var i = elementsToBeRemoved.length - 1; i >= 0; i--) {
+        this.indice.splice(elementsToBeRemoved[i], 1);
       }
-    }
-    else if(this.story!=""){
-      console.log(this.story);
-    // else if(this.found===true && this.qrcodeScanned=true){
 
     }
-    this.initializeScanner();
+    else if (this.story != "") {
+
+      console.log(this.story);
+      // else if(this.found===true && this.qrcodeScanned=true){
+
+    }
+
+
   }
-  youtubeURL(video) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(video);
-  }
-  initializeScanner(): void{
-    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
-    this.hasDevices = true;
-    this.availableDevices = devices;
+
+
+
+
+
+
+  /*
+  ** QR Code Scanner
+  */
+
+
+  initializeScanner(): void {
+
+    /*this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
+      this.hasDevices = true;
+      this.availableDevices = devices;
+
+      console.log("camera")
 
       // selects the devices's back camera by default
       for (const device of devices) {
-          if (/back|rear|environment/gi.test(device.label)) {
-              // this.scanner.changeDevice(device);
-              this.currentDevice = device;
-              break;
-          }
+        if (/back|rear|environment/gi.test(device.label)) {
+          // this.scanner.changeDevice(device);
+          this.currentDevice = device;
+          break;
+        }
       }
     });
 
     this.scanner.camerasNotFound.subscribe(() => this.hasDevices = false);
-    this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
     this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
+
+
+    this.scanner.scanComplete.subscribe((result: Result) => {
+      this.qrResult = result
+
+      console.log(this.qrResult)
+    });*/
+
   }
+
   clearResult(): void {
     this.qrResultString = null;
   }
 
   onCodeResult(resultString: string) {
-    console.debug('Result: ', resultString);
+
+    console.log('Result: ', resultString);
+
     // this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
-    this.found=true;
+
+    this.found = true;
+
     this.activeModal.close(0);
   }
-  onScanError(e){
+
+  onScanError(e) {
     this.qrResultString = "QR Code illisible";
+
+    console.log("onScanError")
+    //console.log(e)
   }
-  
-  onClickMe(id){
-    this.id=id;
-    this.indice=null;
-    this.coord={lat:0.00000, lng:0.00000};
+
+  onScanFailure(e) {
+    console.log("onScanFailure")
+    //console.log(e)
+  }
+
+
+  startScanner(id) {
+    console.log(id)
+    this.id = id; // Id cache
+
+    this.indice = null;
+    this.coord = { lat: 0.00000, lng: 0.00000 };
+
     this.formatsEnabled = BarcodeFormat.QR_CODE;
     // this.activeModal.close(this.id);
     // this.thisTreasure.properties.status="treasureFound";
+
+    this.initializeScanner();
   }
 
+
+
+  /*
+  ** Utilitaires
+  */
+
+  youtubeURL(video) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(video);
+  }
 
 }
