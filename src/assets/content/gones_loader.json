@@ -35,14 +35,6 @@
   ],
   "indices": [
     {
-      "id": 0,
-      "name": "Decines",
-      "coords": "xxxxxxxx",
-      "qr_secret": "secret",
-      "indice": [],
-      "resultat": []
-    },
-    {
       "id": 1,
       "name": "Avenue Félix Faure",
       "coords": "45.752121, 4.847156",

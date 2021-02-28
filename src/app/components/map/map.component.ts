@@ -87,6 +87,57 @@ export class MapComponent implements OnInit, OnChanges {
     });
 
 
+
+    that.loadGroupes();
+
+    that.loadCaches();
+
+    that.loadMap();
+
+  }
+
+  ngOnChanges() {
+  }
+
+  // getUserPosition(){
+  //   this.locationService.getPosition().then(pos=>{
+  //     this.userPositionGeoJson.features.push({
+  //       "type": "Feature",
+  //       "geometry": {
+  //         "type": "Point",
+  //         "coordinates": [pos.lng,pos.lat]
+  //       }
+  //     })
+  //     this.map.setCenter([pos.lng,pos.lat]);
+  //   });
+  // }
+
+  // updateUserPosition(){
+  //   this.locationService.getPosition().then(pos=>{
+  //     this.userPositionGeoJson.features=[{
+  //       "type": "Feature",
+  //       "geometry": {
+  //         "type": "Point",
+  //         "coordinates": [pos.lng,pos.lat]
+  //       }
+  //     }];
+  //     this.map.setCenter([pos.lng,pos.lat]);
+  //   });
+  // }
+
+
+
+
+
+
+
+  /*
+  ** MAP
+  */
+
+  loadGroupes() {
+    const that = this;
+
     // Chargement de la position des groupes et des caches
     Papa.parse("assets/objets_carte.csv", {
       download: true,
@@ -140,14 +191,12 @@ export class MapComponent implements OnInit, OnChanges {
           }
 
         }
-
-        console.log(that.groupesGeoJson)
-        console.log(that.allTresorsGeoJson)
       }
     });
+  }
 
-
-
+  loadCaches() {
+    const that = this;
 
     if(this.terreChoosed == "gones") {
       this.parcoursSelected = gones_loader;
@@ -159,13 +208,10 @@ export class MapComponent implements OnInit, OnChanges {
       this.parcoursSelected = canuts_loader;
     }
 
-    console.log(this.parcoursSelected)
+    that.activeTresorsGeoJson.features = [];
 
     for (let i = 0; i < this.parcoursSelected.indices.length; i++) {
       const indice = this.parcoursSelected.indices[i];
-
-
-
 
       // Statut de la cache (trouvee ou pas)
       var status = that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id);
@@ -197,52 +243,7 @@ export class MapComponent implements OnInit, OnChanges {
         }
       })
     }
-
-    console.log(that.activeTresorsGeoJson)
-
-    that.loadMap();
-
-
   }
-
-  ngOnChanges() {
-  }
-
-  // getUserPosition(){
-  //   this.locationService.getPosition().then(pos=>{
-  //     this.userPositionGeoJson.features.push({
-  //       "type": "Feature",
-  //       "geometry": {
-  //         "type": "Point",
-  //         "coordinates": [pos.lng,pos.lat]
-  //       }
-  //     })
-  //     this.map.setCenter([pos.lng,pos.lat]);
-  //   });
-  // }
-
-  // updateUserPosition(){
-  //   this.locationService.getPosition().then(pos=>{
-  //     this.userPositionGeoJson.features=[{
-  //       "type": "Feature",
-  //       "geometry": {
-  //         "type": "Point",
-  //         "coordinates": [pos.lng,pos.lat]
-  //       }
-  //     }];
-  //     this.map.setCenter([pos.lng,pos.lat]);
-  //   });
-  // }
-
-
-
-
-
-
-
-  /*
-  ** MAP
-  */
 
 
   loadMap() {
@@ -403,6 +404,8 @@ export class MapComponent implements OnInit, OnChanges {
     // Maj du cookie de la terre sélectionnée
     if (that.terreChoosed != this.cookieService.get('scoutocaching_terre')) {
       that.terreChoosed = this.cookieService.get('scoutocaching_terre');
+
+      that.loadCaches();
     }
 
     // Géojson des caches à afficher : celles correspondant à la terre
