@@ -112,16 +112,16 @@ export class ModalChangeTerreComponent implements OnInit {
   selectTerre(e):void{
     if (e==="Terre des Gones"){
       this.choice="gones";
-      this.content=gones_loader.description;
+      this.content=this.deepClone(gones_loader.description);
     }
     else if(e==="Terre des Lumieres"){
       this.choice="lumieres";
-      this.content=lumieres_loader.description;
+      this.content=this.deepClone(lumieres_loader.description);
       // console.log("Lumières");
     }
     else{
       this.choice="canuts";
-      this.content=canuts_loader.description;
+      this.content=this.deepClone(canuts_loader.description);
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }
@@ -145,5 +145,13 @@ export class ModalChangeTerreComponent implements OnInit {
     this.showStart=false;
     this.showTerreChoice=true;
     this.start();
+  }
+
+  deepClone(oldArray: Object[]) {
+    let newArray: any = [];
+    oldArray.forEach((item) => {
+      newArray.push(Object.assign({}, item));
+    });
+    return newArray;
   }
 }

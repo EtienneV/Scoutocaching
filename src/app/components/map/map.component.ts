@@ -149,31 +149,24 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-    if(this.terreChoosed == "gones") {
-      this.parcoursSelected = gones_loader;
-    }
-    else if(this.terreChoosed == "lumieres") {
-      this.parcoursSelected = lumieres_loader;
-    }
-    else if(this.terreChoosed == "canuts") {
-      this.parcoursSelected = canuts_loader;
-    }
+    that.loadMap();
 
+
+  }
+
+  loadParcoursCaches(){
+    const that = this;
     console.log(this.parcoursSelected)
-
     for (let i = 0; i < this.parcoursSelected.indices.length; i++) {
       const indice = this.parcoursSelected.indices[i];
 
-
-
-
       // Statut de la cache (trouvee ou pas)
-      var status = that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id);
+      var status = that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + (parseInt(indice.id)-parseInt(this.parcoursSelected.indices[0].id)).toString());
 
       // Initialisation du cookie
       if (status === "undefined" || status === "") {
         status = "treasureNotFound";
-        that.cookieService.set('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id, status);
+        that.cookieService.set('scoutocaching_caches_' + this.parcoursSelected.name + "_" + (parseInt(indice.id)-parseInt(this.parcoursSelected.indices[0].id)).toString(), status);
       }
 
       var coord = indice.coords.split(' ');
@@ -195,16 +188,37 @@ export class MapComponent implements OnInit, OnChanges {
           "indice": indice.indice,
           "qrSecret": indice.qr_secret
         }
-      })
+      });
+      return that.activeTresorsGeoJson;
     }
-
-    console.log(that.activeTresorsGeoJson)
-
-    that.loadMap();
-
-
   }
 
+  onBoarding(){
+    const that = this;
+    const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
+
+    onboarding.result.then((result) => {
+      console.log(result);
+      this.parcoursSelected = result.parcours;
+      this.terreChoosed = result.name;
+
+      const now = new Date();
+      // console.log(now.getHours());
+
+      const expiredDate = new Date();
+      expiredDate.setMinutes(now.getMinutes() + 3);
+
+      console.log(now.getMinutes(), expiredDate.getMinutes());
+
+      that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
+      this.activeTresorsGeoJson = this.loadParcoursCaches();
+      that.loadMap();
+
+      //this.init()
+    }, (reason) => {
+      console.log(reason);
+    });
+  }
   ngOnChanges() {
   }
 
@@ -274,7 +288,7 @@ export class MapComponent implements OnInit, OnChanges {
       // Chargement des icones a afficher sur la carte
       that.loadMapIcons().then(() => {
         that.loadMapFoulards().then(() => {
-
+          console.log(that.activeTresorsGeoJson)
           // Sources
           that.map.addSource('tresors', {
             type: 'geojson',
@@ -358,39 +372,26 @@ export class MapComponent implements OnInit, OnChanges {
           });
 
           that.mapLoaded = true;
-
+          
+              
+        if(!['lumieres','gones','canuts'].includes(that.cookieService.get('scoutocaching_terre'))){
+          that.onBoarding();
+        }else{        
+          if(this.terreChoosed == "gones") {
+            this.parcoursSelected = gones_loader;
+          }
+          else if(this.terreChoosed == "lumieres") {
+            this.parcoursSelected = lumieres_loader;
+          }
+          else if(this.terreChoosed == "canuts") {
+            this.parcoursSelected = canuts_loader;
+          }
+        }
+        this.activeTresorsGeoJson=this.loadParcoursCaches();
+        that.refreshMap()
           window.setInterval(function () {
             that.refreshMap();
           }, 500);
-
-          if (!that.cookieService.check('avoidOnBoarding')) {
-            const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
-
-            onboarding.result.then((result) => {
-              console.log(result);
-
-              that.terreChoosed = result;
-
-              const now = new Date();
-              // console.log(now.getHours());
-
-              const expiredDate = new Date();
-              expiredDate.setMinutes(now.getMinutes() + 3);
-
-              console.log(now.getMinutes(), expiredDate.getMinutes());
-
-              that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
-              that.cookieService.set('scoutocaching_terre', that.terreChoosed);
-
-              that.refreshMap();
-
-              //this.init()
-            }, (reason) => {
-              console.log(reason);
-            });
-          } else {
-            that.refreshMap();
-          }
         })
       });
     });
@@ -403,14 +404,21 @@ export class MapComponent implements OnInit, OnChanges {
     // Maj du cookie de la terre sélectionnée
     if (that.terreChoosed != this.cookieService.get('scoutocaching_terre')) {
       that.terreChoosed = this.cookieService.get('scoutocaching_terre');
-    }
+      that.activeTresorsGeoJson = {
+        "type": "FeatureCollection",
+        "features": []
+      };
+      that.activeTresorsGeoJson = that.loadParcoursCaches();
+      console.log(that.activeTresorsGeoJson);
+      console.log(this.activeTresorsGeoJson);
+      this.map.getSource('tresors').setData(that.activeTresorsGeoJson);
+    } 
+    // Maj des caches sur la carte
 
     // Géojson des caches à afficher : celles correspondant à la terre
     //that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element => element.properties.terre == that.terreChoosed);
     // console.log(that.activeTresorsGeoJson);
 
-    // Maj des caches sur la carte
-    that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
   }
 
 

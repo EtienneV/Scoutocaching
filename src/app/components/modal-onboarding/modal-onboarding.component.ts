@@ -15,6 +15,7 @@ import gones_loader from '@assets/content/gones_loader.json';
 export class ModalOnBoardingComponent implements OnInit {
   
   terreChoosed:string;
+  parcoursSelected:any;
   alreadyStarted = false;
   showStart=true
   showTerreChoice=false
@@ -133,16 +134,19 @@ export class ModalOnBoardingComponent implements OnInit {
   selectTerre(e):void{
     if (e==="Terre des Gones"){
       this.choice="gones";
-      this.content=gones_loader;
+      this.content=gones_loader.description;
+      this.parcoursSelected = gones_loader;
     }
     else if(e==="Terre des Lumieres"){
       this.choice="lumieres";
-      this.content=lumieres_loader;
+      this.content=lumieres_loader.description;
+      this.parcoursSelected = lumieres_loader;
       // console.log("Lumières");
     }
     else{
       this.choice="canuts";
-      this.content=canuts_loader;
+      this.content=canuts_loader.description;
+      this.parcoursSelected = canuts_loader;
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }
@@ -157,7 +161,7 @@ export class ModalOnBoardingComponent implements OnInit {
     console.log(this.footer);
   }
   go(e):void{
-    this.activeModal.close(this.choice);
+    this.activeModal.close({name: this.choice,parcours:this.parcoursSelected});
   }
   goBackToTerreChoice(e):void{
     this.header=null;
