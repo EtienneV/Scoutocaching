@@ -29,7 +29,7 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "Mur des canuts"
+          "text": "Face au petit théâtre<br>Où Guignol fait le drôle<br>Une armoire renferme <br> Le premier des trésors<br>Au-delà de la route<br>Regarde et va trouver<br>Derrière cette cache"
         }
       ],
       "resultat": []
@@ -42,7 +42,7 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "Cour des voraces"
+          "text": "Je continue, je traverse la rue, et à côté des trois hibous"
         }
       ],
       "resultat": []
@@ -55,7 +55,7 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "xxxxxx"
+          "text": "Au pied de la lumière, au sud de l'eau"
         }
       ],
       "resultat": []
@@ -68,7 +68,7 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "xxxxxx"
+          "text": "Vitre de verre verte dans le passage de la rue à la Saône"
         }
       ],
       "resultat": []
@@ -81,7 +81,16 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "xxxxxx"
+          "text": "Je vois ceci"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/celestins.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "Puis je vais à gauche, au pied du poteau"
         }
       ],
       "resultat": []

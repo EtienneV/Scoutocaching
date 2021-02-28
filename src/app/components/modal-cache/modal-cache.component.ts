@@ -86,7 +86,7 @@ export class ModalCacheComponent implements OnInit {
     console.log(this.coordinates)
     //console.log(this.tresorProperties.qrSecret)
 
-    if(this.tresorProperties.status == "treasureFound") {
+    if (this.tresorProperties.status == "treasureFound") {
       this.found = true;
     }
 
@@ -99,47 +99,50 @@ export class ModalCacheComponent implements OnInit {
       this.indice = JSON.parse(this.tresorProperties.resultat);
     }
 
+    console.log(this.indice)
 
-/*
 
-    if (this.found == false) {
-      const elementsToBeRemoved = [];
+    const elementsToBeRemoved = [];
 
-      for (let i = 0; i < this.indice.length; i++) {
-        const element = this.indice[i];
+    for (let i = 0; i < this.indice.length; i++) {
+      const element = this.indice[i];
 
-        if (element.type == "titre" || element.type == "paragraphe") {
+      if (element.type == "titre") {
 
-          if (element.text != null) {
-            element.text = element.text.replace('\"', '"')
-          }
-          else {
-            elementsToBeRemoved.push(this.indice.indexOf(element))
-          }
-
+        if (element.text != null) {
+          element.text = element.text.replace('\"', '"');
         }
-        if (element.type == "video" || element.type == "image") {
-
-          if (element.url != null) {
-            element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
-          } else {
-            elementsToBeRemoved.push(this.indice.indexOf(element))
-          }
-
+        else {
+          elementsToBeRemoved.push(this.indice.indexOf(element))
         }
-      }
 
-      for (var i = elementsToBeRemoved.length - 1; i >= 0; i--) {
-        this.indice.splice(elementsToBeRemoved[i], 1);
       }
+      if (element.type == "paragraphe") {
 
+        if (element.text != null) {
+          element.text = element.text.replace('\"', '"');
+        }
+        else {
+          elementsToBeRemoved.push(this.indice.indexOf(element))
+        }
+
+      }
+      if (element.type == "video" || element.type == "image") {
+
+        if (element.url != null) {
+          element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+        } else {
+          elementsToBeRemoved.push(this.indice.indexOf(element))
+        }
+
+      }
     }
-    else if (this.story != "") {
 
-      console.log(this.story);
-      // else if(this.found===true && this.qrcodeScanned=true){
+    for (var i = elementsToBeRemoved.length - 1; i >= 0; i--) {
+      this.indice.splice(elementsToBeRemoved[i], 1);
+    }
 
-    }*/
+
 
 
   }
@@ -196,7 +199,7 @@ export class ModalCacheComponent implements OnInit {
     // this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
 
     // Si c'est le bon qr code, on considère l'indice comme trouvé et on affiche le résultat de la cache
-    if(resultString == this.tresorProperties.qrSecret) {
+    if (resultString == this.tresorProperties.qrSecret) {
       this.found = true;
 
       that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.terre + "_" + this.tresorProperties.id, "treasureFound");
