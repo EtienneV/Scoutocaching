@@ -85,14 +85,32 @@
       "id": 4,
       "name": "Kiosque Monplaisir",
       "coords": "45.744698, 4.871189",
-      "qr_secret": "secret",
+      "qr_secret": "viktouare",
       "indice": [
+        {
+          "type": "image",
+          "url": "assets/images/gones_loader.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Qui a volé le chat de la mère Michèle ?"
+        },
         {
           "type": "paragraphe",
           "text": "23ème barreau gauche"
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Bravo !!"
+        },
+        {
+          "type": "paragraphe",
+          "text": "C'est trouvé"
+        }
+      ]
     },
     {
       "id": 5,

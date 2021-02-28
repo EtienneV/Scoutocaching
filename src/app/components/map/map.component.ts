@@ -191,7 +191,7 @@ export class MapComponent implements OnInit, OnChanges {
           "name": indice.name,
           "status": status,
           "terre": this.parcoursSelected.name,
-          "story": indice.resultat,
+          "resultat": indice.resultat,
           "indice": indice.indice,
           "qrSecret": indice.qr_secret
         }

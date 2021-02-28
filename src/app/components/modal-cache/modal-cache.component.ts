@@ -90,10 +90,17 @@ export class ModalCacheComponent implements OnInit {
       this.found = true;
     }
 
-    this.indice = JSON.parse(this.tresorProperties.indice);
 
 
+    if (!this.found) {
+      this.indice = JSON.parse(this.tresorProperties.indice);
+    }
+    else {
+      this.indice = JSON.parse(this.tresorProperties.resultat);
+    }
 
+
+/*
 
     if (this.found == false) {
       const elementsToBeRemoved = [];
@@ -132,7 +139,7 @@ export class ModalCacheComponent implements OnInit {
       console.log(this.story);
       // else if(this.found===true && this.qrcodeScanned=true){
 
-    }
+    }*/
 
 
   }

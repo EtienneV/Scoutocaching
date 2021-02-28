@@ -1,9 +1,9 @@
 <div class="modal-header d-flex  align-items-center">
-  <button type="button" class="close" style="margin-left: -16px;" aria-label="Close"
-    (click)="close()">
+  <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="close()">
     <img src="assets/icons/clear-24px.png" />
   </button>
-  <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{tresorProperties.name}}</h3>
+  <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{tresorProperties.name}}
+  </h3>
 </div>
 <div class="modal-body p-0">
 
@@ -13,8 +13,7 @@
     <div *ngIf="!this.scannerOpen">
       <!-- Si scanner non ouvert -->
 
-      <div *ngIf="coordinates !== undefined" class="modal-coordinates"
-        style="padding: 1rem 1rem 1rem 1rem;">
+      <div *ngIf="coordinates !== undefined" class="modal-coordinates" style="padding: 1rem 1rem 1rem 1rem;">
         <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
         <img class="modal-icon" src="assets/icons/Composant 2 – 1.png" />
         <p style="margin-bottom: 0;">
@@ -23,8 +22,7 @@
       </div>
 
 
-      <div class="modal-coordinates"
-        style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
+      <div class="modal-coordinates" style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
 
         <img class="modal-icon" src="assets/icons/Composant 3 – 1.png" />
 
@@ -100,10 +98,35 @@
   <div *ngIf="this.found">
     <!-- Contenu modal si trouvée -->
 
-    <div>
-      <!-- {{story}} -->
-      <p [innerHTML]="story"></p>
+    <div class="modal-coordinates" style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
+
+      <img class="modal-icon" src="assets/icons/Composant 3 – 1.png" />
+
+      <div style="margin-bottom: 0;" class="d-flex flex-column">
+
+        <div *ngFor="let item of indice; odd as isOdd">
+          <div *ngIf="item.type == 'titre'">
+            <b>{{item.text}}</b><br />
+          </div>
+
+          <div *ngIf="item.type == 'paragraphe'">
+            <p>{{item.text}}</p>
+          </div>
+
+          <div *ngIf="item.type == 'video'">
+            <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+
+          <div *ngIf="item.type == 'image'">
+            <img style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
+          </div>
+        </div>
+
+      </div>
     </div>
+
 
   </div>
 
