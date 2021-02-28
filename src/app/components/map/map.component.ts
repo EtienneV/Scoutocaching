@@ -9,6 +9,11 @@ import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from '../modal-onboarding/modal-onboarding.component';
 import { LocationService } from '../../services/location.service';
 
+import lumieres_loader from '@assets/content/lumieres_loader.json';
+import canuts_loader from '@assets/content/canuts_loader.json';
+import gones_loader from '@assets/content/gones_loader.json';
+import { InvalidatedProjectKind } from 'typescript';
+
 
 declare var $: any;
 declare var Papa: any;
@@ -34,6 +39,8 @@ export class MapComponent implements OnInit, OnChanges {
   header = false;
   geolocate;
   groupes = [];
+
+  parcoursSelected;
 
   userPositionGeoJson = {
     "type": "FeatureCollection",
@@ -79,64 +86,6 @@ export class MapComponent implements OnInit, OnChanges {
       trackUserLocation: true
     });
 
-    // var size = 200;
-    // this.userPulsingDot = {
-    //   width: size,
-    //   height: size,
-    //   data: new Uint8Array(size * size * 4),
-
-    //   // get rendering context for the map canvas when layer is added to the map
-    //   onAdd: function () {
-    //   var canvas = document.createElement('canvas');
-    //   canvas.width = this.width;
-    //   canvas.height = this.height;
-    //   this.context = canvas.getContext('2d');
-    //   },
-
-    //   // called once before every frame where the icon will be used
-    //   render: function () {
-    //   var duration = 1000;
-    //   var t = (performance.now() % duration) / duration;
-
-    //   var radius = (size / 2) * 0.3;
-    //   var outerRadius = (size / 2) * 0.7 * t + radius;
-    //   var context = this.context;
-
-    //   // draw outer circle
-    //   context.clearRect(0, 0, this.width, this.height);
-    //   context.beginPath();
-    //   context.arc(this.width / 2,this.height / 2,outerRadius,0, Math.PI * 2);
-    //   // context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
-    //   context.fillStyle = 'rgba(1, 116, 186,' + (1 - t) + ')';
-    //   context.fill();
-
-    //   // draw inner circle
-    //   context.beginPath();
-    //   context.arc(
-    //   this.width / 2,
-    //   this.height / 2,
-    //   radius,
-    //   0,
-    //   Math.PI * 2
-    //   );
-    //   // context.fillStyle = 'rgba(255, 100, 100, 1)';
-    //   context.fillStyle = 'rgba(4, 58, 93, 1)';
-    //   context.strokeStyle = 'white';
-    //   context.lineWidth = 2 + 4 * (1 - t);
-    //   context.fill();
-    //   context.stroke();
-
-    //   // update this image's data with data from the canvas
-    //   this.data = context.getImageData(0,0,this.width,this.height).data;
-
-    //   // continuously repaint the map, resulting in the smooth animation of the dot
-    //   that.map.triggerRepaint();
-
-    //   // return `true` to let the map know that the image was updated
-    //   return true;
-    //   }
-    //   };
-    // that.getUserPosition();
 
     // Chargement de la position des groupes et des caches
     Papa.parse("assets/objets_carte.csv", {
@@ -144,14 +93,6 @@ export class MapComponent implements OnInit, OnChanges {
       dynamicTyping: true,
       header: true,
       complete: function (results) {
-
-
-        /* results.data.map(function(item) {
-           console.log(item["coords.coordinates"])
-           item["coords.coordinates"] = JSON.parse(item["coords.coordinates"])
-
-           return item;
-         })*/
 
         console.log(results);
 
@@ -195,50 +136,6 @@ export class MapComponent implements OnInit, OnChanges {
                   }
                 })
               }
-              // Si l'élément est une cache
-              else if (element["type"] == "Cache") {
-
-                // Statut de la cache (trouvee ou pas)
-                var status = that.cookieService.get('scoutocaching_caches_'.concat(element["id"].toString()));
-
-                // Initialisation du cookie
-                if (status === "undefined" || status === "") {
-                  status = "treasureNotFound";
-                  that.cookieService.set('scoutocaching_caches_'.concat(element["id"].toString()), status);
-                }
-
-                // Ajout de la cache au géoJson global des caches
-                that.allTresorsGeoJson.features.push({
-                  "type": "Feature",
-                  "geometry": {
-                    "type": "Point",
-                    "coordinates": coord
-                  },
-                  "properties": {
-                    "name": element["name"], // ! NAME
-                    "id": element["id"], // ! ID
-                    "status": status,
-                    "terre": element["terre"],
-                    "story": element["story"],
-                    street: streetName,
-                    indice: [{
-                      type: "titre",
-                      text: element["indice_title"]
-                    },
-                    {
-                      type: "paragraphe", text: element["indice_text"]
-                    },
-                    {
-                      type: "image", url: element["indice_image"], trustedUrl: {}
-                    },
-                    {
-                      type: "video", url: element["indice_video"], trustedUrl: {}
-                    }],
-                    qrSecret: element["qr_secret"]
-                  }
-                })
-              }
-
             });
           }
 
@@ -246,10 +143,66 @@ export class MapComponent implements OnInit, OnChanges {
 
         console.log(that.groupesGeoJson)
         console.log(that.allTresorsGeoJson)
-
-        that.loadMap();
       }
     });
+
+
+
+
+    if(this.terreChoosed == "gones") {
+      this.parcoursSelected = gones_loader;
+    }
+    else if(this.terreChoosed == "lumieres") {
+      this.parcoursSelected = lumieres_loader;
+    }
+    else if(this.terreChoosed == "canuts") {
+      this.parcoursSelected = canuts_loader;
+    }
+
+    console.log(this.parcoursSelected)
+
+    for (let i = 0; i < this.parcoursSelected.indices.length; i++) {
+      const indice = this.parcoursSelected.indices[i];
+
+
+
+
+      // Statut de la cache (trouvee ou pas)
+      var status = that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id);
+
+      // Initialisation du cookie
+      if (status === "undefined" || status === "") {
+        status = "treasureNotFound";
+        that.cookieService.set('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id, status);
+      }
+
+      var coord = indice.coords.split(' ');
+      coord = [parseFloat(coord[1]), parseFloat(coord[0])];
+
+      // Ajout de la cache au géoJson global des caches
+      that.activeTresorsGeoJson.features.push({
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": coord
+        },
+        "properties": {
+          "id": indice.id,
+          "name": indice.name,
+          "status": status,
+          "terre": this.parcoursSelected.name,
+          "story": indice.resultat,
+          "indice": indice.indice,
+          "qrSecret": indice.qr_secret
+        }
+      })
+    }
+
+    console.log(that.activeTresorsGeoJson)
+
+    that.loadMap();
+
+
   }
 
   ngOnChanges() {
@@ -325,7 +278,7 @@ export class MapComponent implements OnInit, OnChanges {
           // Sources
           that.map.addSource('tresors', {
             type: 'geojson',
-            data: that.allTresorsGeoJson
+            data: that.activeTresorsGeoJson
           });
 
           that.map.addSource('groupes', {
@@ -334,7 +287,7 @@ export class MapComponent implements OnInit, OnChanges {
           });
 
           // Labels
-          let labelsGeoJson = { ...that.allTresorsGeoJson };
+          let labelsGeoJson = { ...that.activeTresorsGeoJson };
           labelsGeoJson.features = labelsGeoJson.features.concat(that.groupesGeoJson.features);
 
           that.map.addSource('labels', {
@@ -453,7 +406,7 @@ export class MapComponent implements OnInit, OnChanges {
     }
 
     // Géojson des caches à afficher : celles correspondant à la terre
-    that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element => element.properties.terre == that.terreChoosed);
+    //that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element => element.properties.terre == that.terreChoosed);
     // console.log(that.activeTresorsGeoJson);
 
     // Maj des caches sur la carte

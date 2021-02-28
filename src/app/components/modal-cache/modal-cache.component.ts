@@ -64,7 +64,7 @@ export class ModalCacheComponent implements OnInit {
   id = -1;
   story = null;
   story_cachee = null;
-  
+
   //scannerEnabled = false;
 
   hasDevices: boolean;
@@ -192,15 +192,15 @@ export class ModalCacheComponent implements OnInit {
     if(resultString == this.tresorProperties.qrSecret) {
       this.found = true;
 
-      that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.id, "treasureFound");
+      that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.terre + "_" + this.tresorProperties.id, "treasureFound");
 
       // ! Ne pas fermer, mais afficher le résultat de la cache
-      //this.activeModal.close(true); 
+      //this.activeModal.close(true);
     }
     else { // Sinon, on informe l'utilisateur que le qr code n'a pas été validé pour cette cache
       alert("Ce QR Code ne correspond pas à la cache.");
     }
-    
+
   }
 
   onScanError(e) {

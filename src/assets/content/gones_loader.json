@@ -1,4 +1,5 @@
 {
+  "name": "gones",
   "description": [
     {
       "type": "image",
@@ -32,10 +33,97 @@
       "url": "assets/icons/east-24px.png"
     }
   ],
-  "indices": []
+  "indices": [
+    {
+      "id": 0,
+      "name": "Decines",
+      "coords": "xxxxxxxx",
+      "qr_secret": "secret",
+      "indice": [],
+      "resultat": []
+    },
+    {
+      "id": 1,
+      "name": "Avenue Félix Faure",
+      "coords": "45.752121, 4.847156",
+      "qr_secret": "secret",
+      "indice": [
+        {
+          "type": "paragraphe",
+          "text": "Photo ticket de stationnement"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 2,
+      "name": "La confluence",
+      "coords": "45.740629, 4,814588",
+      "qr_secret": "secret",
+      "indice": [
+        {
+          "type": "paragraphe",
+          "text": "Vidéo d'une main en train de sortir la cache"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 3,
+      "name": "Parc de Gerland",
+      "coords": "45.725458, 4.829558",
+      "qr_secret": "secret",
+      "indice": [
+        {
+          "type": "paragraphe",
+          "text": "Direction à partir d'un point en mode boussole (ex: 6 pas NO)"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 4,
+      "name": "Kiosque Monplaisir",
+      "coords": "45.744698, 4.871189",
+      "qr_secret": "secret",
+      "indice": [
+        {
+          "type": "paragraphe",
+          "text": "23ème barreau gauche"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 5,
+      "name": "Parc de Parilly",
+      "coords": "45.723318, 4.906573",
+      "qr_secret": "secret",
+      "indice": [
+        {
+          "type": "paragraphe",
+          "text": "Dessin arbre + renard sur chemin + scout sur chemin"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 6,
+      "name": "Fort de Bron",
+      "coords": "45.732264, 4.920239",
+      "qr_secret": "secret",
+      "indice": [
+      ],
+      "resultat": []
+    },
+    {
+      "id": 7,
+      "name": "Saint Priest",
+      "coords": "45.694271, 4.940963",
+      "qr_secret": "viktouare",
+      "indice": [
+      ],
+      "resultat": []
+    }
+  ]
 }
-
-
-
-
-
