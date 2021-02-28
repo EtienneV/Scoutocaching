@@ -391,53 +391,7 @@ export class MapComponent implements OnInit, OnChanges {
           // When a click event occurs on a feature in the tresors layer, open a popup at the
           // location of the feature, with description HTML from its properties.
           that.map.on('click', 'tresors', function (e) {
-            //that.clickOnTresor(e);
-
-            // Récupération de la cache
-            const thisTreature = that.activeTresorsGeoJson.features.reduce(function (prev, curr) {
-              return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat)) < (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
-            });
-
-            // Ouverture de la modale de la cache
-            const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
-            modalRef.componentInstance.id = thisTreature.properties['id'];
-            modalRef.componentInstance.indice = thisTreature.properties['indice'];
-            modalRef.componentInstance.title = thisTreature.properties['name'];
-            modalRef.componentInstance.qrSecret = thisTreature.properties['qrSecret'];
-            
-
-            // Si il est trouvé
-            if (thisTreature.properties.status === "treasureFound") {
-
-              // ! TO DO Charger le contenu des personnages
-
-              that.cookieService.set('avoidOnBoarding', '',);
-
-              modalRef.componentInstance.found = true;
-              modalRef.componentInstance.indice = null;
-              modalRef.componentInstance.story = thisTreature.properties['story'];
-
-              console.log(modalRef.componentInstance.story);
-
-              if (modalRef.componentInstance.story === null) { // Si aucun contenu à afficher
-                modalRef.componentInstance.story = "<h2>Cache trouvée </h2>";
-              }
-            }
-
-            modalRef.componentInstance.coord = e.lngLat;
-            //modalRef.componentInstance.idRapport = idRapport;
-
-            modalRef.result.then((result) => {
-              if (modalRef.componentInstance.id === thisTreature.properties['id'] && result === 0) {
-                thisTreature.properties.status = "treasureFound";
-                that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()), thisTreature.properties.status);
-                that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
-              }
-              //this.init()
-            }, (reason) => {
-              console.log(reason);
-            });
-
+            that.clickOnTresor(e);
           });
 
           // Change the cursor to a pointer when the mouse is over the tresors layer.
@@ -520,7 +474,43 @@ export class MapComponent implements OnInit, OnChanges {
   clickOnTresor(e) {
     const that = this;
 
+    //console.log(e.features[0].properties)
+
+    var tresorProperties = e.features[0].properties;
     var coordinates = e.features[0].geometry.coordinates.slice();
+
+    const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.tresorProperties = tresorProperties;
+    modalRef.componentInstance.coordinates = coordinates;
+
+    modalRef.result.then((result) => {
+      console.log(result)
+
+      if(result) {
+
+        console.log("Trouvé")
+
+        var thisTreature = that.activeTresorsGeoJson.features.find(item => {
+          return item.properties.id == tresorProperties.id;
+        })
+
+        console.log(thisTreature)
+
+        if(thisTreature !== undefined) {
+          thisTreature.properties.status = "treasureFound";
+        }
+      }
+
+      that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
+    }, (reason) => {
+      console.log(reason);
+    });
+
+
+
+
+
+    /*var coordinates = e.features[0].geometry.coordinates.slice();
     var id = e.features[0].properties.id;
 
     // Ensure that if the map is zoomed out such that multiple
@@ -540,7 +530,57 @@ export class MapComponent implements OnInit, OnChanges {
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(html)
-      .addTo(that.map);
+      .addTo(that.map);*/
+
+/*
+    // Récupération de la cache
+    const thisTreature = that.activeTresorsGeoJson.features.reduce(function (prev, curr) {
+      return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat)) < (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
+    });
+
+    console.log(thisTreature)
+
+    // Ouverture de la modale de la cache
+    const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
+    modalRef.componentInstance.id = thisTreature.properties['id'];
+    modalRef.componentInstance.indice = thisTreature.properties['indice'];
+    modalRef.componentInstance.title = thisTreature.properties['name'];
+    modalRef.componentInstance.qrSecret = thisTreature.properties['qrSecret'];
+
+
+    // Si il est trouvé
+    if (thisTreature.properties.status === "treasureFound") {
+
+      // ! TO DO Charger le contenu des personnages
+
+      that.cookieService.set('avoidOnBoarding', '',);
+
+      modalRef.componentInstance.found = true;
+      modalRef.componentInstance.indice = null;
+      modalRef.componentInstance.story = thisTreature.properties['story'];
+      modalRef.componentInstance.story_cachee = thisTreature.properties['story'];
+
+      console.log(modalRef.componentInstance.story);
+
+      if (modalRef.componentInstance.story === null) { // Si aucun contenu à afficher
+        modalRef.componentInstance.story = "<h2>Cache trouvée </h2>";
+      }
+    }
+
+    modalRef.componentInstance.coord = e.lngLat;
+    //modalRef.componentInstance.idRapport = idRapport;
+
+    modalRef.result.then((result) => {
+      if (modalRef.componentInstance.id === thisTreature.properties['id'] && result === true) {
+        thisTreature.properties.status = "treasureFound";
+        that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()), thisTreature.properties.status);
+        that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
+      }
+      //this.init()
+    }, (reason) => {
+      console.log(reason);
+    });
+    */
   }
 
 
@@ -555,9 +595,9 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
-/*
-** Load map icons
-*/
+  /*
+  ** Load map icons
+  */
 
 
 

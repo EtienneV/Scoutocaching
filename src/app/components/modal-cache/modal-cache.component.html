@@ -1,89 +1,116 @@
 <div class="modal-header d-flex  align-items-center">
   <button type="button" class="close" style="margin-left: -16px;" aria-label="Close"
-    (click)="activeModal.dismiss('Cross click')">
+    (click)="close()">
     <img src="assets/icons/clear-24px.png" />
   </button>
-  <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{title}}</h3>
+  <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{tresorProperties.name}}</h3>
 </div>
 <div class="modal-body p-0">
 
+  <div *ngIf="!this.found">
+    <!-- Contenu modal si pas encore trouvée -->
 
-  <div *ngIf="coord.lat!=0.00000 && coord.lng!=0.00000 && indice != null " class="modal-coordinates"
-    style="padding: 1rem 1rem 1rem 1rem;">
-    <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
-    <img class="modal-icon" src="assets/icons/Composant 2 – 1.png" />
-    <p style="margin-bottom: 0;">
-      <b> Coordonnees </b><br /><span>{{coord.lat}}</span> Lat. - <span>{{coord.lng}}</span> Long.
-    </p>
-  </div>
+    <div *ngIf="!this.scannerOpen">
+      <!-- Si scanner non ouvert -->
+
+      <div *ngIf="coordinates !== undefined" class="modal-coordinates"
+        style="padding: 1rem 1rem 1rem 1rem;">
+        <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
+        <img class="modal-icon" src="assets/icons/Composant 2 – 1.png" />
+        <p style="margin-bottom: 0;">
+          <b> Coordonnees </b><br /><span>{{coordinates[1]}}</span> Lat. - <span>{{coordinates[0]}}</span> Long.
+        </p>
+      </div>
 
 
-  <div *ngIf="indice != null" class="modal-coordinates" style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
+      <div class="modal-coordinates"
+        style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
 
-    <img class="modal-icon" src="assets/icons/Composant 3 – 1.png" />
+        <img class="modal-icon" src="assets/icons/Composant 3 – 1.png" />
 
-    <div style="margin-bottom: 0;" class="d-flex flex-column">
+        <div style="margin-bottom: 0;" class="d-flex flex-column">
 
-      <!-- Boucle de construction de l'indice -->
-      <div *ngFor="let item of indice; odd as isOdd">
-        <div *ngIf="item.type == 'titre'">
-          <b>{{item.text}}</b><br />
+          <!-- Boucle de construction de l'indice -->
+          <div *ngFor="let item of indice; odd as isOdd">
+            <div *ngIf="item.type == 'titre'">
+              <b>{{item.text}}</b><br />
+            </div>
+
+            <div *ngIf="item.type == 'paragraphe'">
+              <p>{{item.text}}</p>
+            </div>
+
+            <div *ngIf="item.type == 'video'">
+              <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+
+            <div *ngIf="item.type == 'image'">
+              <img style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button (click)="startScanner(id)"><img src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
+      </div>
+
+    </div>
+
+    <div *ngIf="this.scannerOpen">
+      <!-- Si scanner ouvert -->
+
+      <div style="text-align: center;">
+        <!-- </div>class="d-flex  align-items-center"> -->
+        <h5 class="ml-auto mr-auto" style="padding: 1.5vh;">Scannez le QR Code </h5>
+        <!-- <zxing-scanner *ngIf="hasDevices" #scanner  start="true" [device]="currentDevice"  class="qr-scanner" [formats]="formatsEnabled" (scanSuccess)="onCodeResult($event)" (scanError)="onScanError($event)"
+          (scanFailure)="onScanError($event)"></zxing-scanner> -->
+
+        <div class="video-background">
+          <span id="video-background">
+
+            <zxing-scanner #scanner start="true" [device]="currentDevice" (scanSuccess)="onCodeResult($event)"
+              (scanError)="onScanError($event)" (scanFailure)="onScanFailure($event)"
+              [formats]="['AZTEC', 'QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']">
+            </zxing-scanner>
+
+          </span>
+
+          <img class="img-fluid cover-text" src="assets/icons/Scan.png" />
+
         </div>
 
-        <div *ngIf="item.type == 'paragraphe'">
-          <p>{{item.text}}</p>
-        </div>
-
-        <div *ngIf="item.type == 'video'">
-          <iframe width="inherit" [src]="item.trustedUrl" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-
-        <div *ngIf="item.type == 'image'">
-          <img style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
+        <!-- <button (click)="enableScanner()" *ngIf="!scannerEnabled" type="button" class="btn btn-success">Activer le scanner de QR Code</button> -->
+        <div class="modal-footer d-flex justify-content-center">
+          <div>
+            <!-- <small>Result</small> -->
+            <span style="text-decoration: underline;">{{ qrResultString }}</span>
+          </div>
+          <!-- <button mat-icon-button (click)="clearResult()">&times;</button> -->
         </div>
       </div>
 
     </div>
+
   </div>
 
-  <div *ngIf="!found && indice === null" style="text-align: center;">
-    <!-- </div>class="d-flex  align-items-center"> -->
-    <h5 class="ml-auto mr-auto" style="padding: 1.5vh;">Scannez le QR Code </h5>
-    <!-- <zxing-scanner *ngIf="hasDevices" #scanner  start="true" [device]="currentDevice"  class="qr-scanner" [formats]="formatsEnabled" (scanSuccess)="onCodeResult($event)" (scanError)="onScanError($event)"
-      (scanFailure)="onScanError($event)"></zxing-scanner> -->
+  <div *ngIf="this.found">
+    <!-- Contenu modal si trouvée -->
 
-    <div class="video-background">
-      <span id="video-background">
-
-        <zxing-scanner #scanner start="true" [device]="currentDevice" (scanSuccess)="onCodeResult($event)"
-          (scanError)="onScanError($event)" (scanFailure)="onScanFailure($event)"
-          [formats]="['AZTEC', 'QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']">
-        </zxing-scanner>
-
-      </span>
-
-      <img class="img-fluid cover-text" src="assets/icons/Scan.png" />
-
+    <div>
+      <!-- {{story}} -->
+      <p [innerHTML]="story"></p>
     </div>
 
-    <!-- <button (click)="enableScanner()" *ngIf="!scannerEnabled" type="button" class="btn btn-success">Activer le scanner de QR Code</button> -->
-    <div class="modal-footer d-flex justify-content-center">
-      <div>
-        <!-- <small>Result</small> -->
-        <span style="text-decoration: underline;">{{ qrResultString }}</span>
-      </div>
-      <!-- <button mat-icon-button (click)="clearResult()">&times;</button> -->
-    </div>
   </div>
 
-  <div *ngIf="found && indice === null">
-    <!-- {{story}} -->
-    <p [innerHTML]="story"></p>
-  </div>
-</div>
 
-<div *ngIf="!found && indice != null" class="modal-footer d-flex justify-content-center">
-  <button (click)="startScanner(id)"><img src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
+
+
+
+
+
 </div>

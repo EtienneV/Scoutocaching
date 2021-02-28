@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-modal-cache',
@@ -10,6 +11,25 @@ import { ZXingScannerComponent } from '@zxing/ngx-scanner';
   styleUrls: ['./modal-cache.component.scss'],
 })
 export class ModalCacheComponent implements OnInit {
+  @ViewChild('scanner', { static: false })
+  scanner = ZXingScannerComponent as any;
+
+
+  /*
+  id: 34
+  indice: "[{"type":"titre","text":null},{"type":"paragraphe","text":"Dessin arbre + renard sur chemin + scout sur chemin"},{"type":"image","url":null,"trustedUrl":{}},{"type":"video","url":null,"trustedUrl":{}}]"
+  name: "Parc de Parilly"
+  qrSecret: "secret"
+  status: "treasureNotFound"
+  story: "null"
+  street: "Chemin Du Renard"
+  terre: "gones"
+  */
+  tresorProperties;
+  found = false;
+  scannerOpen = false;
+  coordinates;
+
 
   // @Input() indice : any;
   indice = [
@@ -42,17 +62,10 @@ export class ModalCacheComponent implements OnInit {
   ]
 
   id = -1;
-  title = "";
   story = null;
-  coord = { lat: 0.00000, lng: 0.00000 };
-  found = false;
-  scannerEnabled = false;
-
-  qrSecret = "********";
-
-  @ViewChild('scanner', { static: false })
-
-  scanner = ZXingScannerComponent as any;
+  story_cachee = null;
+  
+  //scannerEnabled = false;
 
   hasDevices: boolean;
   hasPermission: boolean;
@@ -65,12 +78,22 @@ export class ModalCacheComponent implements OnInit {
   availableDevices: MediaDeviceInfo[];
 
 
-  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
+  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private CookieService: CookieService) { }
 
   ngOnInit(): void {
 
-    console.log(this.indice)
-    console.log(this.qrSecret)
+    console.log(this.tresorProperties)
+    console.log(this.coordinates)
+    //console.log(this.tresorProperties.qrSecret)
+
+    if(this.tresorProperties.status == "treasureFound") {
+      this.found = true;
+    }
+
+    this.indice = JSON.parse(this.tresorProperties.indice);
+
+
+
 
     if (this.found == false) {
       const elementsToBeRemoved = [];
@@ -159,17 +182,24 @@ export class ModalCacheComponent implements OnInit {
   }
 
   onCodeResult(resultString: string) {
+    const that = this;
 
     console.log('Result: ', resultString);
 
     // this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
 
-    if(resultString == this.qrSecret) {
+    // Si c'est le bon qr code, on considère l'indice comme trouvé et on affiche le résultat de la cache
+    if(resultString == this.tresorProperties.qrSecret) {
       this.found = true;
 
-      this.activeModal.close(0);
+      that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.id, "treasureFound");
+
+      // ! Ne pas fermer, mais afficher le résultat de la cache
+      //this.activeModal.close(true); 
     }
-    else alert("Raté, héhé :3");
+    else { // Sinon, on informe l'utilisateur que le qr code n'a pas été validé pour cette cache
+      alert("Ce QR Code ne correspond pas à la cache.");
+    }
     
   }
 
@@ -187,20 +217,29 @@ export class ModalCacheComponent implements OnInit {
 
 
   startScanner(id) {
-    console.log(id)
-    this.id = id; // Id cache
 
-    this.indice = null;
-    this.coord = { lat: 0.00000, lng: 0.00000 };
+    this.scannerOpen = true;
+
+    //console.log(id)
+    //this.id = id; // Id cache
+
+    //this.indice = null;
 
     this.formatsEnabled = BarcodeFormat.QR_CODE;
     // this.activeModal.close(this.id);
     // this.thisTreasure.properties.status="treasureFound";
 
-    this.initializeScanner();
+    //this.initializeScanner();
   }
 
 
+
+
+
+
+  close() {
+    this.activeModal.close(this.found);
+  }
 
   /*
   ** Utilitaires

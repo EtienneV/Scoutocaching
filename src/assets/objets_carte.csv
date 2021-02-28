@@ -25,9 +25,9 @@ id;type;name;coords;icon;terre;indice_title;indice_text;indice_image;indice_vide
 28;Cache;La Soie;45.7591931208145, 4.921945294840356;;lumieres;Lumieres D;;;;;secret
 29;Cache;Bellecombe;45.765152978333475, 4.866998094635761;;lumieres;Lumieres E;;;;<h2>Jeanne Lumiere</h2><br/><p>J'etais au salon</p>;secret
 30;Cache;Avenue Félix Faure;45.752121, 4.847156;;gones;;Photo ticket de stationnement;;;;secret
-31;Cache;La confluence;45.740629, 4,814588;;gones;;Vid�o d'une main en train de sortir la cache;;;;secret
-32;Cache;Parc de Gerland;45.725458, 4.829558;;gones;;Direction � partir d'un point en mode boussole (ex: 6 pas NO);;;;secret
-33;Cache;Kiosque Monplaisir;45.744698, 4.871189;;gones;;23�me barreau gauche;;;;secret
+31;Cache;La confluence;45.740629, 4,814588;;gones;;Vidéo d'une main en train de sortir la cache;;;;secret
+32;Cache;Parc de Gerland;45.725458, 4.829558;;gones;;Direction à partir d'un point en mode boussole (ex: 6 pas NO);;;;secret
+33;Cache;Kiosque Monplaisir;45.744698, 4.871189;;gones;;23ème barreau gauche;;;;secret
 34;Cache;Parc de Parilly;45.723318, 4.906573;;gones;;Dessin arbre + renard sur chemin + scout sur chemin;;;;secret
 35;Cache;Fort de Bron;45.732264, 4.920239;;gones;;;;;;secret
 36;Cache;Saint Priest;45.694271, 4.940963;;gones;;;;;;viktouare
