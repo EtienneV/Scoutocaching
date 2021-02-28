@@ -233,7 +233,8 @@ export class MapComponent implements OnInit, OnChanges {
                     },
                     {
                       type: "video", url: element["indice_video"], trustedUrl: {}
-                    }]
+                    }],
+                    qrSecret: element["qr_secret"]
                   }
                 })
               }
@@ -402,6 +403,8 @@ export class MapComponent implements OnInit, OnChanges {
             modalRef.componentInstance.id = thisTreature.properties['id'];
             modalRef.componentInstance.indice = thisTreature.properties['indice'];
             modalRef.componentInstance.title = thisTreature.properties['name'];
+            modalRef.componentInstance.qrSecret = thisTreature.properties['qrSecret'];
+            
 
             // Si il est trouvé
             if (thisTreature.properties.status === "treasureFound") {

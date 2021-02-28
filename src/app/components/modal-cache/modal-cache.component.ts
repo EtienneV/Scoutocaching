@@ -48,6 +48,8 @@ export class ModalCacheComponent implements OnInit {
   found = false;
   scannerEnabled = false;
 
+  qrSecret = "********";
+
   @ViewChild('scanner', { static: false })
 
   scanner = ZXingScannerComponent as any;
@@ -66,6 +68,9 @@ export class ModalCacheComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+
+    console.log(this.indice)
+    console.log(this.qrSecret)
 
     if (this.found == false) {
       const elementsToBeRemoved = [];
@@ -159,9 +164,13 @@ export class ModalCacheComponent implements OnInit {
 
     // this.qrResultString = this.sanitizer.bypassSecurityTrustResourceUrl(resultString);
 
-    this.found = true;
+    if(resultString == this.qrSecret) {
+      this.found = true;
 
-    this.activeModal.close(0);
+      this.activeModal.close(0);
+    }
+    else alert("Raté, héhé :3");
+    
   }
 
   onScanError(e) {
