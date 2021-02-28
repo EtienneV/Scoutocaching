@@ -1,35 +1,41 @@
-[
-  
-  {
-    "type": "image",
-    "url": "assets/images/gones_loader.jpg",
-    "trustedUrl": {}
-  },{
-    "type":"titre",
-    "text":"Qui a volé le chat de la mère Michèle ?"
-  },
-  {
-    "type": "paragraphe",
-    "text": "Vénissieux, le vendredi 18 octobre 1895."
-  },
-  {
-    "type": "paragraphe",
-    "text": "Albert, le Maréchal des logis de la gendarmerie de Vénissieux reçoit madame Michèle Faure suite à la disparition de son chat Felix qui n’est pas revenu hier pour la pâtée du soir."
-    
-  },  
-  {
-    "type": "image",
-    "url": "assets/images/default-thumbnail_0.jpg",
-    "trustedUrl": {}
-  },
-  {
-    "type": "paragraphe",
-    "text": "Sur le PV reprenant la plainte de la mère Michèle, cette dernière accuse différents groupes d’enfants des villages alentours."
-  },
-  {
-    "type": "bouton",
-    "text": "Commencer",
-    "url": "assets/icons/east-24px.png"
-  }
-  ]
+{
+  "description": [
+    {
+      "type": "image",
+      "url": "assets/images/gones_loader.jpg",
+      "trustedUrl": {}
+    },
+    {
+      "type": "titre",
+      "text": "Qui a volé le chat de la mère Michèle ?"
+    },
+    {
+      "type": "paragraphe",
+      "text": "Vénissieux, le vendredi 18 octobre 1895."
+    },
+    {
+      "type": "paragraphe",
+      "text": "Albert, le Maréchal des logis de la gendarmerie de Vénissieux reçoit madame Michèle Faure suite à la disparition de son chat Felix qui n’est pas revenu hier pour la pâtée du soir."
+    },
+    {
+      "type": "image",
+      "url": "assets/images/default-thumbnail_0.jpg",
+      "trustedUrl": {}
+    },
+    {
+      "type": "paragraphe",
+      "text": "Sur le PV reprenant la plainte de la mère Michèle, cette dernière accuse différents groupes d’enfants des villages alentours."
+    },
+    {
+      "type": "bouton",
+      "text": "Commencer",
+      "url": "assets/icons/east-24px.png"
+    }
+  ],
+  "indices": []
+}
+
+
+
+
 

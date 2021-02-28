@@ -11,7 +11,7 @@ import { BarcodeFormat } from '@zxing/library';
   styleUrls: ['./modal-changeTerre.component.scss'],
 })
 export class ModalChangeTerreComponent implements OnInit {
-  
+
   showStart=true
   showTerreContent=false
   showTerreChoice=false
@@ -112,16 +112,16 @@ export class ModalChangeTerreComponent implements OnInit {
   selectTerre(e):void{
     if (e==="Terre des Gones"){
       this.choice="gones";
-      this.content=gones_loader;
+      this.content=gones_loader.description;
     }
     else if(e==="Terre des Lumieres"){
       this.choice="lumieres";
-      this.content=lumieres_loader;
+      this.content=lumieres_loader.description;
       // console.log("Lumières");
     }
     else{
       this.choice="canuts";
-      this.content=canuts_loader;
+      this.content=canuts_loader.description;
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }

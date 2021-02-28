@@ -1,20 +1,24 @@
-[
-  {
-    "type": "image",
-    "url": "assets/images/canuts_loader.jpg",
-    "trustedUrl": {}
-  },{
-    "type":"titre",
-    "text":"Un cadeau pour Baden-Powell ?"
-  },
-  {
-    "type": "paragraphe",
-    "text": "1931 : Baden-Powell vient visiter Lyon pour la première fois ; à cette occasion, il parcourt la ville."
-  },
-  {
-    "type": "bouton",
-    "text": "Commencer",
-    "url": "assets/icons/east-24px.png"
-  }
-  ]
+{
+  "description": [
+      {
+        "type": "image",
+        "url": "assets/images/canuts_loader.jpg",
+        "trustedUrl": {}
+      },
+      {
+        "type": "titre",
+        "text": "Un cadeau pour Baden-Powell ?"
+      },
+      {
+        "type": "paragraphe",
+        "text": "1931 : Baden-Powell vient visiter Lyon pour la première fois ; à cette occasion, il parcourt la ville."
+      },
+      {
+        "type": "bouton",
+        "text": "Commencer",
+        "url": "assets/icons/east-24px.png"
+      }
+  ],
+  "indices": []
+}
 
