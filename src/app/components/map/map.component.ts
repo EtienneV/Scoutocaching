@@ -72,6 +72,10 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     const that = this;
 
+    /*
+    ** Init Map
+    */
+
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/chipsondulee/ckibkn4zp08z01apbrodswj9g', //43.244442, 5.398040
@@ -87,102 +91,44 @@ export class MapComponent implements OnInit, OnChanges {
     });
 
 
-
+    /*
+    ** Load parcours
+    */
 
     that.terreChoosed = this.cookieService.get('scoutocaching_terre');
-
-    console.log(that.terreChoosed)
 
     if (that.terreChoosed === undefined || that.terreChoosed == "") { // Si aucune terre n'a été choisie
 
       const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
 
       onboarding.result.then((result) => {
-        console.log(result);
-
         that.terreChoosed = result;
 
         const now = new Date();
-        // console.log(now.getHours());
-
         const expiredDate = new Date();
         expiredDate.setMinutes(now.getMinutes() + 3);
-
-        console.log(now.getMinutes(), expiredDate.getMinutes());
 
         that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
         that.cookieService.set('scoutocaching_terre', that.terreChoosed);
 
         that.loadCaches();
-
         that.refreshMap();
-
-        //this.init()
       }, (reason) => {
         console.log(reason);
       });
-
 
     }
     else {
       that.loadCaches();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     that.loadGroupes();
-
-
-
     that.loadMap();
-
   }
 
   ngOnChanges() {
+
   }
-
-  // getUserPosition(){
-  //   this.locationService.getPosition().then(pos=>{
-  //     this.userPositionGeoJson.features.push({
-  //       "type": "Feature",
-  //       "geometry": {
-  //         "type": "Point",
-  //         "coordinates": [pos.lng,pos.lat]
-  //       }
-  //     })
-  //     this.map.setCenter([pos.lng,pos.lat]);
-  //   });
-  // }
-
-  // updateUserPosition(){
-  //   this.locationService.getPosition().then(pos=>{
-  //     this.userPositionGeoJson.features=[{
-  //       "type": "Feature",
-  //       "geometry": {
-  //         "type": "Point",
-  //         "coordinates": [pos.lng,pos.lat]
-  //       }
-  //     }];
-  //     this.map.setCenter([pos.lng,pos.lat]);
-  //   });
-  // }
-
-
-
-
-
 
 
   /*
@@ -303,28 +249,10 @@ export class MapComponent implements OnInit, OnChanges {
   loadMap() {
     const that = this;
 
-    that.map.addControl(that.geolocate); // Bouton de géolocalisation // ! PAS VISIBLE : caché par la barre de menu
+    that.map.addControl(that.geolocate); // Bouton de géolocalisation
 
     that.map.on('load', function () {
       that.geolocate.trigger();
-
-      // that.updateUserPosition();
-      // update the drone symbol's location on the map
-      // that.map.getSource('userPoint').setData(that.userPositionGeoJson);
-      // console.log(that.userPositionGeoJson.features)
-      // fly the map to the drone's current location
-      // that.map.flyTo({center: that.userPositionGeoJson.features[0].geometry.coordinates, speed: 0.5});
-      // }, 2000);
-      // that.map.addImage('pulsing-dot', that.userPulsingDot, { pixelRatio: 4});
-
-      // that.map.addLayer({
-      //   'id': 'userPoint',
-      //   'type': 'symbol',
-      //   'source': 'userPoint',
-      //   'layout': {
-      //     'icon-image': 'pulsing-dot'
-      //   }
-      //   });
 
       // Chargement des icones a afficher sur la carte
       that.loadMapIcons().then(() => {
@@ -418,7 +346,6 @@ export class MapComponent implements OnInit, OnChanges {
             that.refreshMap();
           }, 500);
 
-
         })
       });
     });
@@ -434,10 +361,6 @@ export class MapComponent implements OnInit, OnChanges {
 
       that.loadCaches();
     }
-
-    // Géojson des caches à afficher : celles correspondant à la terre
-    //that.activeTresorsGeoJson.features = that.allTresorsGeoJson.features.filter(element => element.properties.terre == that.terreChoosed);
-    // console.log(that.activeTresorsGeoJson);
 
     // Maj des caches sur la carte
     that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
