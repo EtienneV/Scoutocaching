@@ -88,9 +88,63 @@ export class MapComponent implements OnInit, OnChanges {
 
 
 
+
+    that.terreChoosed = this.cookieService.get('scoutocaching_terre');
+
+    console.log(that.terreChoosed)
+
+    if (that.terreChoosed === undefined || that.terreChoosed == "") { // Si aucune terre n'a été choisie
+
+      const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
+
+      onboarding.result.then((result) => {
+        console.log(result);
+
+        that.terreChoosed = result;
+
+        const now = new Date();
+        // console.log(now.getHours());
+
+        const expiredDate = new Date();
+        expiredDate.setMinutes(now.getMinutes() + 3);
+
+        console.log(now.getMinutes(), expiredDate.getMinutes());
+
+        that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
+        that.cookieService.set('scoutocaching_terre', that.terreChoosed);
+
+        that.loadCaches();
+
+        that.refreshMap();
+
+        //this.init()
+      }, (reason) => {
+        console.log(reason);
+      });
+
+
+    }
+    else {
+      that.loadCaches();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     that.loadGroupes();
 
-    that.loadCaches();
+
 
     that.loadMap();
 
@@ -198,13 +252,13 @@ export class MapComponent implements OnInit, OnChanges {
   loadCaches() {
     const that = this;
 
-    if(this.terreChoosed == "gones") {
+    if (this.terreChoosed == "gones") {
       this.parcoursSelected = gones_loader;
     }
-    else if(this.terreChoosed == "lumieres") {
+    else if (this.terreChoosed == "lumieres") {
       this.parcoursSelected = lumieres_loader;
     }
-    else if(this.terreChoosed == "canuts") {
+    else if (this.terreChoosed == "canuts") {
       this.parcoursSelected = canuts_loader;
     }
 
@@ -364,34 +418,7 @@ export class MapComponent implements OnInit, OnChanges {
             that.refreshMap();
           }, 500);
 
-          if (!that.cookieService.check('avoidOnBoarding')) {
-            const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
 
-            onboarding.result.then((result) => {
-              console.log(result);
-
-              that.terreChoosed = result;
-
-              const now = new Date();
-              // console.log(now.getHours());
-
-              const expiredDate = new Date();
-              expiredDate.setMinutes(now.getMinutes() + 3);
-
-              console.log(now.getMinutes(), expiredDate.getMinutes());
-
-              that.cookieService.set("alreadyStarted", "true", { expires: expiredDate });
-              that.cookieService.set('scoutocaching_terre', that.terreChoosed);
-
-              that.refreshMap();
-
-              //this.init()
-            }, (reason) => {
-              console.log(reason);
-            });
-          } else {
-            that.refreshMap();
-          }
         })
       });
     });
@@ -442,7 +469,7 @@ export class MapComponent implements OnInit, OnChanges {
     modalRef.result.then((result) => {
       console.log(result)
 
-      if(result) {
+      if (result) {
 
         console.log("Trouvé")
 
@@ -452,7 +479,7 @@ export class MapComponent implements OnInit, OnChanges {
 
         console.log(thisTreature)
 
-        if(thisTreature !== undefined) {
+        if (thisTreature !== undefined) {
           thisTreature.properties.status = "treasureFound";
         }
       }
@@ -488,55 +515,55 @@ export class MapComponent implements OnInit, OnChanges {
       .setHTML(html)
       .addTo(that.map);*/
 
-/*
-    // Récupération de la cache
-    const thisTreature = that.activeTresorsGeoJson.features.reduce(function (prev, curr) {
-      return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat)) < (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
-    });
+    /*
+        // Récupération de la cache
+        const thisTreature = that.activeTresorsGeoJson.features.reduce(function (prev, curr) {
+          return ((Math.abs(curr.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(curr.geometry.coordinates[1] - e.lngLat.lat)) < (Math.abs(prev.geometry.coordinates[0] - e.lngLat.lng) + Math.abs(prev.geometry.coordinates[1] - e.lngLat.lat)) ? curr : prev);
+        });
 
-    console.log(thisTreature)
+        console.log(thisTreature)
 
-    // Ouverture de la modale de la cache
-    const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
-    modalRef.componentInstance.id = thisTreature.properties['id'];
-    modalRef.componentInstance.indice = thisTreature.properties['indice'];
-    modalRef.componentInstance.title = thisTreature.properties['name'];
-    modalRef.componentInstance.qrSecret = thisTreature.properties['qrSecret'];
+        // Ouverture de la modale de la cache
+        const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg' });
+        modalRef.componentInstance.id = thisTreature.properties['id'];
+        modalRef.componentInstance.indice = thisTreature.properties['indice'];
+        modalRef.componentInstance.title = thisTreature.properties['name'];
+        modalRef.componentInstance.qrSecret = thisTreature.properties['qrSecret'];
 
 
-    // Si il est trouvé
-    if (thisTreature.properties.status === "treasureFound") {
+        // Si il est trouvé
+        if (thisTreature.properties.status === "treasureFound") {
 
-      // ! TO DO Charger le contenu des personnages
+          // ! TO DO Charger le contenu des personnages
 
-      that.cookieService.set('avoidOnBoarding', '',);
+          that.cookieService.set('avoidOnBoarding', '',);
 
-      modalRef.componentInstance.found = true;
-      modalRef.componentInstance.indice = null;
-      modalRef.componentInstance.story = thisTreature.properties['story'];
-      modalRef.componentInstance.story_cachee = thisTreature.properties['story'];
+          modalRef.componentInstance.found = true;
+          modalRef.componentInstance.indice = null;
+          modalRef.componentInstance.story = thisTreature.properties['story'];
+          modalRef.componentInstance.story_cachee = thisTreature.properties['story'];
 
-      console.log(modalRef.componentInstance.story);
+          console.log(modalRef.componentInstance.story);
 
-      if (modalRef.componentInstance.story === null) { // Si aucun contenu à afficher
-        modalRef.componentInstance.story = "<h2>Cache trouvée </h2>";
-      }
-    }
+          if (modalRef.componentInstance.story === null) { // Si aucun contenu à afficher
+            modalRef.componentInstance.story = "<h2>Cache trouvée </h2>";
+          }
+        }
 
-    modalRef.componentInstance.coord = e.lngLat;
-    //modalRef.componentInstance.idRapport = idRapport;
+        modalRef.componentInstance.coord = e.lngLat;
+        //modalRef.componentInstance.idRapport = idRapport;
 
-    modalRef.result.then((result) => {
-      if (modalRef.componentInstance.id === thisTreature.properties['id'] && result === true) {
-        thisTreature.properties.status = "treasureFound";
-        that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()), thisTreature.properties.status);
-        that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
-      }
-      //this.init()
-    }, (reason) => {
-      console.log(reason);
-    });
-    */
+        modalRef.result.then((result) => {
+          if (modalRef.componentInstance.id === thisTreature.properties['id'] && result === true) {
+            thisTreature.properties.status = "treasureFound";
+            that.cookieService.set('scoutocaching_caches_'.concat(thisTreature.properties['id'].toString()), thisTreature.properties.status);
+            that.map.getSource('tresors').setData(that.activeTresorsGeoJson);
+          }
+          //this.init()
+        }, (reason) => {
+          console.log(reason);
+        });
+        */
   }
 
 

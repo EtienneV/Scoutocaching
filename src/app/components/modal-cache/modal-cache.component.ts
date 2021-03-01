@@ -200,9 +200,14 @@ export class ModalCacheComponent implements OnInit {
 
     // Si c'est le bon qr code, on considère l'indice comme trouvé et on affiche le résultat de la cache
     if (resultString == this.tresorProperties.qrSecret) {
+
+      console.log("Bon QR Code")
+
       this.found = true;
 
       that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.terre + "_" + this.tresorProperties.id, "treasureFound");
+
+      this.indice = JSON.parse(this.tresorProperties.resultat);
 
       // ! Ne pas fermer, mais afficher le résultat de la cache
       //this.activeModal.close(true);
