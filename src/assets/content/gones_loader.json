@@ -35,14 +35,6 @@
   ],
   "indices": [
     {
-      "id": 0,
-      "name": "Decines",
-      "coords": "xxxxxxxx",
-      "qr_secret": "secret",
-      "indice": [],
-      "resultat": []
-    },
-    {
       "id": 1,
       "name": "Avenue Félix Faure",
       "coords": "45.752121, 4.847156",
@@ -143,5 +135,22 @@
       ],
       "resultat": []
     }
+  ],
+  "resolutionTitre":"ResolutionTitre",
+  "resolutionPersonnages":[
+    {"id":1,
+    "name":"Personnage 1",
+  "coupable":false},
+{"id":2,
+"name":"Personnage 2",
+"image":"assets/images/charles_moisson.jpg",
+"coupable":false},
+{"id":3,
+"name":"Personnage 3",
+"image":"assets/images/jeanne_lumiere.jpg",
+"coupable":true},
+{"id":4,
+"name":"Toto",
+"coupable":false}
   ]
 }

@@ -20,6 +20,7 @@ export class AppComponent {
   changeTerre():void{
     const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
     onboarding.result.then((result) => {
+      console.log(result);
       this.terreChoosed=result;
       this.cookieService.set('scoutocaching_terre',this.terreChoosed);
       //this.init()

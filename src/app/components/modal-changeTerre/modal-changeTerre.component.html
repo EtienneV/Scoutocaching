@@ -59,7 +59,7 @@
           <img [src]="item.trustedUrl">
         </div>
         <div *ngIf="item.type == 'bouton'">
-          <button (click)="selectTerre(item.text)"><img [src]="item.url"/> {{item.text}}</button>
+          <button (click)="selectTerre(item.text)"><img [src]="item.url"/> {{item.text}}  <img *ngIf="item.done" src="assets/icons/done-24px.png"/></button>
         </div>
       </div>
 

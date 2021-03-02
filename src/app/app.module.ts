@@ -16,14 +16,7 @@ import { PageSiteComponent } from './components/page-site/page-site.component';
 import { ModalCacheComponent } from './components/modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
 import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
-import {ItemComponent} from '@content/item/item.component';
-import {SimpleComponent} from '@content/item/simple/simple.component';
-import {FeatureComponent} from '@content/item/feature/feature.component';
-import {UnrecognizedComponent} from '@content/item/unrecognized/unrecognized.component';
-import {WidgetComponent} from '@content/item/widget/widget.component';
-import {ItemService} from "@app/services/item.service";
-import {JSONComponent} from "@content/json/json.component";
-
+import {ModalResolutionComponent} from './components/modal-resolve/modal-resolve.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,12 +27,7 @@ import {JSONComponent} from "@content/json/json.component";
     ModalCacheComponent,
     ModalOnBoardingComponent,
     ModalChangeTerreComponent,
-    JSONComponent,
-    ItemComponent,
-     SimpleComponent,
-     FeatureComponent,
-     UnrecognizedComponent,
-     WidgetComponent,
+    ModalResolutionComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +38,7 @@ import {JSONComponent} from "@content/json/json.component";
     NgbModule,
     ZXingScannerModule
   ],
-  providers: [CookieService,ItemService],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@
   <div *ngIf="!this.found">
     <!-- Contenu modal si pas encore trouvée -->
 
-    <div *ngIf="!this.scannerOpen">
+    <div *ngIf="!this.scannerOpen && !this.userInputOpen">
       <!-- Si scanner non ouvert -->
 
       <div *ngIf="coordinates !== undefined" class="modal-coordinates" style="padding: 1rem 1rem 1rem 1rem;">
@@ -35,7 +35,7 @@
             </div>
 
             <div *ngIf="item.type == 'paragraphe'">
-              <p>{{item.text}}</p>
+              <div [innerHTML]="item.text"></div>
             </div>
 
             <div *ngIf="item.type == 'video'">
@@ -83,23 +83,45 @@
 
         <!-- <button (click)="enableScanner()" *ngIf="!scannerEnabled" type="button" class="btn btn-success">Activer le scanner de QR Code</button> -->
         <div class="modal-footer d-flex justify-content-center">
-          <div>
+          
             <!-- <small>Result</small> -->
-            <span style="text-decoration: underline;">{{ qrResultString }}</span>
-          </div>
-          <!-- <button mat-icon-button (click)="clearResult()">&times;</button> -->
+            <span style="text-decoration: underline;">{{ qrResultString }}</span><br/>
+            <button (click)="saisieManuelle()"><img src="assets/icons/qr_code_scanner-24px.png" /> Saisie Manuelle </button>
         </div>
       </div>
 
     </div>
+    
+    
+    <div *ngIf="this.userInputOpen" class="userInput">
+      <!-- Si scanner non ouvert -->
 
+      <div *ngIf="coordinates !== undefined" class="modal-coordinates justify-content-center" style="padding: 1rem 1rem 1rem 1rem;">
+        <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
+        <div style="text-align: center;">
+          <div style="padding-bottom: 0.5rem;">
+            <b> Code trouvé </b>
+          </div>
+          <div style="padding-bottom: 0.5rem;">
+            <input type="text" id="code" name="code" required
+                   minlength="4" maxlength="10" size="10"/>
+          </div>
+          <div>
+            <button (click)="checkInput()"> Valider </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button (click)="startScanner(id)"><img src="assets/icons/qr_code_scanner-24px.png" /> Scanner le QR Code </button>
+      </div>
+
+    </div>
   </div>
 
-  <div *ngIf="this.found">
+  <div *ngIf="this.found" class="contenuHistoire">
     <!-- Contenu modal si trouvée -->
 
     <div class="modal-coordinates" style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
-
       <div style="margin-bottom: 0;" class="d-flex flex-column">
 
         <div *ngFor="let item of indice; odd as isOdd">
@@ -108,7 +130,7 @@
           </div>
 
           <div *ngIf="item.type == 'paragraphe'">
-            <p>{{item.text}}</p>
+            <p style="text-align: justify;">{{item.text}}</p>
           </div>
 
           <div *ngIf="item.type == 'video'">
@@ -123,8 +145,12 @@
         </div>
 
       </div>
-    </div>
+      
 
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+        <button (click)="close()"> Ok </button>
+    </div>
 
   </div>
 

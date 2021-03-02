@@ -101,3 +101,66 @@
 .results{
     text-align: center;
 }
+
+.modal-coordinates > div > button {
+    text-align: center;
+    background-color:  #013a5d!important;
+    color: white;
+    border: none;
+    padding: 10px 0.1vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 4px;
+    width: 90%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.userInput{
+        
+    .modal-footer > button {
+        text-align: center;
+        background-color:  #013a5d!important;
+        color: white;
+        border: none;
+        padding: 10px 0.1vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 4px;
+        width: 90%;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .modal-coordinates > div > div > button {
+        text-align: center;
+        background-color:  #ff8300!important;
+        color: white;
+        border: none;
+        padding: 10px 1.1vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        width: auto;
+    }
+}
+.contenuHistoire{
+    .modal-footer > button {
+        text-align: center;
+        background-color:  #013a5d!important;
+        color: white;
+        border: none;
+        padding: 10px 0.1vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 4px;
+        width: 90%;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+}
