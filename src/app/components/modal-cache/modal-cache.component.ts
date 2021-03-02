@@ -209,6 +209,46 @@ export class ModalCacheComponent implements OnInit {
       that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.terre + "_" + this.tresorProperties.id, "treasureFound");
 
       this.indice = JSON.parse(this.tresorProperties.resultat);
+        
+      const elementsToBeRemoved = [];
+
+      for (let i = 0; i < this.indice.length; i++) {
+        const element = this.indice[i];
+
+        if (element.type == "titre") {
+
+          if (element.text != null) {
+            element.text = element.text.replace('\"', '"');
+          }
+          else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+
+        }
+        if (element.type == "paragraphe") {
+
+          if (element.text != null) {
+            element.text = element.text.replace('\"', '"');
+          }
+          else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+
+        }
+        if (element.type == "video" || element.type == "image") {
+
+          if (element.url != null) {
+            element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+          } else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+
+        }
+      }
+
+      for (var i = elementsToBeRemoved.length - 1; i >= 0; i--) {
+        this.indice.splice(elementsToBeRemoved[i], 1);
+      }
 
       // ! Ne pas fermer, mais afficher le résultat de la cache
       //this.activeModal.close(true);
