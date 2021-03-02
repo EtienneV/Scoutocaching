@@ -19,12 +19,11 @@
 .modal-footer > button.terreContent{
     padding: 10px 32px;
 }
-// .modal-body > div > .divImg, 
-.modal-body > div > div >  img, .modal-body > div > div > div> img{
-    // object-fit: contain;
-    // overflow: hidden;
-        max-width: 100%;
-        max-height: 100%;
+.card-body{
+    padding: 1vh;
+}
+.card-title{
+    margin-bottom: 0;
 }
 .modal-body > div > div > button {
     text-align: center;
@@ -34,13 +33,11 @@
     padding: 10px 0.1vw;
     text-align: center;
     text-decoration: none;
-    // display: inline-block;
+    display: inline-block;
     font-size: 18px;
     border-radius: 4px;
     width: 90%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    display: table-cell;
-vertical-align: middle;
 }
 div.modal-header.terreContent{
     max-height: 70vh;
@@ -58,7 +55,8 @@ div.modal-header.terreContent{
 div.modal-header > img.terreContent{
     border-top-left-radius: calc(0.3rem - 1px);
     border-top-right-radius: calc(0.3rem - 1px);
-    object-fit: cover;
+    object-fit: scale-down !important;
+    // object-fit: cover;
     width: fit-content;
     position: absolute;
     top: 0;
@@ -68,14 +66,6 @@ div.modal-header > img.terreContent{
     display: list-item;
     overflow-y: hidden;
 }
-.sgdfIcon{
-    height: 24px !important;
-}
-
-.icons{
-    height: auto;
-    width: 30px !important;
-  }
 div.modal-header > button.terreContent{
     position: absolute;
     top: 1rem;
@@ -105,4 +95,16 @@ div.modal-header > button.terreContent{
 
 .modal-body.terreContent{
     z-index: 99;
+}
+.custom-card{
+    object-fit: scale-down !important;
+    max-width: 350px !important;
+    overflow: hidden;
+}
+div.card{
+    width: 40vw;
+    max-width: 350px !important; 
+    object-fit: scale-down !important;
+    display: inline-block;
+    background-color:inherit;
 }

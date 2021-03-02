@@ -59,7 +59,7 @@
           <img [src]="item.trustedUrl">
         </div>
         <div *ngIf="item.type == 'bouton'">
-          <button (click)="selectTerre(item.text)"><img [src]="item.url"/> {{item.text}}  <img *ngIf="item.done" src="assets/icons/done-24px.png"/></button>
+          <button (click)="selectTerre(item.text)"><img class="icons" [src]="item.url"/> {{item.text}}  <img *ngIf="item.done" class="icons" src="assets/icons/done-24px.png"/></button>
         </div>
       </div>
 
@@ -72,7 +72,7 @@
   <div class="modal-header terreContent d-flex align-items-center justify-content-center">
         <p style="width: inherit;"><img class="terreContent modal-title d-flex justify-content-center" [src]="header.trustedUrl" style="width: inherit;"/></p>
         <button type="button" class="back terreContent modal-title d-flex justify-content-center" aria-label="Close" (click)="goBackToTerreChoice()">
-          <img src="assets/icons/back.png"/></button>
+          <img class="icons" src="assets/icons/back.png"/></button>
   </div>
   <div class="modal-body terreContent" style="width: 100%">
     <div *ngFor="let item of content" class="modal-coordinates d-flex justify-content-center flex-column">

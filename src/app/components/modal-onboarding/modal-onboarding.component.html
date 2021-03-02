@@ -3,7 +3,7 @@
     <!-- <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <img src="assets/icons/clear-24px.png"/>
     </button> -->
-    <img class="ml-auto pr-2" src="assets/icons/Groupe_67blue.png" width="auto" />
+    <img class="ml-auto pr-2 sgdfIcon" src="assets/icons/Groupe_67blue.png" />
     <h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
   </div>
   <div class="modal-body">
@@ -48,7 +48,7 @@
     <!-- <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <img src="assets/icons/clear-24px.png"/>
     </button> -->
-    <img class="ml-auto pr-2" src="assets/icons/Groupe_67blue.png" width="auto" />
+    <img class="ml-auto pr-2 pt-1 sgdfIcon" src="assets/icons/Groupe_67blue.png" width="auto" />
     <h3 class="modal-title d-flex justify-content-center mr-auto" id="modal-basic-title">{{title}}</h3>
   </div>
   <div class="modal-body">
@@ -67,12 +67,12 @@
           allowfullscreen></iframe>
       </div>
 
-      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
+      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto divImg">
         <img [src]="item.trustedUrl">
       </div>
 
       <div *ngIf="item.type == 'bouton'">
-        <button (click)="selectTerre(item.text)"><img [src]="item.url" /> {{item.text}}   <img *ngIf="item.done" src="assets/icons/done-24px.png"/></button>
+        <button (click)="selectTerre(item.text)"><img class="icons pb-1" [src]="item.url" /> {{item.text}}   <img *ngIf="item.done" class="icons pb-1" src="assets/icons/done-24px.png"/></button>
       </div>
 
     </div>
@@ -91,7 +91,7 @@
         [src]="header.trustedUrl" style="width: inherit;" /></p>
     <button type="button" class="back terreContent modal-title d-flex justify-content-center" aria-label="Close"
       (click)="goBackToTerreChoice()">
-      <img src="assets/icons/back.png" /></button>
+      <img class="icons" src="assets/icons/back.png" /></button>
   </div>
   <div class="modal-body terreContent" style="width: 100%">
     <div *ngFor="let item of content" class="modal-coordinates d-flex justify-content-center flex-column">
@@ -109,8 +109,8 @@
           allowfullscreen></iframe>
       </div>
 
-      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
-        <img [src]="item.trustedUrl">
+      <div *ngIf="item.type == 'image'" class="ml-auto mr-auto divImg">
+        <img class="divImg" [src]="item.trustedUrl">
       </div>
       <div *ngIf="item.type == 'bouton'">
         <button (click)="selectTerre(item.text)"><img [src]="item.url" /> {{item.text}}</button>

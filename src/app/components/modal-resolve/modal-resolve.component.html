@@ -1,0 +1,65 @@
+
+<div *ngIf="!this.resolved">
+  <div class="modal-header d-flex align-items-center justify-content-center">
+    <!-- <img class="ml-auto pr-2"  src="assets/icons/Groupe_67blue.png" width="auto"/> -->
+    <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{title}}</h3>
+    <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <img class="icons" src="assets/icons/clear-24px.png"/>
+    </button>
+  </div>
+  <div class="modal-body container">
+    <div  class="modal-coordinates d-flex justify-content-center row row-cols-2">
+      <div *ngFor="let item of content">
+        <button (click)="isCoupable(item.coupable)" class="custom-card" style="width: 40vw;padding-top: 0px; padding-bottom: 0px;">
+          <div class="card">
+            <img *ngIf="item.image != undefined " class="card-img-top" [src]="item.image" style="overflow: hidden;
+            inline-size: 30vh;
+            height: 30vh;
+            width: 100%; object-fit: cover;"alt="Card image cap"/>
+            <div class="card-body">
+              <h5 class="card-title">{{item.name}}</h5>
+              <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+            </div>
+          </div>
+        </button>
+        <!-- <div *ngIf="item.type == 'titre'">
+          <b>{{item.text}}</b><br/>
+        </div>
+
+        <div *ngIf="item.type == 'paragraphe'">
+          <p>{{item.text}}</p>
+        </div>
+
+        <div *ngIf="item.type == 'video'">
+          <iframe width="inherit" [src]="item.trustedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
+          <img [src]="item.trustedUrl">
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div>
+<div *ngIf="this.resolved">
+  <div class="modal-header d-flex align-items-center justify-content-center">
+    <!-- <img class="ml-auto pr-2"  src="assets/icons/Groupe_67blue.png" width="auto"/> -->
+    <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{title}}</h3>
+    <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <img class="icons" src="assets/icons/clear-24px.png"/>
+    </button>
+  </div>
+  <div class="modal-body container">
+    <div class="modal-coordinates d-flex justify-content-center row">
+            <img class="card-img-top" src="assets/images/bravo.gif" style="overflow: hidden;
+            inline-size: 30vh;
+            height: 100%;
+            width: 100%; object-fit: cover;"alt="Card image cap"/>
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-center">
+    <button (click)="activeModal.close(true)"><img class="ml-auto pr-2 icons" src="assets/icons/outline_change_circle-24px.png" /> Changer de terre </button>
+    <button (click)="activeModal.close(false)"><img class="ml-auto pr-2 icons" src="assets/icons/change_circle-24px.png" /> Quitter </button>
+  </div>
+</div>

@@ -15,7 +15,7 @@
 
       <div *ngIf="coordinates !== undefined" class="modal-coordinates" style="padding: 1rem 1rem 1rem 1rem;">
         <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
-        <img class="modal-icon" src="assets/icons/Composant 2 – 1.png" />
+        <img class="modal-icon icons" src="assets/icons/Composant 2 – 1.png" />
         <p style="margin-bottom: 0;">
           <b> Coordonnees </b><br /><span>{{coordinates[1]}}</span> Lat. - <span>{{coordinates[0]}}</span> Long.
         </p>
@@ -24,7 +24,7 @@
 
       <div class="modal-coordinates" style="background-color: #e5ebee;padding: 1rem 1rem 1rem 1rem;">
 
-        <img class="modal-icon" src="assets/icons/Composant 3 – 1.png" />
+        <img class="modal-icon icons" src="assets/icons/Composant 3 – 1.png" />
 
         <div style="margin-bottom: 0;" class="d-flex flex-column">
 
@@ -53,7 +53,7 @@
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
-        <button (click)="startScanner(id)"><img src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
+        <button (click)="startScanner(id)"><img class="icons" src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
       </div>
 
     </div>
@@ -86,7 +86,7 @@
           
             <!-- <small>Result</small> -->
             <span style="text-decoration: underline;">{{ qrResultString }}</span><br/>
-            <button (click)="saisieManuelle()"><img src="assets/icons/qr_code_scanner-24px.png" /> Saisie Manuelle </button>
+            <button (click)="saisieManuelle()"><img class="icons" src="assets/icons/qr_code_scanner-24px.png" /> Saisie Manuelle </button>
         </div>
       </div>
 
