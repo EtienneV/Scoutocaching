@@ -162,21 +162,21 @@
       "resultat": []
     }
   ],
-  "resolutionTitre":"ResolutionTitre",
-  "resolutionPersonnages":[
-    {"id":1,
-    "name":"Personnage 1",
-  "coupable":false},
-{"id":2,
-"name":"Personnage 2",
-"image":"assets/images/charles_moisson.jpg",
-"coupable":false},
-{"id":3,
-"name":"Personnage 3",
-"image":"assets/images/jeanne_lumiere.jpg",
-"coupable":true},
-{"id":4,
-"name":"Toto",
-"coupable":false}
+  "resolutionTitre": "ResolutionTitre",
+  "resolutionPersonnages": [
+    { "id": 1, "name": "Personnage 1", "coupable": false },
+    {
+      "id": 2,
+      "name": "Personnage 2",
+      "image": "assets/images/charles_moisson.jpg",
+      "coupable": false
+    },
+    {
+      "id": 3,
+      "name": "Personnage 3",
+      "image": "assets/images/jeanne_lumiere.jpg",
+      "coupable": true
+    },
+    { "id": 4, "name": "Toto", "coupable": false }
   ]
 }
