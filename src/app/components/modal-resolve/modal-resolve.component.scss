@@ -1,116 +1,129 @@
-.modal-footer > button, .modal-body > div > div > button {
-    text-align: center;
-    background-color:  #013a5d!important;
-    color: white;
-    border: none;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
-    width: 90%;
-}
-.modal-body > div > div {
-    width:90%;
-    padding:1rem;
-    text-align: center;
-}
-.modal-footer > button.terreContent{
-    padding: 10px 32px;
-}
-.card-body{
-    padding: 1vh;
-}
-.card-title{
-    margin-bottom: 0;
-}
+.modal-footer > button,
 .modal-body > div > div > button {
-    text-align: center;
-    background-color:  #013a5d!important;
-    color: white;
-    border: none;
-    padding: 10px 0.1vw;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
-    width: 90%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  text-align: center;
+  background-color: #013a5d !important;
+  color: white;
+  border: none;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
+  width: 90%;
 }
-div.modal-header.terreContent{
-    max-height: 70vh;
-    overflow-y: hidden;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex !important;
-    padding: 0;
-    border-bottom: 0px;
-    // display: contents;
-    // height:100%;
-    // height: max-content;
-    // display: flex;
-}
-div.modal-header > img.terreContent{
-    border-top-left-radius: calc(0.3rem - 1px);
-    border-top-right-radius: calc(0.3rem - 1px);
-    object-fit: scale-down !important;
-    // object-fit: cover;
-    width: fit-content;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 90;
-    max-height: 40vh;
-    display: list-item;
-    overflow-y: hidden;
-}
-div.modal-header > button.terreContent{
-    position: absolute;
-    top: 1rem;
-    left: 0.5rem;
-    z-index: 99;
-    background-color: transparent;
-    border: 0;
-
-}
-.modal-header > button{
-    float: left;
+.modal-footer > button:disabled,
+.modal-body > div > div > button:disabled {
+  background-color : #002237 !important;
 }
 
-.modal-header, .modal-body{
-    color:#013a5d;
+.modal-body > div > div {
+  width: 90%;
+  padding: 1rem;
+  text-align: center;
+}
+.modal-footer > button.terreContent {
+  padding: 10px 32px;
+}
+.card-body {
+  padding: 1vh;
+}
+.card-title {
+  margin-bottom: 0;
+}
+// .modal-body > div > div > button {
+//   text-align: center;
+//   background-color: #013a5d !important;
+//   color: white;
+//   border: none;
+//   padding: 10px 0.1vw;
+//   text-align: center;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-size: 18px;
+//   border-radius: 4px;
+//   width: 90%;
+//   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
+
+// .modal-body > div > div > button:disabled {
+//   background-color : #002237 !important;
+// }
+div.modal-header.terreContent {
+  max-height: 70vh;
+  overflow-y: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex !important;
+  padding: 0;
+  border-bottom: 0px;
+  // display: contents;
+  // height:100%;
+  // height: max-content;
+  // display: flex;
+}
+div.modal-header > img.terreContent {
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  object-fit: scale-down !important;
+  // object-fit: cover;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  max-height: 40vh;
+  display: list-item;
+  overflow-y: hidden;
+}
+div.modal-header > button.terreContent {
+  position: absolute;
+  top: 1rem;
+  left: 0.5rem;
+  z-index: 99;
+  background-color: transparent;
+  border: 0;
+}
+.modal-header > button {
+  float: left;
 }
 
-.modal-coordinates{
-    display: flex;
-    align-items:center;
-    vertical-align: middle;
-}
-.modal-icon{
-    float: left;
-    margin: 0px 15px 0px 0px;
+.modal-header,
+.modal-body {
+  color: #013a5d;
 }
 
-.modal-body.terreContent{
-    z-index: 99;
+.modal-coordinates {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
 }
-.custom-card{
-    object-fit: scale-down !important;
-    max-width: 350px !important;
-    overflow: hidden;
+.modal-icon {
+  float: left;
+  margin: 0px 15px 0px 0px;
+}
+
+.btn-icon {
+  width: 25px;
+}
+
+.modal-body.terreContent {
+  z-index: 99;
+}
+.custom-card {
+  object-fit: scale-down !important;
+  max-width: 350px !important;
+  overflow: hidden;
+}
+div.card {
+  width: 40vw;
+  max-width: 350px !important;
+  object-fit: scale-down !important;
+  display: inline-block;
+  background-color: inherit;
 }
 
 .icons{
     height: auto;
     width: 30px !important;
   }
-  
-div.card{
-    width: 40vw;
-    max-width: 350px !important; 
-    object-fit: scale-down !important;
-    display: inline-block;
-    background-color:inherit;
-}

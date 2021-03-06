@@ -7,7 +7,7 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from '../modal-onboarding/modal-onboarding.component';
-import {ModalResolutionComponent} from '../modal-resolve/modal-resolve.component';
+import { ModalResolutionComponent } from '../modal-resolve/modal-resolve.component';
 
 import lumieres_loader from '@assets/content/lumieres_loader.json';
 import canuts_loader from '@assets/content/canuts_loader.json';
@@ -69,7 +69,7 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     const that = this;
 
-    (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="none";
+    (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "none";
     /*
     ** Init Map
     */
@@ -97,7 +97,8 @@ export class MapComponent implements OnInit, OnChanges {
 
     if (that.terreChoosed === undefined || that.terreChoosed == "") { // Si aucune terre n'a été choisie
 
-      const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
+
+      const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true, backdrop: 'static' });
 
       onboarding.result.then((result) => {
         that.terreChoosed = result;
@@ -120,6 +121,7 @@ export class MapComponent implements OnInit, OnChanges {
       that.loadCaches();
       // console.log(that.activeTresorsGeoJson.features.length)
     }
+
 
     
     that.loadGroupes();
@@ -438,6 +440,9 @@ export class MapComponent implements OnInit, OnChanges {
       that.refreshment = window.setInterval(function () {that.refreshMap();}, 500);
       if(result){
         (<HTMLInputElement>document.getElementById("changeTerreButton")).click();
+      }else{ // REDIRECTION BETA TESTING -- TO BE REMOVED IN PRODUCTION !!!!!
+        let url: string = 'https://forms.gle/2CgCK7SgVR2wJ27u9';
+        window.open(url, '_blank'); 
       }
     }, (reason) => {
       console.log(reason);
@@ -493,7 +498,12 @@ export class MapComponent implements OnInit, OnChanges {
     }
     that.areAllFound();
     if(that.allFound && !that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){
-      that.loadResolution();
+      
+      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
+      (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="none";
+      (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="initial";
+      (<HTMLInputElement>document.getElementById("resolutionButton")).onclick =  function(){that.loadResolution()};
+      // that.loadResolution();
     }
     // Maj des caches sur la carte
     that.map.getSource('tresors').setData(that.activeTresorsGeoJson);

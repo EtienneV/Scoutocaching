@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ModalCacheComponent implements OnInit {
   @ViewChild('scanner', { static: false })
   scanner = ZXingScannerComponent as any;
-
+  
 
   /*
   id: 34

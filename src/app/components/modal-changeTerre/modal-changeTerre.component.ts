@@ -48,6 +48,7 @@ export class ModalChangeTerreComponent implements OnInit {
       url: "assets/icons/Composant 7 – 2.png",
       percentage: 1,
       style:"",
+      isDisabled:true,
       done: true
     },
     {
@@ -95,10 +96,20 @@ export class ModalChangeTerreComponent implements OnInit {
     this.showStart = false;
     this.showTerreChoice = true;
     this.title = "Changer de Terre"
-    this.content = [{
+    this.content = [
+    {
+      type: "bouton",
+      text: "Terre des Lumieres",
+      url: "assets/icons/Composant 6 – 2.png",
+      percentage: this.getPercentage("lumieres"),
+      isDisabled:false,
+      style:"width:"+this.getPercentage("lumieres")+"%",
+      done: this.cookieService.check('scoutocaching_caches_lumieres_done')
+    },{
       type: "bouton",
       text: "Terre des Gones",
       url: "assets/icons/Composant 4 – 2.png",
+      isDisabled:true,
       percentage: this.getPercentage("gones"),
       style:"width:"+this.getPercentage("gones")+"%",
       done: this.cookieService.check('scoutocaching_caches_gones_done')
@@ -108,16 +119,9 @@ export class ModalChangeTerreComponent implements OnInit {
       text: "Terre des Canuts",
       url: "assets/icons/Composant 5 – 2.png",
       percentage: this.getPercentage("canuts"),
+      isDisabled:true,
       style:"width:"+this.getPercentage("canuts")+"%",
       done: this.cookieService.check('scoutocaching_caches_canuts_done')
-    },
-    {
-      type: "bouton",
-      text: "Terre des Lumieres",
-      url: "assets/icons/Composant 6 – 2.png",
-      percentage: this.getPercentage("lumieres"),
-      style:"width:"+this.getPercentage("lumieres")+"%",
-      done: this.cookieService.check('scoutocaching_caches_lumieres_done')
     }]
     this.validContent();
   }
