@@ -56,10 +56,13 @@
         </div>
 
         <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
-          <img [src]="item.trustedUrl">
+          <img [src]="item.trustedUrl" style="object-fit:contain;width:100%">
         </div>
         <div *ngIf="item.type == 'bouton'">
-          <button (click)="selectTerre(item.text)"><img class="icons" [src]="item.url"/> {{item.text}}  <img *ngIf="item.done" class="icons" src="assets/icons/done-24px.png"/></button>
+          <button (click)="selectTerre(item.text)"><img class="icons" [src]="item.url"/> {{item.text}}  <img *ngIf="item.done" class="icons" src="assets/icons/done-24px.png"/>
+            <div class="progress-bar progress-bar-animated" role="progressbar" [style]="item.style" [aria-valuenow]="item.percentage" aria-valuemin="0" aria-valuemax="100"></div>
+          </button>
+          
         </div>
       </div>
 

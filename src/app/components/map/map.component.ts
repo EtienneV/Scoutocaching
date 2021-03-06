@@ -121,15 +121,83 @@ export class MapComponent implements OnInit, OnChanges {
       // console.log(that.activeTresorsGeoJson.features.length)
     }
 
+    
     that.loadGroupes();
     that.loadMap();
+    var item = window.document.getElementById('groupesVisibilitySelectorShow');
+    item.onclick =  function(e){that.changeGroupesVisibility(e);}
+    var item = window.document.getElementById('groupesVisibilitySelectorHide');
+    item.onclick =  function(e){that.changeGroupesVisibility(e);}
+    // item.href="javascript:void(0);";
+    // item.className="dropdown-item waves-effect waves-light";
+// 
+    // var link =  window.document.createElement('input');
+    // link.type = 'checkbox';
+    // link.name="showGroupes";
+    // // link.className = 'pr-2';
+    
+    // var label = document.createElement('label'); 
+              
+    // // assigning attributes for  
+    // // the created label tag  
+    // // label.htmlFor = link.name; 
+      
+    // // appending the created text to  
+    // // the created label tag  
+    // // label.appendChild(document.createTextNode('Voir les groupes')); 
+    
+    // item.textContent = 'Voir les groupes'; 
+    // // link.textContent = "<label for='showGroupes'>Afficher les groupes</label>";
+    // // var text = document.createTextNode("Afficher les groupes");
+    // // link.appendChild(text);
+    // // item.appendChild(link);
+    // // item.appendChild(label);
+    // var layers = window.document.getElementById('navMenu');
+    // layers.appendChild(item);
   }
 
   ngOnChanges() {
 
   }
 
-
+  changeGroupesVisibility(e){
+    // var clickedLayer = "groupes";
+    // e.preventDefault();
+    // e.stopPropagation();
+    var hideBool:boolean;
+    for(const clickedLayer of ["groupes","labels"]){
+      var visibility = this.map.getLayoutProperty(clickedLayer, 'visibility');
+      
+      // toggle layer visibility by changing the layout object's visibility property
+      if (visibility === 'visible') {
+      this.map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+      hideBool=true;
+      // this.className = '';
+      } else {
+      // this.className = 'active';
+      this.map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+      hideBool=false;
+      }
+    }
+    const show=window.document.getElementById('groupesVisibilitySelectorHide');
+    var hide = window.document.getElementById('groupesVisibilitySelectorShow');
+    if(hideBool){ // Groupes visibles
+      show.style.visibility="hidden";
+      show.style.height="0px";
+      show.style.padding="0 0";
+      hide.style.visibility="visible";
+      hide.style.height="auto";
+      hide.style.padding="0.25rem 1.5rem";
+    }
+    else{
+      hide.style.visibility="hidden";
+      hide.style.height="0px";
+      hide.style.padding="0 0";
+      show.style.visibility="visible";
+      show.style.height="auto";
+      show.style.padding="0.25rem 1.5rem";
+    }
+  }
   /*
   ** MAP
   */
@@ -283,6 +351,7 @@ export class MapComponent implements OnInit, OnChanges {
             'type': 'symbol',
             'source': 'labels',
             'layout': {
+              'visibility': 'none',
               'text-allow-overlap': false,
               'text-ignore-placement': false,
               'text-field': ['get', 'name'],
@@ -298,6 +367,7 @@ export class MapComponent implements OnInit, OnChanges {
             'type': 'symbol',
             'source': 'groupes',
             'layout': {
+              'visibility': 'none',
               'icon-image': ['get', 'icon'],
               'icon-size': 0.5,
               'icon-allow-overlap': true,
@@ -442,8 +512,8 @@ export class MapComponent implements OnInit, OnChanges {
 
   clickOnTresor(e) {
     const that = this;
-
-    //console.log(e.features[0].properties)
+    console.log(e);
+    console.log(e.features[0].properties)
 
     var tresorProperties = e.features[0].properties;
     var coordinates = e.features[0].geometry.coordinates.slice();

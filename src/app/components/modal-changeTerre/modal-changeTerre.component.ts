@@ -46,6 +46,8 @@ export class ModalChangeTerreComponent implements OnInit {
       type: "bouton",
       text: "Terre des Gones",
       url: "assets/icons/Composant 7 – 2.png",
+      percentage: 1,
+      style:"",
       done: true
     },
     {
@@ -97,18 +99,24 @@ export class ModalChangeTerreComponent implements OnInit {
       type: "bouton",
       text: "Terre des Gones",
       url: "assets/icons/Composant 4 – 2.png",
+      percentage: this.getPercentage("gones"),
+      style:"width:"+this.getPercentage("gones")+"%",
       done: this.cookieService.check('scoutocaching_caches_gones_done')
     },
     {
       type: "bouton",
       text: "Terre des Canuts",
       url: "assets/icons/Composant 5 – 2.png",
+      percentage: this.getPercentage("canuts"),
+      style:"width:"+this.getPercentage("canuts")+"%",
       done: this.cookieService.check('scoutocaching_caches_canuts_done')
     },
     {
       type: "bouton",
       text: "Terre des Lumieres",
       url: "assets/icons/Composant 6 – 2.png",
+      percentage: this.getPercentage("lumieres"),
+      style:"width:"+this.getPercentage("lumieres")+"%",
       done: this.cookieService.check('scoutocaching_caches_lumieres_done')
     }]
     this.validContent();
@@ -151,6 +159,22 @@ export class ModalChangeTerreComponent implements OnInit {
     this.showStart = false;
     this.showTerreChoice = true;
     this.start();
+  }
+  
+  getPercentage(terre): number {
+    var answer=0;
+    var id=1;
+    if(this.cookieService.check("scoutocaching_caches_"+terre+"_"+id)){
+      while(this.cookieService.check("scoutocaching_caches_"+terre+"_"+id)){
+        if(this.cookieService.get("scoutocaching_caches_"+terre+"_"+id)==="treasureFound"){
+          answer=answer+1;
+        }
+        id=id+1;
+      }
+      id=id-1;
+      answer=answer*(100/id);
+    }
+    return answer;
   }
   deepCopy(oldObj: any) {
     var newObj = oldObj;

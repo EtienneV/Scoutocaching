@@ -74,7 +74,7 @@ export class ModalCacheComponent implements OnInit {
   qrResult: Result;
 
   information = "";
-  formatsEnabled: BarcodeFormat = BarcodeFormat.QR_CODE;
+  formatsEnabled: BarcodeFormat[];
   currentDevice: MediaDeviceInfo = null;
   availableDevices: MediaDeviceInfo[];
 
@@ -290,7 +290,7 @@ export class ModalCacheComponent implements OnInit {
 
     //this.indice = null;
 
-    this.formatsEnabled = BarcodeFormat.QR_CODE;
+    this.formatsEnabled = [BarcodeFormat.QR_CODE, BarcodeFormat.EAN_8, BarcodeFormat.AZTEC, BarcodeFormat.CODE_128, BarcodeFormat.EAN_13];
     // this.activeModal.close(this.id);
     // this.thisTreasure.properties.status="treasureFound";
 

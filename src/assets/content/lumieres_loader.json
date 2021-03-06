@@ -33,7 +33,7 @@
       "id": 1,
       "name": "Décines",
       "coords": "45.774203318406194, 4.951723321339614",
-      "qr_secret": "secret",
+      "qr_secret": "88659602",
       "indice": [
         {
           "type": "paragraphe",
@@ -84,7 +84,7 @@
       "id": 2,
       "name": "Gratte-Ciel",
       "coords": "45.770780998339404, 4.882447618560946",
-      "qr_secret": "secret",
+      "qr_secret": "20688608",
       "indice": [
         {
           "type": "paragraphe",
@@ -105,7 +105,7 @@
       "id": 3,
       "name": "Montchat",
       "coords": "45.75085116679938, 4.879670852466887",
-      "qr_secret": "secret",
+      "qr_secret": "94438499",
       "indice": [
         {
           "type": "paragraphe",
@@ -126,7 +126,7 @@
       "id": 4,
       "name": "La Soie",
       "coords": "45.7591931208145, 4.921945294840356",
-      "qr_secret": "viktouare",
+      "qr_secret": "62464529",
       "indice": [
         {
           "type": "paragraphe",
@@ -167,7 +167,7 @@
       "id": 5,
       "name": "Bellecombe",
       "coords": "45.765152978333475, 4.866998094635761",
-      "qr_secret": "secret",
+      "qr_secret": "57131559",
       "indice": [
         {
           "type": "paragraphe",
