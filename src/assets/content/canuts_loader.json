@@ -32,7 +32,21 @@
           "text": "Face au petit théâtre<br>Où Guignol fait le drôle<br>Une armoire renferme <br> Le premier des trésors<br>Au-delà de la route<br>Regarde et va trouver<br>Derrière cette cache"
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Cadeau trouvé !"
+        },
+        {
+          "type": "paragraphe",
+          "text": "C'est un foulard de soie offert par les canuts"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/foulard-canut.jpg",
+          "trustedUrl": {}
+        }
+      ]
     },
     {
       "id": 2,
