@@ -7,7 +7,7 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 import { ModalCacheComponent } from '../modal-cache/modal-cache.component';
 import { ModalOnBoardingComponent } from '../modal-onboarding/modal-onboarding.component';
-import {ModalResolutionComponent} from '../modal-resolve/modal-resolve.component';
+import { ModalResolutionComponent } from '../modal-resolve/modal-resolve.component';
 
 import lumieres_loader from '@assets/content/lumieres_loader.json';
 import canuts_loader from '@assets/content/canuts_loader.json';
@@ -32,7 +32,7 @@ export class MapComponent implements OnInit, OnChanges {
   alreadyStarted = "";
   terreChoosed = "";
   csvRecords: any[] = [];
-  refreshment : any;
+  refreshment: any;
   header = false;
   geolocate;
   groupes = [];
@@ -69,7 +69,7 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     const that = this;
 
-    (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="none";
+    (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "none";
     /*
     ** Init Map
     */
@@ -97,7 +97,7 @@ export class MapComponent implements OnInit, OnChanges {
 
     if (that.terreChoosed === undefined || that.terreChoosed == "") { // Si aucune terre n'a été choisie
 
-      const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true });
+      const onboarding = that.modalService.open(ModalOnBoardingComponent, { size: 'lg', centered: true, backdrop: 'static' });
 
       onboarding.result.then((result) => {
         that.terreChoosed = result;
@@ -121,7 +121,7 @@ export class MapComponent implements OnInit, OnChanges {
       // console.log(that.activeTresorsGeoJson.features.length)
     }
 
-    that.loadGroupes();
+    //that.loadGroupes();
     that.loadMap();
   }
 
@@ -349,66 +349,77 @@ export class MapComponent implements OnInit, OnChanges {
       });
     });
 
-  
+
   }
 
-  loadResolution(){
-    const that = this;   
+  loadResolution() {
+    const that = this;
+
     clearInterval(that.refreshment);
+
     const resolution = that.modalService.open(ModalResolutionComponent, { size: 'lg', centered: true });
-    resolution.componentInstance.title=that.parcoursSelected.resolutionTitle;
+    resolution.componentInstance.title = that.parcoursSelected.resolutionTitle;
     resolution.componentInstance.content = that.parcoursSelected.resolutionPersonnages;
-    resolution.componentInstance.parcoursName=this.parcoursSelected.name
+    resolution.componentInstance.parcoursName = this.parcoursSelected.name
+
     resolution.result.then((result) => {
       console.log(result);
-      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
-      (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="none";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="initial";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function(){that.changeTerre()};
-      that.refreshment = window.setInterval(function () {that.refreshMap();}, 500);
-      if(result){
+
+      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "initial";
+      (<HTMLInputElement>document.getElementById("resolutionButton")).style.display = "none";
+      (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display = "initial";
+      (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function () { that.changeTerre() };
+
+      that.refreshment = window.setInterval(function () {
+        that.refreshMap();
+      }, 500);
+
+      if (result) {
         (<HTMLInputElement>document.getElementById("changeTerreButton")).click();
       }
     }, (reason) => {
       console.log(reason);
       console.log(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done"))
-      if(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){ // Le suspect a été trouvé 
-      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="initial";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function(){that.changeTerre()};
-      (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="none";
-      }else{      
-        (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
-        (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="none";
-        (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="initial";
+
+      if (that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done")) { // Le suspect a été trouvé
+        (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "initial";
+        (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display = "initial";
+        (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function () { that.changeTerre() };
+        (<HTMLInputElement>document.getElementById("resolutionButton")).style.display = "none";
+      } else {
+        (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "initial";
+        (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display = "none";
+        (<HTMLInputElement>document.getElementById("resolutionButton")).style.display = "initial";
       }
     });
   }
-  changeTerre():void{
-    const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
+  changeTerre(): void {
+    const onboarding = this.modalService.open(ModalChangeTerreComponent, { size: 'lg', centered: true });
     onboarding.result.then((result) => {
       console.log(result);
-      this.terreChoosed=result;
-      this.cookieService.set('scoutocaching_terre',this.terreChoosed);
-      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="none";
+
+      this.terreChoosed = result;
+      this.cookieService.set('scoutocaching_terre', this.terreChoosed);
+
+      (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display = "none";
       //this.init()
     }, (reason) => {
       console.log(reason);
     });
   }
 
-  areAllFound(){    
+  areAllFound() {
     const that = this;
     var answer = true;
-    
+
     for (let i = 0; i < this.parcoursSelected.indices.length; i++) {
       const indice = this.parcoursSelected.indices[i]
-      if(that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id)==="treasureNotFound"){
-        answer=false;
+      if (that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id) === "treasureNotFound") {
+        answer = false;
       }
     }
-    if(this.parcoursSelected.indices.length===0){
-      answer =false;
+    if (this.parcoursSelected.indices.length === 0) {
+      answer = false;
     }
     that.allFound = answer;
   }
@@ -418,11 +429,12 @@ export class MapComponent implements OnInit, OnChanges {
     // Maj du cookie de la terre sélectionnée
     if (that.terreChoosed != this.cookieService.get('scoutocaching_terre')) {
       that.terreChoosed = this.cookieService.get('scoutocaching_terre');
+
       that.areAllFound();
       that.loadCaches();
     }
     that.areAllFound();
-    if(that.allFound && !that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){
+    if (that.allFound && !that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_done")) {
       that.loadResolution();
     }
     // Maj des caches sur la carte
