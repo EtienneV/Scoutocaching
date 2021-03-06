@@ -53,7 +53,7 @@
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
-        <button (click)="startScanner(id)"><img class="icons" src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
+        <button (click)="startScanner(id)"><img class="icons btn-icon" src="assets/icons/qr_code_scanner-24px.png" /> Trouvée !</button>
       </div>
 
     </div>
@@ -83,16 +83,16 @@
 
         <!-- <button (click)="enableScanner()" *ngIf="!scannerEnabled" type="button" class="btn btn-success">Activer le scanner de QR Code</button> -->
         <div class="modal-footer d-flex justify-content-center">
-          
+
             <!-- <small>Result</small> -->
             <span style="text-decoration: underline;">{{ qrResultString }}</span><br/>
-            <button (click)="saisieManuelle()"><img class="icons" src="assets/icons/qr_code_scanner-24px.png" /> Saisie Manuelle </button>
+            <button (click)="saisieManuelle()"><img class="icons button btn-icon" src="assets/icons/qr_code_scanner-24px.png" /> Saisie Manuelle </button>
         </div>
       </div>
 
     </div>
-    
-    
+
+
     <div *ngIf="this.userInputOpen" class="userInput">
       <!-- Si scanner non ouvert -->
 
@@ -112,7 +112,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button (click)="startScanner(id)"><img src="assets/icons/qr_code_scanner-24px.png" /> Scanner le QR Code </button>
+        <button (click)="startScanner(id)"><img class="button btn-icon" src="assets/icons/qr_code_scanner-24px.png" /> Scanner le QR Code </button>
       </div>
 
     </div>
@@ -145,7 +145,7 @@
         </div>
 
       </div>
-      
+
 
     </div>
     <div class="modal-footer d-flex justify-content-center">

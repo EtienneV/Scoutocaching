@@ -72,7 +72,7 @@
       </div>
 
       <div *ngIf="item.type == 'bouton'">
-        <button (click)="selectTerre(item.text)"><img class="icons pb-1" [src]="item.url" /> {{item.text}}   <img *ngIf="item.done" class="icons pb-1" src="assets/icons/done-24px.png"/></button>
+        <button (click)="selectTerre(item.text)"><img class="icons btn-icon pb-1" [src]="item.url" /> {{item.text}}   <img *ngIf="item.done" class="icons pb-1" src="assets/icons/done-24px.png"/></button>
       </div>
 
     </div>
@@ -119,7 +119,7 @@
   </div>
   <div class="modal-footer d-flex justify-content-center align-items-center justify-content-center"
     style="width: 100%;">
-    <button (click)="go()">{{footer.text}} <img [src]="footer.url" /> </button>
+    <button (click)="go()">{{footer.text}} <img class="btn-icon" [src]="footer.url" /> </button>
   </div>
 </div>
 
