@@ -20,6 +20,7 @@ export class ModalOnBoardingComponent implements OnInit {
   showStart = true
   showTerreChoice = false
   showTerreContent = false
+  showExplaination = false
 
   title = "Territoire Lyon levant"
 
@@ -106,13 +107,32 @@ export class ModalOnBoardingComponent implements OnInit {
     console.log(this.content)
 
   }
+  explainMe():void{
+    this.showStart = false;
+    this.showExplaination = true;
+    this.content = [
+      {
+        type:"paragraphe",
+        text:"Le ScoutoGéocaching est la combinaison d’une chasse au trésor et d’un Cluedo."
+      },{
+        type:"paragraphe",
+        text:"Votre objectif : reconstituer l’histoire à partir de différents fragments, auxquels vous accédrez en scannant sur le site les QR codes trouvés dans les caches. "
+      },{
+        type:"paragraphe",
+        text:"Les caches peuvent prendre différentes formes et tailles. Elles sont situées aux coordonnées GPS indiquées sur la carte. Une fois sur place, il vous suffit de les chercher à l’aide de l’indice qui vous est donné. Le QR code se trouve à l’intérieur de la cache. Nous comptons sur vous pour bien les remettre à l’intérieur, et repositionner la cache au même endroit pour les prochains !"
+      },{
+        type:"paragraphe",
+        text:"Chaque terre a son histoire, pour trois fois plus de plaisir ! Bonne partie !"
+      }
+    ]
 
+  }
   start(): void {
     if (this.terreChoosed === "") {
 
       console.log("Ouvrir choix Terres")
 
-      this.showStart = false;
+      this.showExplaination = false;
       this.showTerreChoice = true;
 
       this.title = "Quelle est ta terre ?"

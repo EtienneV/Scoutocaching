@@ -1,6 +1,6 @@
 <div class="modal-header d-flex  align-items-center">
   <button type="button" class="close" style="margin-left: -16px;" aria-label="Close" (click)="close()">
-    <img src="assets/icons/clear-24px.png" />
+    <img class="btn-icon" src="assets/icons/clear-24px.png" />
   </button>
   <h3 class="modal-title d-flex justify-content-center ml-auto mr-auto" id="modal-basic-title">{{tresorProperties.name}}
   </h3>
@@ -17,7 +17,7 @@
         <!-- <img src="" height= "75" width="75" style="float:left;"/> -->
         <img class="modal-icon icons" src="assets/icons/Composant 2 – 1.png" />
         <p style="margin-bottom: 0;">
-          <b> Coordonnees </b><br /><span>{{coordinates[1]}}</span> Lat. - <span>{{coordinates[0]}}</span> Long.
+          <b> Coordonnees </b><br /><a [href]="mapsUrl" target="_blank"><span>{{coordinates[1]}}</span> Lat. - <span>{{coordinates[0]}}</span> Long.</a>
         </p>
       </div>
 

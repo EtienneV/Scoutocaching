@@ -17,6 +17,7 @@ import { ModalCacheComponent } from './components/modal-cache/modal-cache.compon
 import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-onboarding.component';
 import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 import {ModalResolutionComponent} from './components/modal-resolve/modal-resolve.component';
+import {ModalAideComponent} from './components/modal-aide/modal-aide.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {ModalResolutionComponent} from './components/modal-resolve/modal-resolve
     ModalCacheComponent,
     ModalOnBoardingComponent,
     ModalChangeTerreComponent,
-    ModalResolutionComponent
+    ModalResolutionComponent,
+    ModalAideComponent
   ],
   imports: [
     BrowserModule,

@@ -65,7 +65,7 @@ export class ModalCacheComponent implements OnInit {
   id = -1;
   story = null;
   story_cachee = null;
-
+  mapsUrl: any;
   //scannerEnabled = false;
 
   hasDevices: boolean;
@@ -95,6 +95,7 @@ export class ModalCacheComponent implements OnInit {
 
     if (!this.found) {
       this.indice = JSON.parse(this.tresorProperties.indice);
+      this.mapsUrl="https://www.google.com/maps/search/?api=1&query="+this.coordinates[1]+", "+this.coordinates[0];//47.5951518,-122.3316393"
     }
     else {
       this.indice = JSON.parse(this.tresorProperties.resultat);
@@ -187,7 +188,26 @@ export class ModalCacheComponent implements OnInit {
     });*/
 
   }
+  
+ getMobileOperatingSystem() {
+  var userAgent = navigator.userAgent || navigator.vendor; // || window.opera;
 
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+    }
+
+    return "unknown";
+}
   clearResult(): void {
     this.qrResultString = null;
   }

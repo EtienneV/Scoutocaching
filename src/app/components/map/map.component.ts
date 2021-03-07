@@ -271,7 +271,7 @@ export class MapComponent implements OnInit, OnChanges {
       this.parcoursSelected = gones_loader;
     }
     else if (this.terreChoosed == "lumieres") {
-      this.parcoursSelected = lumieres_loader;
+      this.parcoursSelected = lumieres_loader; //JSON.parse("../../assets/content/gones_loader.json");// 
     }
     else if (this.terreChoosed == "canuts") {
       this.parcoursSelected = canuts_loader;
@@ -436,7 +436,6 @@ export class MapComponent implements OnInit, OnChanges {
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
       (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="none";
       (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="initial";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function(){that.changeTerre()};
       that.refreshment = window.setInterval(function () {that.refreshMap();}, 500);
       if(result){
         (<HTMLInputElement>document.getElementById("changeTerreButton")).click();
@@ -450,7 +449,6 @@ export class MapComponent implements OnInit, OnChanges {
       if(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){ // Le suspect a été trouvé 
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
       (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="initial";
-      (<HTMLInputElement>document.getElementById("changeTerreButton")).onclick = function(){that.changeTerre()};
       (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="none";
       }else{      
         (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";

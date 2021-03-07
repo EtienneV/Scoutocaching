@@ -99,12 +99,42 @@
       {
         "type": "titre",
         "text": "Thomas Edison"
+      },
+      {
+        "type": "paragraphe",
+        "text": "Je suis un inventeur, scientifique et un industriel américain réputé. Je suis pionnier de l'électricité, diffuseur, vulgarisateur,mais également un des principaux inventeurs du cinéma."
+      },
+      {
+        "type": "paragraphe",
+        "text": "Dès 1888, je consacre l’intégralité de mon temps à la recherche sur l'image photographique animée, dont les aboutissements ultimes sont depuis l’année 1891 et le kinetoscope, les premiers « films » Edison."
+      },
+      
+      {
+        "type": "paragraphe",
+        "text": "En 1891, le kinétoscope est présenté au public et à la presse, notamment le 20 mai devant une assemblée invitée de cent-cinquante militantes de la Federation of Women’s Clubs."
+      },
+      
+      {
+        "type": "paragraphe",
+        "text": "Le quotidien américain The New York Sun relate ainsi l’événement : « Sur la face supérieure de la boîte, se trouvait un trou, de 1 pouce de diamètre environ. Et, alors qu'elles se penchaient pour regarder, elles virent l'image d’un homme. C'était une très belle image. Il s'inclina, tout en souriant et en agitant la main puis enleva son chapeau avec grâce et le plus grand naturel. Chaque mouvement était parfait... »"
+      },
+      {
+        "type": "paragraphe",
+        "text": "Le film dure moins de dix secondes et s'intitule Dickson Greeting (Le Salut de Dickson), et l’homme très cérémonieux qui salue en direction du public (regard caméra) n'est autre que William Dickson. Le succès est donc au rendez-vous, et les spectatrices manifestent leur étonnement et leur enthousiasme. Dickson a montré sa liberté par rapport aux canons de la photographie et a choisi d’être filmé jusqu’à mi-cuisse, un cadrage jusqu'alors méconnu."
+      },
+      {
+        "type": "paragraphe",
+        "text": "Je pense que c'est Louis qui a volé la pièce car la machine n’était pas au point donc il paniqué. Il a dérobé la pièce pour ne pas se ridiculiser."
+      },
+      {
+        "type": "paragraphe",
+        "text": "De mon côté,j’étais au troquet du coin pour me détendre.  J’y ai d’ailleurs vu Auguste avec Clément, son ami d’enfance."
       }]
     },
     {
       "id": 3,
       "name": "Montchat",
-      "coords": "45.75085116679938, 4.879670852466887",
+      "coords": "45.75116, 4.87966",
       "qr_secret": "94438499",
       "indice": [
         {
@@ -120,6 +150,24 @@
       {
         "type": "titre",
         "text": "Charles Moisson"
+      },
+      {
+        "type": "paragraphe",
+        "text": "Je suis  un ami de longue date de la famille Lumière mais aussi leur ingénieur mécanicien, qui fabrique les prototypes successifs du Cinématographe."
+      },
+      {
+        "type": "paragraphe",
+        "text": "J’assume la fonction de projectionniste à l'occasion des représentations Lumière devant le public parisien."
+      },
+      
+      {
+        "type": "paragraphe",
+        "text": "J’étais tout l’après-midi au salon avec Louis pour finir de préparer les derniers réglages."
+      },
+      
+      {
+        "type": "paragraphe",
+        "text": "Je pense c’est Auguste qui a volé les griffes car il n’accepte pas que son frère soit plus intelligent que lui."
       }]
     },
     {
@@ -130,7 +178,7 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "A 12 pas du passage piéton, 5 cm sous terre"
+          "text": "Au pied d'un objet qui illumine vos pas la nuit"
         }
       ],
       "resultat": [
@@ -160,6 +208,9 @@
         {
           "type": "paragraphe",
           "text": "Vers 15h30, j’ai quitté le salon indien du grand Café avec mon ami Clément Maurice pour aller dans un fumoir pas loin afin de discuter. Je n’étais donc pas sur les lieux au moment de la disparition des griffes."
+        },
+        { "type":"paragraphe",
+          "text":"Je pense que c'est Thomas qui nous a volé car il est simplement jaloux que notre machine soit meilleure que la sienne."
         }
       ]
     },
@@ -170,8 +221,9 @@
       "qr_secret": "57131559",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "Dessin arbre + renard sur chemin + scout sur chemin"
+          "type": "image",
+          "url": "assets/images/indice_bellecombe.png",
+          "trustedUrl": {}
         }
       ],
       "resultat": [{
@@ -200,6 +252,11 @@
     {
       "type": "paragraphe",
       "text": "Vers 15h50, j’étais avec Charles entrain de terminer le montage et c’est alors qu’il m’a dit qu’il manquait les griffes. Je suis devenu tout pâle, et je vous ai alors appelé pour m’aider à retrouver le voleur ! Hormis ma famille, Clément et Thomas qui sont venus me souhaiter bonne chance, je n’ai pas vu grand monde entrer dans le salon indien. S’il vous plait, aidez moi à retrouver le coupable !"
+    },
+    
+    {
+      "type": "paragraphe",
+      "text": "Selon moi, c’est Charles qui a volé les griffes car il est jaloux que l’invention appartienne aux frères Lumière et pas à lui."
     }]
     }
   ],
