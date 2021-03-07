@@ -526,7 +526,7 @@ export class MapComponent implements OnInit, OnChanges {
     var tresorProperties = e.features[0].properties;
     var coordinates = e.features[0].geometry.coordinates.slice();
 
-    const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = that.modalService.open(ModalCacheComponent, { size: 'lg', backdrop: 'static' , centered: true});
     modalRef.componentInstance.tresorProperties = tresorProperties;
     modalRef.componentInstance.coordinates = coordinates;
 
