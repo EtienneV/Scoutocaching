@@ -38,4 +38,36 @@ export class AppComponent {
     //   // console.log(reason);
     // });
   }
+  async lireIntrigue():Promise<void>{
+    const onboarding = this.modalService.open(ModalAideComponent, {size: 'lg', centered: true }); 
+    if(this.cookieService.get('scoutocaching_terre')==="lumieres"){
+      await import("../assets/content/lumieres_loader.json").then(data => {
+        onboarding.componentInstance.loadContent(data['description']);
+        onboarding.componentInstance.title = data['description'].filter(word => word.type ==="title")[0].text;
+        // onboarding.componentInstance.indice = data.description;
+      });
+      
+    }
+    else if(this.cookieService.get('scoutocaching_terre')==="canuts"){
+      await import("../assets/content/canuts_loader.json").then(data => {
+        onboarding.componentInstance.loadContent(data['description']);
+        onboarding.componentInstance.title = data['description'].filter(word => word.type ==="title")[0].text;
+        // onboarding.componentInstance.indice = data.description;
+            });
+    }
+    else if(this.cookieService.get('scoutocaching_terre')==="gones"){
+
+      await import("../assets/content/gones_loader.json").then(data => {
+        onboarding.componentInstance.loadContent(data['description']);
+        onboarding.componentInstance.title = data['description'].filter(word => word.type ==="title")[0].text;
+        // onboarding.componentInstance.indice = data.description;
+      });
+    }
+    // onboarding.result.then((result) => {
+    //   // console.log(result);
+    //   //this.init()
+    // }, (reason) => {
+    //   // console.log(reason);
+    // });
+  }
 }

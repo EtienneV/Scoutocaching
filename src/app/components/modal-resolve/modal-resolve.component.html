@@ -11,8 +11,9 @@
     <div class="modal-coordinates d-flex justify-content-center row row-cols-2">
       <div *ngFor="let item of content">
         <button (click)="isCoupable(item.coupable)" class="custom-card"
-          style="width: 40vw;padding-top: 0px; padding-bottom: 0px;">
-          <div class="card">
+          style="width: 40vw;padding: 0px 0px;">
+          <!-- <div class="card"> -->
+            <div>
             <img *ngIf="item.image != undefined " class="card-img-top" [src]="item.image" style="overflow: hidden;
             inline-size: 30vh;
             height: 30vh;
@@ -61,7 +62,7 @@
     </div>
   </div>
   <div class="modal-footer d-flex justify-content-center">
-    <button (click)="activeModal.close(true)" disabled="true"><img class="ml-auto pr-2 icons btn-icon"
+    <button (click)="activeModal.close(true)" disabled="true"><img class="ml-auto pr-2 py-2 icons btn-icon"
         src="assets/icons/outline_change_circle-24px.png" /> Changer de terre </button>
     <button (click)="activeModal.close(false)"><img class="ml-auto pr-2 icons btn-icon"
         src="assets/icons/change_circle-24px.png" /> Quitter </button>

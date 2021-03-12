@@ -25,7 +25,7 @@ declare var Papa: any;
 export class MapComponent implements OnInit, OnChanges {
   @Input() position;
   @Input() zoom;
-
+  private test;
   map;
   mapLoaded = false;
   allFound = false;
@@ -269,12 +269,29 @@ export class MapComponent implements OnInit, OnChanges {
 
     if (this.terreChoosed == "gones") {
       this.parcoursSelected = gones_loader;
+      // await import("../../assets/content/gones_loader.json").then(data => {
+      //   this.test = data;
+      // });
+      var request = new XMLHttpRequest();
+      request.open("GET","../../../assets/content/gones_loader.json", false);
+      request.send(null);
+      this.parcoursSelected = JSON.parse(request.responseText);
+      // console.log(jsonData)
+      // console.log(this.test);
     }
     else if (this.terreChoosed == "lumieres") {
-      this.parcoursSelected = lumieres_loader; //JSON.parse("../../assets/content/gones_loader.json");// 
+      var request = new XMLHttpRequest();
+      request.open("GET","../../../assets/content/lumieres_loader.json", false);
+      request.send(null);
+      this.parcoursSelected = JSON.parse(request.responseText);
+      // this.parcoursSelected = lumieres_loader; //JSON.parse("../../assets/content/gones_loader.json");// 
     }
     else if (this.terreChoosed == "canuts") {
-      this.parcoursSelected = canuts_loader;
+      var request = new XMLHttpRequest();
+      request.open("GET","../../../assets/content/canuts_loader.json", false);
+      request.send(null);
+      this.parcoursSelected = JSON.parse(request.responseText);
+      // this.parcoursSelected = canuts_loader;
     }
 
     this.activeTresorsGeoJson.features = [];
@@ -494,7 +511,9 @@ export class MapComponent implements OnInit, OnChanges {
       that.areAllFound();
       that.loadCaches();
     }
-    that.areAllFound();
+    if (this.parcoursSelected!=undefined) {
+      that.areAllFound();
+    }
     if(that.allFound && !that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){
       
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";

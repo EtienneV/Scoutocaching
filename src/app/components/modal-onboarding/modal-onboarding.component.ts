@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
-import lumieres_loader from '@assets/content/lumieres_loader.json';
-import canuts_loader from '@assets/content/canuts_loader.json';
-import gones_loader from '@assets/content/gones_loader.json';
+// import lumieres_loader from '@assets/content/lumieres_loader.json';
+// import canuts_loader from '@assets/content/canuts_loader.json';
+// import gones_loader from '@assets/content/gones_loader.json';
 @Component({
   selector: 'app-modal-onboarding',
   templateUrl: './modal-onboarding.component.html',
@@ -16,6 +16,9 @@ export class ModalOnBoardingComponent implements OnInit {
 
   terreChoosed: string;
 
+  private lumieres_loader : any;
+  private gones_loader: any;
+  private canuts_loader: any;
   alreadyStarted = false;
   showStart = true
   showTerreChoice = false
@@ -58,7 +61,7 @@ export class ModalOnBoardingComponent implements OnInit {
     console.log("alreadyStarted : " + this.alreadyStarted);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     this.content = [{
       type: "image",
@@ -71,7 +74,15 @@ export class ModalOnBoardingComponent implements OnInit {
     }];
 
     this.validContent();
-
+    await import("../../../assets/content/lumieres_loader.json").then(data => {
+      this.lumieres_loader = data;
+    });
+    await import("../../../assets/content/canuts_loader.json").then(data => {
+      this.canuts_loader = data;
+    });
+    await import("../../../assets/content/gones_loader.json").then(data => {
+      this.gones_loader = data;
+    });
   }
 
   validContent(): void {
@@ -198,16 +209,16 @@ export class ModalOnBoardingComponent implements OnInit {
 
     if (e === "Terre des Gones") {
       this.choice = "gones";
-      this.content = gones_loader.description;
+      this.content = this.gones_loader.description;
     }
     else if (e === "Terre des Lumieres") {
       this.choice = "lumieres";
-      this.content = lumieres_loader.description;
+      this.content = this.lumieres_loader.description;
       // console.log("Lumières");
     }
     else {
       this.choice = "canuts";
-      this.content = canuts_loader.description;
+      this.content = this.canuts_loader.description;
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }

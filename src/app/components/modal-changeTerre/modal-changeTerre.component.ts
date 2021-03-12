@@ -1,10 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer } from '@angular/platform-browser';
-import lumieres_loader from '@assets/content/lumieres_loader.json';
-import canuts_loader from '@assets/content/canuts_loader.json';
-import gones_loader from '@assets/content/gones_loader.json';
-import { BarcodeFormat } from '@zxing/library';
+// import lumieres_loader from '@assets/content/lumieres_loader.json';
+// import canuts_loader from '@assets/content/canuts_loader.json';
+// import gones_loader from '@assets/content/gones_loader.json';
 import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-modal-changeTerre',
@@ -13,6 +12,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ModalChangeTerreComponent implements OnInit {
 
+  private lumieres_loader;
+  private gones_loader;
+  private canuts_loader;
   showStart = true
   showTerreContent = false
   showTerreChoice = false
@@ -64,7 +66,16 @@ export class ModalChangeTerreComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private cookieService: CookieService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await import("../../../assets/content/lumieres_loader.json").then(data => {
+      this.lumieres_loader = data;
+    });
+    await import("../../../assets/content/canuts_loader.json").then(data => {
+      this.canuts_loader = data;
+    });
+    await import("../../../assets/content/gones_loader.json").then(data => {
+      this.gones_loader = data;
+    });
     this.start();
   }
 
@@ -129,16 +140,16 @@ export class ModalChangeTerreComponent implements OnInit {
   selectTerre(e): void {
     if (e === "Terre des Gones") {
       this.choice = "gones";
-      this.content = this.deepCopy(gones_loader.description);
+      this.content = this.deepCopy(this.gones_loader.description);
     }
     else if (e === "Terre des Lumieres") {
       this.choice = "lumieres";
-      this.content = this.deepCopy(lumieres_loader.description);
+      this.content = this.deepCopy(this.lumieres_loader.description);
       // console.log("Lumières");
     }
     else {
       this.choice = "canuts";
-      this.content = this.deepCopy(canuts_loader.description);
+      this.content = this.deepCopy(this.canuts_loader.description);
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }

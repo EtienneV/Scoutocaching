@@ -1,0 +1,185 @@
+.modal-footer > button {
+    text-align: center;
+    background-color:  #ff8300!important;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: auto;
+}
+.modal-header > button{
+    float: left;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.modal-header, .modal-body{
+    color:#013a5d;
+}
+
+.modal-coordinates{
+    display: flex;
+    align-items:center;
+    vertical-align: middle;
+}
+.modal-icon{
+    float: left;
+    margin: 0px 15px 0px 0px;
+    width: 17px;
+}
+
+.btn-icon {
+  width: 25px;
+}
+
+
+// :host zxing-scanner::ng-deep video {
+//     padding: 0.3rem 0.3rem;
+//     padding-bottom: 0%;
+// }
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+// :host zxing-scanner::ng-deep video {
+//     position: relative;
+//     z-index: 990;
+//     top: 0;
+//     left: 0;
+//     border: 1px red solid;
+//   }
+.parent > img {
+    content: '';
+    position: absolute;
+    // width: 75%; // Makes the overlay smaller to accommodate the skew
+    // height: 100%;
+    // top: 0;
+    // left: 0; // Push the element 50% of the container's width to the right
+    transform: translateY(-50%); // Moves the element 50% of its width back to the left
+
+    object-fit: scale-down;
+    z-index: 999;
+    // margin:0;
+    // top: 44%;
+    // left: 50%;
+    // margin-left: -107px;
+    // margin-top: -107px;
+    // background-image: url("/assets/icons/Scan.png");
+}
+
+.video-background:before{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: "";
+    background-color: #000;
+    opacity: 0.0;
+    z-index: 6;
+}
+.video-background {
+    position: relative;
+    background: #222;
+    width:100%;
+    z-index:5;
+    }
+#video-background{
+    background-size: cover;
+    transition: 1s opacity;
+}
+.modal-header > h3{
+    font-size: min(3.5vh,1.75rem);
+    
+}
+.cover-text{
+    position:absolute;
+    width:100%;
+    text-align:center;
+    z-index:9999;
+    top: 8%;
+    left: 0%;
+    object-fit: contain;
+    height: 85%;
+    // transform: translateY(-36%);
+}
+
+.results{
+    text-align: center;
+}
+
+.modal-coordinates > div > button {
+    text-align: center;
+    background-color:  #013a5d!important;
+    color: white;
+    border: none;
+    padding: 10px 0.1vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 4px;
+    width: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.userInput{
+
+    .modal-footer > button {
+        text-align: center;
+        background-color:  #013a5d!important;
+        color: white;
+        border: none;
+        padding: 10px 2.8vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 4px;
+        width: auto;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .modal-coordinates > div > div > button {
+        text-align: center;
+        background-color:  #ff8300!important;
+        color: white;
+        border: none;
+        padding: 10px 7vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        width: auto;
+    }
+}
+.contenuHistoire{
+    .modal-footer > button {
+        text-align: center;
+        background-color:  #013a5d!important;
+        color: white;
+        border: none;
+        padding: 10px 0.1vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 4px;
+        width: 90%;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+}
+.modal-body{
+    padding: 1rem;
+}
