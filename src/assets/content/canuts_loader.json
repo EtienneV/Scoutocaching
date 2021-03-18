@@ -25,7 +25,7 @@
       "id": 1,
       "name": "Mur des canuts",
       "coords": "45.778091555016935, 4.827961740598596",
-      "qr_secret": "secret",
+      "qr_secret": "46859753",
       "indice": [
         {
           "type": "paragraphe",
@@ -52,7 +52,7 @@
       "id": 2,
       "name": "Cour des voraces",
       "coords": "45.77194730111077, 4.834668369406383",
-      "qr_secret": "secret",
+      "qr_secret": "65982310",
       "indice": [
         {
           "type": "paragraphe",
@@ -65,7 +65,7 @@
       "id": 3,
       "name": "Rue Mercière",
       "coords": "45.76257421997917, 4.832750790484299",
-      "qr_secret": "secret",
+      "qr_secret": "15784956",
       "indice": [
         {
           "type": "paragraphe",
@@ -78,7 +78,7 @@
       "id": 4,
       "name": "Parc de la Tête d'Or",
       "coords": "45.77917, 4.8543",
-      "qr_secret": "secret",
+      "qr_secret": "72536841",
       "indice": [
         {
           "type": "paragraphe",
@@ -91,7 +91,7 @@
       "id": 5,
       "name": "St Pothin",
       "coords": "45.76614, 4.84621",
-      "qr_secret": "secret",
+      "qr_secret": "05628491",
       "indice": [
         {
           "type": "paragraphe",
@@ -104,7 +104,7 @@
       "id": 6,
       "name": "Place Bir Hakeim",
       "coords": "45.75279, 4.85534",
-      "qr_secret": "secret",
+      "qr_secret": "16587495",
       "indice": [
         {
           "type": "paragraphe",
@@ -129,6 +129,6 @@
       "image": "assets/images/jeanne_lumiere.jpg",
       "coupable": true
     },
-    { "id": 4, "name": "Toto", "coupable": false }
+    { "id": 4, "name": "Castor Junior", "coupable": false }
   ]
 }
