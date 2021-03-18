@@ -107,8 +107,20 @@
       "qr_secret": "05628491",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "TODO"
+          "type": "titre",
+          "text": "Une transmission vient d'arriver !"
+        },
+        {
+          "type": "audio",
+          "url": "assets/content/canuts/morse_pothin.mp3",
+          "trustedUrl": {},
+          "playlist" : []
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/morse.png",
+          "trustedUrl": {}
+
         }
       ],
       "resultat": []
