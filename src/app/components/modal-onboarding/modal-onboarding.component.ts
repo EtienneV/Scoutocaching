@@ -34,7 +34,7 @@ export class ModalOnBoardingComponent implements OnInit {
       url: "assets/icons/Composant 7 – 2.png",
       percentage: 1,
       style:"",
-      isDisabled:true,
+      isDisabled:false,
       done: true
     },
     {
@@ -161,7 +161,7 @@ export class ModalOnBoardingComponent implements OnInit {
           type: "bouton",
           text: "Terre des Gones",
           url: "assets/icons/Composant 4 – 2.png",
-          isDisabled:true,
+          isDisabled:false,
           percentage: this.getPercentage("gones"),
           style:"width:"+this.getPercentage("gones")+"%",
           done: this.cookieService.check('scoutocaching_caches_gones_done')
@@ -209,16 +209,16 @@ export class ModalOnBoardingComponent implements OnInit {
 
     if (e === "Terre des Gones") {
       this.choice = "gones";
-      this.content = this.gones_loader.description;
+      this.content = this.deepCopy(this.gones_loader.description);
     }
     else if (e === "Terre des Lumieres") {
       this.choice = "lumieres";
-      this.content = this.lumieres_loader.description;
+      this.content = this.deepCopy(this.lumieres_loader.description);
       // console.log("Lumières");
     }
     else {
       this.choice = "canuts";
-      this.content = this.canuts_loader.description;
+      this.content = this.deepCopy(this.canuts_loader.description);
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }
@@ -232,7 +232,7 @@ export class ModalOnBoardingComponent implements OnInit {
     this.header = this.content[0];
     this.footer = this.content[this.content.length - 1];
 
-    this.content = this.content.slice(1, this.content.length - 2);
+    this.content = this.content.slice(1, this.content.length - 1);
   }
 
   go(e): void {
@@ -265,6 +265,20 @@ export class ModalOnBoardingComponent implements OnInit {
       answer=answer*(100/id);
     }
     return answer;
+  }
+  
+  deepCopy(oldObj: any) {
+    var newObj = oldObj;
+    if (oldObj && typeof oldObj === "object") {
+      if (oldObj instanceof Date) {
+        return new Date(oldObj.getTime());
+      }
+      newObj = Object.prototype.toString.call(oldObj) === "[object Array]" ? [] : {};
+      for (var i in oldObj) {
+        newObj[i] = this.deepCopy(oldObj[i]);
+      }
+    }
+    return newObj;
   }
 
 }

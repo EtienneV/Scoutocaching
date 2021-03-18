@@ -12,20 +12,19 @@
     },
     {
       "type": "paragraphe",
-      "text": "Vénissieux, le vendredi 18 octobre 1895."
+      "text": "Le vendredi 18 octobre 1895, le Commandant Latourette voit entrer Madame Michèle Faure dans son commissariat au moment même où il s’apprêtait à quitter l’établissement. Celle-ci a perdu son chat…"
     },
     {
       "type": "paragraphe",
-      "text": "Albert, le Maréchal des logis de la gendarmerie de Vénissieux reçoit madame Michèle Faure suite à la disparition de son chat Felix qui n’est pas revenu hier pour la pâtée du soir."
-    },
-    {
-      "type": "image",
-      "url": "assets/images/default-thumbnail_0.jpg",
-      "trustedUrl": {}
+      "text": "Il prit la déposition de la plaignante comme suit « Hier soir, vers 18 heures je rentre chez moi après avoir pris le thé chez mon amie Thérèse. D’habitude Félix m’attend dehors, sur le rebord de la fenêtre, et se met à miauler dès que j’approche. Ce soir-là j’ai tout de suite su que quelque chose n’allait pas, lorsque j’ai remarqué qu’il n’était pas là à m’attendre. Je l’ai cherché des heures sans le trouver. Il n’avait pas mangé sa gamelle… Il a dû être enlevé dans l’après-midi, après mon départ ! C’est encore un coup de ces petits garnements, ils vont me le payer, je vous le dis. »"
     },
     {
       "type": "paragraphe",
-      "text": "Sur le PV reprenant la plainte de la mère Michèle, cette dernière accuse différents groupes d’enfants des villages alentours."
+      "text": "<span style=\"text-align: justify !important;\">Le Commandant Latourette envisage alors toutes les possibilités, et arrête son jugement sur cinq suspects potentiels. Cinq clans d’enfants qui pourraient en vouloir à Madame Faure et auraient voulu se venger sur Félix :<br/>Le clan de la Mouche, qui n’arrête pas de passer au travers de son potager, écrasant tous ses poireaux. Madame Faure a depuis peu installé des barbelés autour de son jardin pour les empêcher de passer. Quelques jours avant la disparition de Félix, l’un d’eux s’est écorché sur le barbelé.<br/>Le clan de Grand Trou, qui s’amusait à voler des pommes à Madame Faure. Celle-ci a mis des pièges à colle sur ses pommiers pour les dissuader de revenir.<br/>Le clan de Corbas, dont elle était l’institutrice en 9ème. Elle avait la fâcheuse habitude de leur taper sur les doigts avec une règle pour qu’ils se tiennent correctement.<br/>Le clan de Charréard, dont elle s’est souvent plainte à leurs parents de leur comportement pendant la messe. Plus d’une fois les petits sont repartis en pleurant de la torgnole donnée par leur père, ne supportant pas de se prendre une remarque sur l’éducation de leurs enfants en public.<br/>Le clan des Clochettes, dont le canari a mystérieusement disparu, laissant place à une flopée de plumes et de poils de chats dans la volière. Elles ont l’air persuadées que Félix est à l’origine de cette disparition.</span>"
+    },
+    {
+      "type": "paragraphe",
+      "text": "Qui aura donc volé Félix à la mère Faure ?"
     },
     {
       "type": "bouton",
@@ -38,24 +37,41 @@
       "id": 1,
       "name": "Avenue Félix Faure",
       "coords": "45.752121, 4.847156",
-      "qr_secret": "secret",
+      "qr_secret": "92090088",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "Photo ticket de stationnement"
+          "type": "image",
+          "url": "assets/content/gones/Horodateur.jpg",
+          "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [{
+        "type":"titre",
+        "text":"Albert, chef de clan des Grand Trou"
+      },
+      {"type": "paragraphe",
+        "text": "On était au champ de la Garde jeudi après-midi. Les Clochettes nous ont attaqué pour voler notre trésor de guerre… elles étaient bien trop nombreuses, on a dû le leur laisser. Mais on compte bien le récupérer, la prochaine fois ! On va mieux se préparer et tous les gars seront présents cette fois-ci, on ne va pas se refaire avoir ! Jeudi n’était pas un bon jour pour nous…"
+      },
+      {"type": "paragraphe",
+        "text": "Vous savez, cette guerre avec les Clochettes dure depuis des années, nos grands frères avant nous les ont combattus, et cela depuis plusieurs générations. Et au fur et à mesure le trésor grossit ! J’avoue que je ne sais pas vraiment pourquoi tout cela a commencé, mais maintenant c’est une question d’honneur ! En tant que chef de clan je me dois de maintenir cet honneur sauf, et de ramener le trésor à Grand Trou ! "
+      },
+      {"type": "paragraphe",
+        "text": "Déjà qu’il y a deux semaines de ça tout le monde s’est moqué quand on est rentrés les mains pleines de colle… On voulait juste deux trois pommes pour le goûter, on ne faisait pas de mal…"
+      },
+      {"type": "paragraphe",
+        "text": "L’honneur doit être sauvé ! "
+      }]
     },
     {
       "id": 2,
       "name": "La confluence",
-      "coords": "45.740629, 4,814588",
-      "qr_secret": "secret",
+      "coords": "45.740629, 4.814588",
+      "qr_secret": "88949523",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "Vidéo d'une main en train de sortir la cache"
+          "type": "video",
+          "url": "https://www.youtube.com/embed/4iQETIfbzvk",
+          "trustedUrl": {}
         }
       ],
       "resultat": []
@@ -64,93 +80,107 @@
       "id": 3,
       "name": "Parc de Gerland",
       "coords": "45.725458, 4.829558",
-      "qr_secret": "secret",
+      "qr_secret": "51229557",
       "indice": [
-        {
-          "type": "paragraphe",
-          "text": "Direction à partir d'un point en mode boussole (ex: 6 pas NO)"
+        {"type":"paragraphe",
+        "text":"Je m'assois à 6 pas au NO"
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "audio",
+          "url": "assets/content/gones/Clochettes.mp3",
+          "trustedUrl": {},
+          "playlist" : []
+        }, 
+        {
+          "type": "image",
+          "url": "assets/content/gones/gerland.gif",
+          "trustedUrl": {}
+        }
+      ]
     },
     {
       "id": 4,
       "name": "Kiosque Monplaisir",
       "coords": "45.744698, 4.871189",
-      "qr_secret": "viktouare",
+      "qr_secret": "40852036",
       "indice": [
-        {
-          "type": "image",
-          "url": "assets/images/gones_loader.jpg",
-          "trustedUrl": {}
-        },
-        {
-          "type": "titre",
-          "text": "Qui a volé le chat de la mère Michèle ?"
-        },
         {
           "type": "paragraphe",
           "text": "23ème barreau gauche"
         }
       ],
-      "resultat": [
-        {
-          "type": "titre",
-          "text": "Bravo !!"
-        },
-        {
-          "type": "paragraphe",
-          "text": "C'est trouvé"
-        }
-      ]
+      "resultat": []
     },
     {
       "id": 5,
       "name": "Parc de Parilly",
       "coords": "45.723318, 4.906573",
-      "qr_secret": "secret",
+      "qr_secret": "83231147",
       "indice": [
         {
           "type": "paragraphe",
-          "text": "Dessin arbre + renard sur chemin + scout sur chemin"
+          "text": "Premier arbre à gauche, en regardant la rencontre du renard et du scout"
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "audio",
+          "url": "assets/content/gones/Charreard.mp3",
+          "trustedUrl": {},
+          "playlist" : []
+        }
+      ]
     },
     {
       "id": 6,
-      "name": "Fort de Bron",
-      "coords": "45.732264, 4.920239",
-      "qr_secret": "secret",
-      "indice": [
-      ],
-      "resultat": []
-    },
-    {
-      "id": 7,
       "name": "Saint Priest",
       "coords": "45.694271, 4.940963",
-      "qr_secret": "viktouare",
+      "qr_secret": "24694399",
       "indice": [
       ],
-      "resultat": []
+      "resultat": [ {
+        "type": "image",
+        "url": "assets/content/gones/Lignes_ecriture.jpg",
+        "trustedUrl": {}
+      },
+      {
+        "type":"titre",
+        "text":"« Le Bouillon », surveillant de l’école de Corbas"
+      },
+      {
+        "type":"paragraphe",
+        "text":"Jeudi après-midi tous les petits étaient avec moi. Vous ne croyez pas que je les aurais laissés libres après les dérangements de la veille ? Il faut qu’ils apprennent ces petits garnements qu’ici ce n’est pas eux qui font la loi… A croire que tout leur est permis à la maison ! Heureusement que je suis là pour les reprendre en main, après qu’est-ce que ça va donner… de la racaille, c’est tout ce qu’ils vont devenir ! Regardez, ils ont passé l’après-midi à recopier ces lignes d’écriture. Ça leur apprendra à se battre comme des chiffonniers. Y’en a bien un ou deux qui a essayé de s’échapper de la retenue, mais j’ai l’œil, pas un seul n’a pu sortir d’ici avant tard le soir !"
+      },
+      {
+        "type":"paragraphe",
+        "text":"Vous savez, c’est ici que se fait leur éducation, ils manquent de personnes pouvant leur tenir tête ! Si seulement Madame Faure n’était pas partie à la retraite… Elle les menait à la baguette ! Enfin à la règle si je peux me permettre un peu d’humour… »"
+      }
+    ]
     }
   ],
-  "resolutionTitre":"ResolutionTitre",
+  "resolutionTitre":"Qui a donc volé Félix à la mère Faure ?",
   "resolutionPersonnages":[
     {"id":1,
-    "name":"Personnage 1",
-  "coupable":false},
-{"id":2,
-"name":"Personnage 2",
-"image":"assets/images/charles_moisson.jpg",
-"coupable":false},
-{"id":3,
-"name":"Personnage 3",
-"image":"assets/images/jeanne_lumiere.jpg",
-"coupable":true},
-{"id":4,
-"name":"Toto",
-"coupable":false}
-  ]
+    "name":"Charreard",
+    "image":"assets/content/gones/Accusation_Charreard.jpeg",
+    "coupable":false},
+    {"id":2,
+    "name":"Clochettes",
+    "image":"assets/content/gones/Accusation_Clochettes.jpeg",
+    "coupable":false},
+    {"id":3,
+      "name":"La Mouche",
+      "image":"assets/content/gones/Accusation_La_Mouche.jpeg",
+      "coupable":false},
+    {"id":4,
+      "name":"Corbas",
+      "image":"assets/content/gones/Accusation_Corbas.jpg",
+      "coupable":false},
+      {"id":5,
+        "name":"Grand trou",
+        "image":"assets/content/gones/Accusation_Grand_Trou.jpeg",
+        "coupable":true}
+      ]
 }

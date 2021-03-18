@@ -277,7 +277,7 @@ export class MapComponent implements OnInit, OnChanges {
       request.send(null);
       this.parcoursSelected = JSON.parse(request.responseText);
       // console.log(jsonData)
-      // console.log(this.test);
+      console.log(this.parcoursSelected);
     }
     else if (this.terreChoosed == "lumieres") {
       var request = new XMLHttpRequest();
@@ -445,9 +445,9 @@ export class MapComponent implements OnInit, OnChanges {
     const that = this;   
     clearInterval(that.refreshment);
     const resolution = that.modalService.open(ModalResolutionComponent, { size: 'lg', centered: true });
-    resolution.componentInstance.title=that.parcoursSelected.resolutionTitle;
+    resolution.componentInstance.title=that.parcoursSelected.resolutionTitre;
     resolution.componentInstance.content = that.parcoursSelected.resolutionPersonnages;
-    resolution.componentInstance.parcoursName=this.parcoursSelected.name
+    resolution.componentInstance.parcoursName=this.parcoursSelected.name;
     resolution.result.then((result) => {
       console.log(result);
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";

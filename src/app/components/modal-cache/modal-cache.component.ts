@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeFormat, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { CookieService } from 'ngx-cookie-service';
-
+import { Track } from 'ngx-audio-player';
 @Component({
   selector: 'app-modal-cache',
   templateUrl: './modal-cache.component.html',
@@ -48,7 +48,7 @@ export class ModalCacheComponent implements OnInit {
     },
     {
       type: "video",
-      url: "https://www.youtube.com/embed/1Rk1K5Mmnbg",
+      url: "https://www.youtube.com/embed/4iQETIfbzvk",
       trustedUrl: {}
     },
     {
@@ -59,6 +59,14 @@ export class ModalCacheComponent implements OnInit {
       type: "image",
       url: "https://www.woopets.fr/assets/img/008/141/og-image/perroquet.jpg",
       trustedUrl: {}
+    },
+    {
+      type: "audio",
+      url: "https://dl.dropboxusercontent.com/s/9v0psowra7ekhxo/A%20Himitsu%20-%20In%20Love%20%28feat.%20Nori%29.flac?dl=0",
+      trustedUrl: {},
+      playlist : [{title: 'Audio One Title',
+      link : {}
+      }]
     }
   ]
 
@@ -129,7 +137,7 @@ export class ModalCacheComponent implements OnInit {
         }
 
       }
-      if (element.type == "video" || element.type == "image") {
+      if (element.type == "video" || element.type == "image" ) {
 
         if (element.url != null) {
           element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
@@ -137,6 +145,19 @@ export class ModalCacheComponent implements OnInit {
           elementsToBeRemoved.push(this.indice.indexOf(element))
         }
 
+      }
+      if (element.type == "audio"){
+        if (element.url != null) {
+          element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+          element.playlist = [
+            {
+              title: 'Audio One Title',
+              link: element.trustedUrl
+            } ]
+            console.log(element)
+        } else {
+          elementsToBeRemoved.push(this.indice.indexOf(element))
+        }
       }
     }
 
@@ -255,14 +276,28 @@ export class ModalCacheComponent implements OnInit {
           }
 
         }
-        if (element.type == "video" || element.type == "image") {
-
+        if (element.type == "video" || element.type == "image" ) {
+          
           if (element.url != null) {
             element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+            console.log(element.trustedUrl)
           } else {
             elementsToBeRemoved.push(this.indice.indexOf(element))
           }
 
+        }
+        if (element.type == "audio"){
+          if (element.url != null) {
+            element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
+            element.playlist = [
+              {
+                title: 'Audio One Title',
+                link: element.trustedUrl
+              } ]
+          } else {
+            elementsToBeRemoved.push(this.indice.indexOf(element))
+          }
+          console.log(element)
         }
       }
 

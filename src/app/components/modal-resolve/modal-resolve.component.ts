@@ -11,7 +11,6 @@ export class ModalResolutionComponent implements OnInit {
   @Input() public content;
   header:any;
   footer:any;
-  title="Territoire Lyon levant"
   choice:string;
   resolved=false;
   parcoursName:string;
@@ -52,9 +51,8 @@ export class ModalResolutionComponent implements OnInit {
   //     text: "Bienvenue dans ce jeu de piste"
   //   }
   // ]
-
+  title :string = "Qui est le coupable ?";
   constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private cookieService : CookieService) { }
-
   ngOnInit(): void {
     this.start();
   }
@@ -84,9 +82,9 @@ export class ModalResolutionComponent implements OnInit {
     }
   }
   start():void{
-    this.title="Qui est le coupable ?";
     this.validContent();
     console.log(this.content);
+    console.log(this.title);
   }
 
   isCoupable(ans){

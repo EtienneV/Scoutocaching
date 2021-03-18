@@ -120,7 +120,7 @@ export class ModalChangeTerreComponent implements OnInit {
       type: "bouton",
       text: "Terre des Gones",
       url: "assets/icons/Composant 4 – 2.png",
-      isDisabled:true,
+      isDisabled:false,
       percentage: this.getPercentage("gones"),
       style:"width:"+this.getPercentage("gones")+"%",
       done: this.cookieService.check('scoutocaching_caches_gones_done')

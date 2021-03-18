@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { ModalOnBoardingComponent } from './components/modal-onboarding/modal-on
 import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-changeTerre.component';
 import {ModalResolutionComponent} from './components/modal-resolve/modal-resolve.component';
 import {ModalAideComponent} from './components/modal-aide/modal-aide.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,9 @@ import {ModalAideComponent} from './components/modal-aide/modal-aide.component';
     HttpClientModule,
     CommonModule,
     NgbModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    NgxAudioPlayerModule,
+    MatSliderModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
