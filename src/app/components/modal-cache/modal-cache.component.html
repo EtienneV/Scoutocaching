@@ -48,11 +48,11 @@
               <img style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
             </div>
             <div *ngIf="item.type == 'audio'">
-              <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false" 
+              <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false"
     muted="muted" [displayPlaylist]="false" [pageSizeOptions]="pageSizeOptions" (trackEnded)="onEnded($event)"
         [displayVolumeControls]="true" [displayRepeatControls]="false"
-        [disablePositionSlider]="false" [displayArtist]="false" 
-        [displayDuration]="false" [expanded]="false"></ngx-audio-player> 
+        [disablePositionSlider]="false" [displayArtist]="false"
+        [displayDuration]="false" [expanded]="false"></ngx-audio-player>
             </div>
           </div>
 
@@ -147,14 +147,14 @@
           </div>
 
           <div *ngIf="item.type == 'image'">
-            <img class="ml-auto mr-auto" style="box-sizing: border-box;width: inherit;padding: 5px;" [src]="item.trustedUrl">
+            <img class="ml-auto mr-auto" style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
           </div>
           <div *ngIf="item.type == 'audio'">
-            <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false" 
+            <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false"
   muted="muted" [displayPlaylist]="false" [pageSizeOptions]="pageSizeOptions" (trackEnded)="onEnded($event)"
       [displayVolumeControls]="true" [displayRepeatControls]="false"
-      [disablePositionSlider]="false" [displayArtist]="false" 
-      [displayDuration]="false" [expanded]="false" style="box-sizing: border-box;width: inherit;padding: 5px;"style="box-sizing: border-box;width: inherit;padding: 5px;"></ngx-audio-player> 
+      [disablePositionSlider]="false" [displayArtist]="false"
+      [displayDuration]="false" [expanded]="false" style="box-sizing: border-box;width: inherit;padding: 5px;"style="box-sizing: border-box;width: inherit;padding: 5px;"></ngx-audio-player>
           </div>
         </div>
 

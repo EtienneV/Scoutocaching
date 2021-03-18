@@ -68,8 +68,21 @@
       "qr_secret": "15784956",
       "indice": [
         {
+          "type": "titre",
+          "text": "Un puzzle à résoudre..."
+        },
+        {
           "type": "paragraphe",
-          "text": "Vitre de verre verte dans le passage de la rue à la Saône"
+          "text": "<a href='https://puzzel.org/fr/jigsaw/play?p=-MW6V2oumf_Ke_59aK8b' target='_blank'>Cliquer ici</a>"
+        },
+        {
+          "type": "titre",
+          "text": "...et une photo !"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/merciere.jpg",
+          "trustedUrl": {}
         }
       ],
       "resultat": []
