@@ -130,7 +130,7 @@ export class ModalChangeTerreComponent implements OnInit {
       text: "Terre des Canuts",
       url: "assets/icons/Composant 5 – 2.png",
       percentage: this.getPercentage("canuts"),
-      isDisabled:true,
+      isDisabled:false,
       style:"width:"+this.getPercentage("canuts")+"%",
       done: this.cookieService.check('scoutocaching_caches_canuts_done')
     }]
@@ -175,7 +175,7 @@ export class ModalChangeTerreComponent implements OnInit {
     this.showTerreChoice = true;
     this.start();
   }
-  
+
   getPercentage(terre): number {
     var answer=0;
     var id=1;

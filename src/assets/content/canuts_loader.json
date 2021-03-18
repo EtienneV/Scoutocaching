@@ -63,19 +63,6 @@
     },
     {
       "id": 3,
-      "name": "Place des Terreaux",
-      "coords": "45.767513766329905, 4.8335873944011984",
-      "qr_secret": "secret",
-      "indice": [
-        {
-          "type": "paragraphe",
-          "text": "Au pied de la lumière, au sud de l'eau"
-        }
-      ],
-      "resultat": []
-    },
-    {
-      "id": 4,
       "name": "Rue Mercière",
       "coords": "45.76257421997917, 4.832750790484299",
       "qr_secret": "secret",
@@ -88,75 +75,40 @@
       "resultat": []
     },
     {
-      "id": 5,
-      "name": "Place des Célestins",
-      "coords": "45.759774781377786, 4.831868945483302",
+      "id": 4,
+      "name": "Parc de la Tête d'Or",
+      "coords": "45.77917, 4.8543",
       "qr_secret": "secret",
       "indice": [
         {
           "type": "paragraphe",
-          "text": "Je vois ceci"
-        },
-        {
-          "type": "image",
-          "url": "assets/images/celestins.png",
-          "trustedUrl": {}
-        },
+          "text": "TODO"
+        }
+      ],
+      "resultat": []
+    },
+    {
+      "id": 5,
+      "name": "St Pothin",
+      "coords": "45.76614, 4.84621",
+      "qr_secret": "secret",
+      "indice": [
         {
           "type": "paragraphe",
-          "text": "Puis je vais à gauche, au pied du poteau"
+          "text": "TODO"
         }
       ],
       "resultat": []
     },
     {
       "id": 6,
-      "name": "Clocher de l'Hôpital de la Charité",
-      "coords": "45.75636200329194, 4.833896575774663",
+      "name": "Place Bir Hakeim",
+      "coords": "45.75279, 4.85534",
       "qr_secret": "secret",
       "indice": [
         {
           "type": "paragraphe",
-          "text": "xxxxxx"
-        }
-      ],
-      "resultat": []
-    },
-    {
-      "id": 7,
-      "name": "Ainay",
-      "coords": "45.75385350197837, 4.8270155198275075",
-      "qr_secret": "secret",
-      "indice": [
-        {
-          "type": "paragraphe",
-          "text": "xxxxxx"
-        }
-      ],
-      "resultat": []
-    },
-    {
-      "id": 8,
-      "name": "Place des Archives",
-      "coords": "45.747433622815386, 4.825558834759747",
-      "qr_secret": "secret",
-      "indice": [
-        {
-          "type": "paragraphe",
-          "text": "xxxxxx"
-        }
-      ],
-      "resultat": []
-    },
-    {
-      "id": 9,
-      "name": "Port de Saône",
-      "coords": "45.74221422226957, 4.8166719461843215",
-      "qr_secret": "secret",
-      "indice": [
-        {
-          "type": "paragraphe",
-          "text": "xxxxxx"
+          "text": "TODO"
         }
       ],
       "resultat": []
