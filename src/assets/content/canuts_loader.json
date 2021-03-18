@@ -120,8 +120,13 @@
       "qr_secret": "16587495",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "TODO"
+          "type": "titre",
+          "text": "De bien étranges symboles"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/birhakeim.jpg",
+          "trustedUrl": {}
         }
       ],
       "resultat": []
