@@ -3,7 +3,7 @@
   "description": [
     {
       "type": "image",
-      "url": "assets/images/canuts_loader.jpg",
+      "url": "assets/images/canuts/olave.jpg",
       "trustedUrl": {}
     },
     {
@@ -12,7 +12,29 @@
     },
     {
       "type": "paragraphe",
-      "text": "1931 : Baden-Powell vient visiter Lyon pour la première fois ; à cette occasion, il parcourt la ville."
+      "text": "Chers scouts et chères guides de la Terre des Canuts,<br>Je me permets de vous écrire après une récente découverte dans les archives de ma famille : il s’agit de ce croquis effectué par mon arrière-grand-père, qui était un grand tisserand des pentes de la Croix-Rousse, de ceux qu’on appelait les canuts.<br>J’ai noté une inscription dans le coin, qui m’a intrigué, et m’a incité à faire des recherches : "
+    },
+    {
+      "type": "image",
+      "url": "assets/images/canuts/croquis.jpg",
+      "trustedUrl": {}
+    },
+    {
+      "type": "paragraphe",
+      "text": "hélas, aucune trace de ce mystérieux foulard de soie, ni auprès du musée Baden-Powell, ni auprès du Musée des Tissus !<br>Tout ce que j’ai pu trouver est cette coupure de journal, qui semble malheureusement incomplète <br>"
+    },
+    {
+      "type": "image",
+      "url": "assets/images/canuts/J1.png",
+      "trustedUrl": {}
+    },
+    {
+      "type": "paragraphe",
+      "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J1.png' target='_blank'>Voir en grand</a>"
+    },
+    {
+      "type": "paragraphe",
+      "text": "C’est un indice bien maigre, mais je suis sûr qu’il vous aidera à retrouver la trace de ce foulard de soie disparu ! Au passage, saurez-vous expliquer les raisons de cette disparition ?<br>Amitiés scoutes,<br>Eulalie Maongle"
     },
     {
       "type": "bouton",
@@ -29,22 +51,26 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "Face au petit théâtre<br>Où Guignol fait le drôle<br>Une armoire renferme <br> Le premier des trésors<br>Au-delà de la route<br>Regarde et va trouver<br>Derrière cette cache"
+          "text": "Face au petit théâtre<br>Où Guignol fait le drôle<br>Une barrière abrite<br>Le premier des trésors<br>Au-delà de la route<br>Regarde et va trouver<br>Derrière et sur ta gauche"
         }
       ],
       "resultat": [
         {
           "type": "titre",
-          "text": "Cadeau trouvé !"
-        },
-        {
-          "type": "paragraphe",
-          "text": "C'est un foulard de soie offert par les canuts"
+          "text": "Une coupure de journal"
         },
         {
           "type": "image",
-          "url": "assets/images/canuts/foulard-canut.jpg",
+          "url": "assets/images/canuts/J2.png",
           "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J2.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : K"
         }
       ]
     },
@@ -55,11 +81,53 @@
       "qr_secret": "65982310",
       "indice": [
         {
+          "type": "titre",
+          "text": "Il y a de la friture"
+        },
+        {
           "type": "paragraphe",
-          "text": "Je continue, je traverse la rue, et à côté des trois hibous"
+          "text": "Deux récepteurs radios ont capté des morceaux différents de la transmission.<br>Reformez le message complet !"
+        },
+        {
+          "type": "titre",
+          "text": "Récepteur 1"
+        },
+        {
+          "type": "audio",
+          "url": "assets/content/canuts/radio1.mp3",
+          "trustedUrl": {},
+          "playlist" : []
+        },
+        {
+          "type": "titre",
+          "text": "Récepteur 2"
+        },
+        {
+          "type": "audio",
+          "url": "assets/content/canuts/radio2.mp3",
+          "trustedUrl": {},
+          "playlist" : []
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Une coupure de journal"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/J3.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J3.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : ♪"
+        }
+      ]
     },
     {
       "id": 3,
@@ -85,20 +153,61 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Une coupure de journal"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/J4.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J4.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : A"
+        }
+      ]
     },
     {
       "id": 4,
       "name": "Parc de la Tête d'Or",
-      "coords": "45.77917, 4.8543",
+      "coords": "45.77543144857667, 4.856594020833016",
       "qr_secret": "72536841",
       "indice": [
         {
-          "type": "paragraphe",
-          "text": "TODO"
+          "type": "titre",
+          "text": "Tout simplement"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/tete_dor.jpg",
+          "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Une coupure de journal"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/J5.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J5.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : B"
+        }
+      ]
     },
     {
       "id": 5,
@@ -123,7 +232,25 @@
 
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Une coupure de journal"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/J7.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J7.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : R"
+        }
+      ]
     },
     {
       "id": 6,
@@ -141,24 +268,34 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Une coupure de journal"
+        },
+        {
+          "type": "image",
+          "url": "assets/images/canuts/J6.png",
+          "trustedUrl": {}
+        },
+        {
+          "type": "paragraphe",
+          "text": "<a href='http://https://geocaching.sgdf-lyonlevant.fr/assets/images/canuts/J6.png' target='_blank'>Voir en grand</a>"
+        },
+        {
+          "type": "titre",
+          "text": "Griffoné au dos de la coupure : π"
+        }
+      ]
     }
   ],
   "resolutionTitre": "ResolutionTitre",
   "resolutionPersonnages": [
-    { "id": 1, "name": "Personnage 1", "coupable": false },
-    {
-      "id": 2,
-      "name": "Personnage 2",
-      "image": "assets/images/charles_moisson.jpg",
-      "coupable": false
-    },
-    {
-      "id": 3,
-      "name": "Personnage 3",
-      "image": "assets/images/jeanne_lumiere.jpg",
-      "coupable": true
-    },
-    { "id": 4, "name": "Castor Junior", "coupable": false }
+    { "id": 1, "name": "Gnafron, mendiant croix-roussien suspecté d’être pickpocket ?", "coupable": false },
+    { "id": 2, "name": "La mère Mounaud, cuisinière susceptible ?", "coupable": false },
+    { "id": 3, "name": "Justin Godart, respectable maire de Lyon ?", "coupable": false },
+    { "id": 4, "name": "Pierre Scize, journaliste ambitieux ?", "coupable": false },
+    { "id": 5, "name": "Le père Grouès, prêtre engagé ?", "coupable": true },
+    { "id": 6, "name": "Le général Doyen, militaire bougon ?", "coupable": false }
   ]
 }

@@ -137,7 +137,7 @@
           </div>
 
           <div *ngIf="item.type == 'paragraphe'">
-            <p style="text-align: justify;">{{item.text}}</p>
+            <div [innerHTML]="item.text"></div>
           </div>
 
           <div *ngIf="item.type == 'video'">
