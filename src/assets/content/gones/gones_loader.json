@@ -41,7 +41,7 @@
       "indice": [
         {
           "type": "image",
-          "url": "assets/content/gones/pompier.jpeg",
+          "url": "assets/content/gones/Horodateur.jpg",
           "trustedUrl": {}
         }
       ],
@@ -64,8 +64,8 @@
     },
     {
       "id": 2,
-      "name": "La Confluence",
-      "coords": "45.741076, 4.814866",
+      "name": "La confluence",
+      "coords": "45.740629, 4.814588",
       "qr_secret": "88949523",
       "indice": [
         {
@@ -74,18 +74,20 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/page_de_garde.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 3,
       "name": "Parc de Gerland",
-      "coords": "45.721415, 4.825721",
+      "coords": "45.725458, 4.829558",
       "qr_secret": "51229557",
       "indice": [
-        {
-          "type": "image",
-          "url": "assets/content/gones/molette.jpeg",
-          "trustedUrl": {}
+        {"type":"paragraphe",
+        "text":"Je m'assois à 6 pas au NO"
         }
       ],
       "resultat": [
@@ -94,7 +96,7 @@
           "url": "assets/content/gones/Clochettes.mp3",
           "trustedUrl": {},
           "playlist" : []
-        },
+        }, 
         {
           "type": "image",
           "url": "assets/content/gones/gerland.gif",
@@ -110,26 +112,24 @@
       "indice": [
         {
           "type": "paragraphe",
-          "text": "To wo mkmro cyec vo qbkxn ombkx"
+          "text": "23ème barreau gauche"
         }
       ],
-      "resultat": [
-        {
-          "type": "image",
-          "url": "assets/content/gones/concours.png",
-          "trustedUrl": {}
-        }
-      ]
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/concours.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 5,
       "name": "Parc de Parilly",
-      "coords": "45.723333, 4.906694",
+      "coords": "45.723318, 4.906573",
       "qr_secret": "83231147",
       "indice": [
         {
           "type": "paragraphe",
-          "text": "La fourmi grimpe sur l’arbre à la croisée du renard et des scouts"
+          "text": "Premier arbre à gauche, en regardant la rencontre du renard et du scout"
         }
       ],
       "resultat": [
@@ -143,14 +143,10 @@
     },
     {
       "id": 6,
-      "name": "Desgenettes",
-      "coords": "45.738864, 4.893268",
+      "name": "Saint Priest",
+      "coords": "45.694271, 4.940963",
       "qr_secret": "24694399",
       "indice": [
-        {
-          "type": "paragraphe",
-          "text": "A l’abri des intempéries, sous la lumière qui illumine la nuit"
-        }
       ],
       "resultat": [ {
         "type": "image",
@@ -191,7 +187,7 @@
       "image":"assets/content/gones/Accusation_Corbas.jpg",
       "coupable":false},
       {"id":5,
-        "name":"Grand Trou",
+        "name":"Grand trou",
         "image":"assets/content/gones/Accusation_Grand_Trou.jpeg",
         "coupable":true}
       ]
