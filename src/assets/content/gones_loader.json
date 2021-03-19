@@ -74,7 +74,13 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/content/gones/page_de_garde.png",
+          "trustedUrl": {}
+        }
+      ]
     },
     {
       "id": 3,
