@@ -74,7 +74,11 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": []
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/page_de_garde.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 3,
@@ -111,7 +115,11 @@
           "text": "23ème barreau gauche"
         }
       ],
-      "resultat": []
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/concours.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 5,
