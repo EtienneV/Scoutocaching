@@ -19,7 +19,8 @@ export class AppComponent {
   }
 
   changeTerre():void{
-    const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
+    const that = this;
+    const onboarding = that.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
     onboarding.result.then((result) => {
       console.log(result);
       this.terreChoosed=result;
@@ -46,7 +47,6 @@ export class AppComponent {
         onboarding.componentInstance.title = data['description'].filter(word => word.type ==="title")[0].text;
         // onboarding.componentInstance.indice = data.description;
       });
-      
     }
     else if(this.cookieService.get('scoutocaching_terre')==="canuts"){
       await import("../assets/content/canuts_loader.json").then(data => {
