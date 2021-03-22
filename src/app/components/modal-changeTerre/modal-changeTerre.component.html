@@ -68,10 +68,10 @@
           
         </div>
       </div>
-      <div *ngIf="item.type == 'bouton'">
+      <!-- <div *ngIf="item.type == 'bouton'">
         <button (click)="selectTerre(item.text)"><img class="icons btn-icon" [src]="item.url" /> {{item.text}} <img
             *ngIf="item.done" class="icons" src="assets/icons/done-24px.png" /></button>
-      </div>
+      </div> -->
     </div>
 
   </div>
@@ -94,7 +94,8 @@
       </div>
 
       <div *ngIf="item.type == 'paragraphe'">
-        <p>{{item.text}}</p>
+        <!-- <p>{{item.text}}</p> -->
+        <div [innerHTML]="item.text"></div>
       </div>
 
       <div *ngIf="item.type == 'video'">
