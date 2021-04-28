@@ -20,6 +20,7 @@ import { ModalChangeTerreComponent } from './components/modal-changeTerre/modal-
 import {ModalResolutionComponent} from './components/modal-resolve/modal-resolve.component';
 import {ModalAideComponent} from './components/modal-aide/modal-aide.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { ModalImageComponent } from './components/modal-image/modal-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     ModalOnBoardingComponent,
     ModalChangeTerreComponent,
     ModalResolutionComponent,
-    ModalAideComponent
+    ModalAideComponent,
+    ModalImageComponent
   ],
   imports: [
     BrowserModule,

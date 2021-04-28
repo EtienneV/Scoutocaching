@@ -5,11 +5,15 @@ import { BarcodeFormat, Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { CookieService } from 'ngx-cookie-service';
 import { Track } from 'ngx-audio-player';
+
+import { ModalImageComponent } from '../modal-image/modal-image.component';
+
 @Component({
   selector: 'app-modal-cache',
   templateUrl: './modal-cache.component.html',
   styleUrls: ['./modal-cache.component.scss'],
 })
+
 export class ModalCacheComponent implements OnInit {
   @ViewChild('scanner', { static: false })
   scanner = ZXingScannerComponent as any;
@@ -87,7 +91,7 @@ export class ModalCacheComponent implements OnInit {
   availableDevices: MediaDeviceInfo[];
 
 
-  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private CookieService: CookieService) { }
+  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private CookieService: CookieService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
@@ -353,6 +357,28 @@ export class ModalCacheComponent implements OnInit {
   }
 
 
+
+  help() {
+    if(this.tresorProperties.solution !== undefined) {
+      if(confirm("Regarder l'indice supplémentaire ?")) {  
+        if(this.tresorProperties.solution !== undefined) {
+          //alert(this.tresorProperties.solution)
+
+          const modalRef = this.modalService.open(ModalImageComponent, { size: 'lg' });
+              modalRef.componentInstance.urlPhoto = this.tresorProperties.solution;
+              modalRef.result.then((result) => {
+              //this.init()
+          }, (reason) => {
+              //console.log(reason);
+          });
+        }
+      }
+      else {
+        console.log("KO");
+      }
+    }
+    else alert("Pas d'indice supplémentaire");
+  }
 
 
 

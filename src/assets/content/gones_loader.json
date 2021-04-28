@@ -125,7 +125,8 @@
         "type": "image",
         "url": "assets/content/gones/concours.png",
         "trustedUrl": {}
-      }]
+      }],
+      "solution": "assets/solutions/gones/monplaisir.jpg"
     },
     {
       "id": 5,
