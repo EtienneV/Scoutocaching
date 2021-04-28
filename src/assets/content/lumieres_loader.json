@@ -40,45 +40,48 @@
           "text": "Les moteurs ne sont pas les bienvenus"
         }
       ],
-      "resultat": [ {
-        "type": "image",
-        "url": "assets/images/jeanne_lumiere.jpg",
-        "trustedUrl": {}
-      },
-      {
-        "type": "titre",
-        "text": "Jeanne Lumière"
-      },
-    {
-      "type": "paragraphe",
-      "text": "Je suis la petite sœur de Louis et Auguste. "
-    },
-    {
-      "type": "paragraphe",
-      "text": "Durant toute mon enfance, et jusqu’à mon mariage avec Jean Koehler il y a 5 ans (le 25 septembre 1890), j’ai énormément aidé mon frère Louis qui venait d’inventer “l’étiquette bleue lumière”. Je travaillais de 5 heures du matin jusqu’à 23 heures dans le petit atelier familial pour répondre à la demande."
-    },
-    
-    {
-      "type": "paragraphe",
-      "text": "Certes, je suis la première de ma fratrie à me marier, et je suis la seule à ne pas être mariée avec un enfant de la famille Winckler."
-    },
-    
-    {
-      "type": "paragraphe",
-      "text": "Je reconnais que je suis restée dans l’ombre face à la renommée grandissante de mes deux frères."
-    },
-    {
-      "type": "paragraphe",
-      "text": "Mais la vie avec Jean me satisfait pleinement, je ne vois pas pourquoi j’aurai abîmé le cinématographe que mon frère a construit. D’autant plus qu’il m’a gentiment invité à la première représentation !"
-    },
-    {
-      "type": "paragraphe",
-      "text": "Et puis, si les affaires se portent bien et qu’il réussit à séduire le public, il est possible qu’ils embauchent mes enfants dans leur usine !"
-    },
-    {
-      "type": "paragraphe",
-      "text": "À partir de 15h45, j’étais bien loin du Salon indien du Grand Café ; je prenais un thé avec des connaissances de Besançon vers la tour Eiffel, cet édifice très critiqué par les journaux lyonnais. Je voulais me faire mon avis ; c’est une belle réussite ! Je trouve cela dommage que les Français ne soient pas plus nombreux à la visiter !"
-    }]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/images/jeanne_lumiere.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Jeanne Lumière"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Je suis la petite sœur de Louis et Auguste. "
+        },
+        {
+          "type": "paragraphe",
+          "text": "Durant toute mon enfance, et jusqu’à mon mariage avec Jean Koehler il y a 5 ans (le 25 septembre 1890), j’ai énormément aidé mon frère Louis qui venait d’inventer “l’étiquette bleue lumière”. Je travaillais de 5 heures du matin jusqu’à 23 heures dans le petit atelier familial pour répondre à la demande."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Certes, je suis la première de ma fratrie à me marier, et je suis la seule à ne pas être mariée avec un enfant de la famille Winckler."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Je reconnais que je suis restée dans l’ombre face à la renommée grandissante de mes deux frères."
+        },
+        {
+          "type": "paragraphe",
+          "text": "Mais la vie avec Jean me satisfait pleinement, je ne vois pas pourquoi j’aurai abîmé le cinématographe que mon frère a construit. D’autant plus qu’il m’a gentiment invité à la première représentation !"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Et puis, si les affaires se portent bien et qu’il réussit à séduire le public, il est possible qu’ils embauchent mes enfants dans leur usine !"
+        },
+        {
+          "type": "paragraphe",
+          "text": "À partir de 15h45, j’étais bien loin du Salon indien du Grand Café ; je prenais un thé avec des connaissances de Besançon vers la tour Eiffel, cet édifice très critiqué par les journaux lyonnais. Je voulais me faire mon avis ; c’est une belle réussite ! Je trouve cela dommage que les Français ne soient pas plus nombreux à la visiter !"
+        }
+      ],
+      "solution": "assets/solutions/lumieres/decines.jpg"
     },
     {
       "id": 2,
@@ -91,45 +94,47 @@
           "text": "Généralement long, les parents s’y reposent pendant que les enfants jouent !"
         }
       ],
-      "resultat": [{
-        "type": "image",
-        "url": "assets/images/thomas_edison.jpg",
-        "trustedUrl": {}
-      },
-      {
-        "type": "titre",
-        "text": "Thomas Edison"
-      },
-      {
-        "type": "paragraphe",
-        "text": "Je suis un inventeur, scientifique et un industriel américain réputé. Je suis pionnier de l'électricité, diffuseur, vulgarisateur, mais également un des principaux inventeurs du cinéma."
-      },
-      {
-        "type": "paragraphe",
-        "text": "Dès 1888, je consacre l’intégralité de mon temps à la recherche sur l'image photographique animée, dont les aboutissements ultimes sont depuis l’année 1891 et le kinetoscope, les premiers « films » Edison."
-      },
-      
-      {
-        "type": "paragraphe",
-        "text": "En 1891, le kinétoscope est présenté au public et à la presse, notamment le 20 mai devant une assemblée invitée de cent-cinquante militantes de la Federation of Women’s Clubs."
-      },
-      
-      {
-        "type": "paragraphe",
-        "text": "Le quotidien américain The New York Sun relate ainsi l’événement : « Sur la face supérieure de la boîte, se trouvait un trou, de 1 pouce de diamètre environ. Et, alors qu'elles se penchaient pour regarder, elles virent l'image d’un homme. C'était une très belle image. Il s'inclina, tout en souriant et en agitant la main puis enleva son chapeau avec grâce et le plus grand naturel. Chaque mouvement était parfait... »"
-      },
-      {
-        "type": "paragraphe",
-        "text": "Le film dure moins de dix secondes et s'intitule Dickson Greeting (Le Salut de Dickson), et l’homme très cérémonieux qui salue en direction du public (regard caméra) n'est autre que William Dickson. Le succès est donc au rendez-vous, et les spectatrices manifestent leur étonnement et leur enthousiasme. Dickson a montré sa liberté par rapport aux canons de la photographie et a choisi d’être filmé jusqu’à mi-cuisse, un cadrage jusqu'alors méconnu."
-      },
-      {
-        "type": "paragraphe",
-        "text": "Je pense que c'est Louis qui a volé la pièce car la machine n’était pas au point donc il paniqué. Il a dérobé la pièce pour ne pas se ridiculiser."
-      },
-      {
-        "type": "paragraphe",
-        "text": "De mon côté, j’étais au troquet du coin pour me détendre.  J’y ai d’ailleurs vu Auguste avec Clément, son ami d’enfance."
-      }]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/images/thomas_edison.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Thomas Edison"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Je suis un inventeur, scientifique et un industriel américain réputé. Je suis pionnier de l'électricité, diffuseur, vulgarisateur, mais également un des principaux inventeurs du cinéma."
+        },
+        {
+          "type": "paragraphe",
+          "text": "Dès 1888, je consacre l’intégralité de mon temps à la recherche sur l'image photographique animée, dont les aboutissements ultimes sont depuis l’année 1891 et le kinetoscope, les premiers « films » Edison."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "En 1891, le kinétoscope est présenté au public et à la presse, notamment le 20 mai devant une assemblée invitée de cent-cinquante militantes de la Federation of Women’s Clubs."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Le quotidien américain The New York Sun relate ainsi l’événement : « Sur la face supérieure de la boîte, se trouvait un trou, de 1 pouce de diamètre environ. Et, alors qu'elles se penchaient pour regarder, elles virent l'image d’un homme. C'était une très belle image. Il s'inclina, tout en souriant et en agitant la main puis enleva son chapeau avec grâce et le plus grand naturel. Chaque mouvement était parfait... »"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Le film dure moins de dix secondes et s'intitule Dickson Greeting (Le Salut de Dickson), et l’homme très cérémonieux qui salue en direction du public (regard caméra) n'est autre que William Dickson. Le succès est donc au rendez-vous, et les spectatrices manifestent leur étonnement et leur enthousiasme. Dickson a montré sa liberté par rapport aux canons de la photographie et a choisi d’être filmé jusqu’à mi-cuisse, un cadrage jusqu'alors méconnu."
+        },
+        {
+          "type": "paragraphe",
+          "text": "Je pense que c'est Louis qui a volé la pièce car la machine n’était pas au point donc il paniqué. Il a dérobé la pièce pour ne pas se ridiculiser."
+        },
+        {
+          "type": "paragraphe",
+          "text": "De mon côté, j’étais au troquet du coin pour me détendre.  J’y ai d’ailleurs vu Auguste avec Clément, son ami d’enfance."
+        }
+      ]
     },
     {
       "id": 3,
@@ -142,33 +147,36 @@
           "text": "J'évacue l'eau en cas d'affluence"
         }
       ],
-      "resultat": [{
-        "type": "image",
-        "url": "assets/images/charles_moisson.jpg",
-        "trustedUrl": {}
-      },
-      {
-        "type": "titre",
-        "text": "Charles Moisson"
-      },
-      {
-        "type": "paragraphe",
-        "text": "Je suis  un ami de longue date de la famille Lumière mais aussi leur ingénieur mécanicien, qui fabrique les prototypes successifs du Cinématographe."
-      },
-      {
-        "type": "paragraphe",
-        "text": "J’assume la fonction de projectionniste à l'occasion des représentations Lumière devant le public parisien."
-      },
-      
-      {
-        "type": "paragraphe",
-        "text": "J’étais tout l’après-midi au salon avec Louis pour finir de préparer les derniers réglages."
-      },
-      
-      {
-        "type": "paragraphe",
-        "text": "Je pense c’est Auguste qui a volé les griffes car il n’accepte pas que son frère soit plus intelligent que lui."
-      }]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/images/charles_moisson.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Charles Moisson"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Je suis  un ami de longue date de la famille Lumière mais aussi leur ingénieur mécanicien, qui fabrique les prototypes successifs du Cinématographe."
+        },
+        {
+          "type": "paragraphe",
+          "text": "J’assume la fonction de projectionniste à l'occasion des représentations Lumière devant le public parisien."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "J’étais tout l’après-midi au salon avec Louis pour finir de préparer les derniers réglages."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Je pense c’est Auguste qui a volé les griffes car il n’accepte pas que son frère soit plus intelligent que lui."
+        }
+      ],
+      "solution": "assets/solutions/lumieres/monchat.jpg"
     },
     {
       "id": 4,
@@ -183,14 +191,14 @@
       ],
       "resultat": [
         {
-            "type": "image",
-            "url": "assets/images/auguste_lumiere.jpg",
-            "trustedUrl": {}
-          },
-          {
-            "type": "titre",
-            "text": "Auguste Lumière"
-          },
+          "type": "image",
+          "url": "assets/images/auguste_lumiere.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Auguste Lumière"
+        },
         {
           "type": "paragraphe",
           "text": "Je suis l’ainé de mes frères et sœurs."
@@ -199,20 +207,22 @@
           "type": "paragraphe",
           "text": "CConvaincu comme mon père Antoine que l’image animée est un marché d’avenir en direction de notre clientèle habituelle, les riches amateurs, je m’attelle avec Charles à construire la machine qui permettra d’allier le miracle de l’image photographique en mouvement avec la magie de la projection sur grand écran. Cependant, je fais face à beaucoup de problèmes pour réussir à contourner les brevets que T. Edison a déposés."
         },
-        
+
         {
           "type": "paragraphe",
           "text": "Je suis heureux de voir que mon frère a réussi et je suis aujourd’hui bien plus attiré vers différents domaines médicaux comme le soin des brûlés ou la thérapie de la tuberculose."
         },
-        
+
         {
           "type": "paragraphe",
           "text": "Vers 15h30, j’ai quitté le salon indien du grand Café avec mon ami Clément Maurice pour aller dans un fumoir pas loin afin de discuter. Je n’étais donc pas sur les lieux au moment de la disparition des griffes."
         },
-        { "type":"paragraphe",
-          "text":"Je pense que c'est Thomas qui nous a volé car il est simplement jaloux que notre machine soit meilleure que la sienne."
+        {
+          "type": "paragraphe",
+          "text": "Je pense que c'est Thomas qui nous a volé car il est simplement jaloux que notre machine soit meilleure que la sienne."
         }
-      ]
+      ],
+      "solution": "assets/solutions/lumieres/lasoie.jpg"
     },
     {
       "id": 5,
@@ -226,61 +236,73 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": [{
-        "type": "image",
-        "url": "assets/images/louis_lumiere.jpg",
-        "trustedUrl": {}
-      },
-      {
-        "type": "titre",
-        "text": "Louis Lumière"
-      },
-    {
-      "type": "paragraphe",
-      "text": "Je suis le frère cadet de la famille."
-    },
-    {
-      "type": "paragraphe",
-      "text": "Passionné de chimie, je me suis illustré très tôt en créant des plaques photos plus robustes que celles qui existaient à l’époque. J’embauche alors toute la famille pour produire “l’étiquette bleue lumière”."
-    },
-    
-    {
-      "type": "paragraphe",
-      "text": "Voyant que mon frère avait échoué, il m'a gentiment proposé de réfléchir à cet appareil qui sera bientôt révolutionnaire. Comment faire ? C’est au cœur de l’hiver dernier que j’ai eu l’idée ingénieuse de transformer les trous sur les bords de la pellicule et d’utiliser une autre méthode que celle de Thomas Edison pour faire dérouler la pellicule. Cela m’a permis avec l’aide de Charles Moisson de réaliser le cinématographe. Bien sûr, comme depuis le début, l’amitié avec mon frère et notre accord font que l’invention sera associée à nos deux noms ; et ce ne sont pas nos épouses (qui sont sœurs) qui vont s’y opposer."
-    },
-    
-    {
-      "type": "paragraphe",
-      "text": "Vers 15h50, j’étais avec Charles entrain de terminer le montage et c’est alors qu’il m’a dit qu’il manquait les griffes. Je suis devenu tout pâle, et je vous ai alors appelé pour m’aider à retrouver le voleur ! Hormis ma famille, Clément et Thomas qui sont venus me souhaiter bonne chance, je n’ai pas vu grand monde entrer dans le salon indien. S’il vous plait, aidez moi à retrouver le coupable !"
-    },
-    
-    {
-      "type": "paragraphe",
-      "text": "Selon moi, c’est Charles qui a volé les griffes car il est jaloux que l’invention appartienne aux frères Lumière et pas à lui."
-    }]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/images/louis_lumiere.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "Louis Lumière"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Je suis le frère cadet de la famille."
+        },
+        {
+          "type": "paragraphe",
+          "text": "Passionné de chimie, je me suis illustré très tôt en créant des plaques photos plus robustes que celles qui existaient à l’époque. J’embauche alors toute la famille pour produire “l’étiquette bleue lumière”."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Voyant que mon frère avait échoué, il m'a gentiment proposé de réfléchir à cet appareil qui sera bientôt révolutionnaire. Comment faire ? C’est au cœur de l’hiver dernier que j’ai eu l’idée ingénieuse de transformer les trous sur les bords de la pellicule et d’utiliser une autre méthode que celle de Thomas Edison pour faire dérouler la pellicule. Cela m’a permis avec l’aide de Charles Moisson de réaliser le cinématographe. Bien sûr, comme depuis le début, l’amitié avec mon frère et notre accord font que l’invention sera associée à nos deux noms ; et ce ne sont pas nos épouses (qui sont sœurs) qui vont s’y opposer."
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Vers 15h50, j’étais avec Charles entrain de terminer le montage et c’est alors qu’il m’a dit qu’il manquait les griffes. Je suis devenu tout pâle, et je vous ai alors appelé pour m’aider à retrouver le voleur ! Hormis ma famille, Clément et Thomas qui sont venus me souhaiter bonne chance, je n’ai pas vu grand monde entrer dans le salon indien. S’il vous plait, aidez moi à retrouver le coupable !"
+        },
+
+        {
+          "type": "paragraphe",
+          "text": "Selon moi, c’est Charles qui a volé les griffes car il est jaloux que l’invention appartienne aux frères Lumière et pas à lui."
+        }
+      ]
     }
   ],
-  "resolutionTitre":"Qui a volé les griffes du cinématographe ?",
-  "resolutionPersonnages":[
-    {"id":1,
-    "name":"Auguste Lumière",
-  "image":"assets/images/auguste_lumiere.jpg",
-  "coupable":false},
-{"id":2,
-"name":"Charles Moisson",
-"image":"assets/images/charles_moisson.jpg",
-"coupable":false},
-{"id":3,
-"name":"Jeanne Lumière",
-"image":"assets/images/jeanne_lumiere.jpg",
-"coupable":true},
-{"id":4,
-"name":"Thomas Edison",
-"image":"assets/images/thomas_edison.jpg",
-"coupable":false},
-  {"id":5,
-  "name":"Louis Lumière",
-"image":"assets/images/louis_lumiere.jpg",
-"coupable":false}
+  "resolutionTitre": "Qui a volé les griffes du cinématographe ?",
+  "resolutionPersonnages": [
+    {
+      "id": 1,
+      "name": "Auguste Lumière",
+      "image": "assets/images/auguste_lumiere.jpg",
+      "coupable": false
+    },
+    {
+      "id": 2,
+      "name": "Charles Moisson",
+      "image": "assets/images/charles_moisson.jpg",
+      "coupable": false
+    },
+    {
+      "id": 3,
+      "name": "Jeanne Lumière",
+      "image": "assets/images/jeanne_lumiere.jpg",
+      "coupable": true
+    },
+    {
+      "id": 4,
+      "name": "Thomas Edison",
+      "image": "assets/images/thomas_edison.jpg",
+      "coupable": false
+    },
+    {
+      "id": 5,
+      "name": "Louis Lumière",
+      "image": "assets/images/louis_lumiere.jpg",
+      "coupable": false
+    }
   ]
 }
