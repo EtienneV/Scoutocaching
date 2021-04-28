@@ -14,6 +14,8 @@ import canuts_loader from '@assets/content/canuts_loader.json';
 import gones_loader from '@assets/content/gones_loader.json';
 import { ModalChangeTerreComponent } from '../modal-changeTerre/modal-changeTerre.component';
 
+import { StatsService } from '../../services/stats.service';
+
 
 declare var Papa: any;
 
@@ -57,7 +59,7 @@ export class MapComponent implements OnInit, OnChanges {
   };
 
 
-  constructor(private httpClient: HttpClient, private modalService: NgbModal, private cookieService: CookieService) {
+  constructor(private httpClient: HttpClient, private modalService: NgbModal, private cookieService: CookieService, private StatsService: StatsService) {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpcHNvbmR1bGVlIiwiYSI6ImQzM2UzYmQxZTFjNjczZWMyY2VlMzQ5NmM2MzEzYWRmIn0.0iPy8Qyw2FjGSxawGZxW8A';
 
@@ -123,7 +125,7 @@ export class MapComponent implements OnInit, OnChanges {
     }
 
 
-    
+
     that.loadGroupes();
     that.loadMap();
     var item = window.document.getElementById('groupesVisibilitySelectorShow');
@@ -132,23 +134,23 @@ export class MapComponent implements OnInit, OnChanges {
     item.onclick =  function(e){that.changeGroupesVisibility(e);}
     // item.href="javascript:void(0);";
     // item.className="dropdown-item waves-effect waves-light";
-// 
+//
     // var link =  window.document.createElement('input');
     // link.type = 'checkbox';
     // link.name="showGroupes";
     // // link.className = 'pr-2';
-    
-    // var label = document.createElement('label'); 
-              
-    // // assigning attributes for  
-    // // the created label tag  
-    // // label.htmlFor = link.name; 
-      
-    // // appending the created text to  
-    // // the created label tag  
-    // // label.appendChild(document.createTextNode('Voir les groupes')); 
-    
-    // item.textContent = 'Voir les groupes'; 
+
+    // var label = document.createElement('label');
+
+    // // assigning attributes for
+    // // the created label tag
+    // // label.htmlFor = link.name;
+
+    // // appending the created text to
+    // // the created label tag
+    // // label.appendChild(document.createTextNode('Voir les groupes'));
+
+    // item.textContent = 'Voir les groupes';
     // // link.textContent = "<label for='showGroupes'>Afficher les groupes</label>";
     // // var text = document.createTextNode("Afficher les groupes");
     // // link.appendChild(text);
@@ -169,7 +171,7 @@ export class MapComponent implements OnInit, OnChanges {
     var hideBool:boolean;
     for(const clickedLayer of ["groupes","labels"]){
       var visibility = this.map.getLayoutProperty(clickedLayer, 'visibility');
-      
+
       // toggle layer visibility by changing the layout object's visibility property
       if (visibility === 'visible') {
       this.map.setLayoutProperty(clickedLayer, 'visibility', 'none');
@@ -284,7 +286,7 @@ export class MapComponent implements OnInit, OnChanges {
       request.open("GET","../../../assets/content/lumieres_loader.json", false);
       request.send(null);
       this.parcoursSelected = JSON.parse(request.responseText);
-      // this.parcoursSelected = lumieres_loader; //JSON.parse("../../assets/content/gones_loader.json");// 
+      // this.parcoursSelected = lumieres_loader; //JSON.parse("../../assets/content/gones_loader.json");//
     }
     else if (this.terreChoosed == "canuts") {
       var request = new XMLHttpRequest();
@@ -439,11 +441,11 @@ export class MapComponent implements OnInit, OnChanges {
       });
     });
 
-  
+
   }
 
   loadResolution(){
-    const that = this;   
+    const that = this;
     clearInterval(that.refreshment);
     const resolution = that.modalService.open(ModalResolutionComponent, { size: 'lg', centered: true });
     resolution.componentInstance.title=that.parcoursSelected.resolutionTitre;
@@ -459,16 +461,16 @@ export class MapComponent implements OnInit, OnChanges {
         (<HTMLInputElement>document.getElementById("changeTerreButton")).click();
       }else{ // REDIRECTION BETA TESTING -- TO BE REMOVED IN PRODUCTION !!!!!
         let url: string = 'https://forms.gle/2CgCK7SgVR2wJ27u9';
-        window.open(url, '_blank'); 
+        window.open(url, '_blank');
       }
     }, (reason) => {
       console.log(reason);
       console.log(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done"))
-      if(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){ // Le suspect a été trouvé 
+      if(that.cookieService.check('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){ // Le suspect a été trouvé
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
       (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="initial";
       (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="none";
-      }else{      
+      }else{
         (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
         (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="none";
         (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="initial";
@@ -476,7 +478,7 @@ export class MapComponent implements OnInit, OnChanges {
     });
   }
   changeTerre():void{
-    const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true }); 
+    const onboarding = this.modalService.open(ModalChangeTerreComponent, {size: 'lg', centered: true });
     onboarding.result.then((result) => {
       console.log(result);
       this.terreChoosed=result;
@@ -488,10 +490,10 @@ export class MapComponent implements OnInit, OnChanges {
     });
   }
 
-  areAllFound(){    
+  areAllFound(){
     const that = this;
     var answer = true;
-    
+
     for (let i = 0; i < this.parcoursSelected.indices.length; i++) {
       const indice = this.parcoursSelected.indices[i]
       if(that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_" + indice.id)==="treasureNotFound"){
@@ -501,6 +503,11 @@ export class MapComponent implements OnInit, OnChanges {
     if(this.parcoursSelected.indices.length===0){
       answer =false;
     }
+
+    if(that.allFound === false && answer === true) {
+      this.StatsService.sendStatScan(this.parcoursSelected.name, 'Parcours termine', "test"); // Stats
+    }
+
     that.allFound = answer;
   }
 
@@ -516,7 +523,7 @@ export class MapComponent implements OnInit, OnChanges {
       that.areAllFound();
     }
     if(that.allFound && !that.cookieService.get('scoutocaching_caches_' + this.parcoursSelected.name + "_done")){
-      
+
       (<HTMLInputElement>document.getElementById("resolutionDiv")).style.display ="initial";
       (<HTMLInputElement>document.getElementById("changeTerreButton")).style.display="none";
       (<HTMLInputElement>document.getElementById("resolutionButton")).style.display="initial";

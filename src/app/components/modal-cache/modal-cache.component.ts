@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Track } from 'ngx-audio-player';
 
 import { ModalImageComponent } from '../modal-image/modal-image.component';
+import { StatsService } from '../../services/stats.service';
 
 @Component({
   selector: 'app-modal-cache',
@@ -17,7 +18,7 @@ import { ModalImageComponent } from '../modal-image/modal-image.component';
 export class ModalCacheComponent implements OnInit {
   @ViewChild('scanner', { static: false })
   scanner = ZXingScannerComponent as any;
-  
+
 
   /*
   id: 34
@@ -91,7 +92,8 @@ export class ModalCacheComponent implements OnInit {
   availableDevices: MediaDeviceInfo[];
 
 
-  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private CookieService: CookieService, private modalService: NgbModal) { }
+  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private CookieService: CookieService, private modalService: NgbModal,
+    private StatsService: StatsService) { }
 
   ngOnInit(): void {
 
@@ -213,7 +215,7 @@ export class ModalCacheComponent implements OnInit {
     });*/
 
   }
-  
+
  getMobileOperatingSystem() {
   var userAgent = navigator.userAgent || navigator.vendor; // || window.opera;
 
@@ -249,12 +251,14 @@ export class ModalCacheComponent implements OnInit {
 
       console.log("Bon QR Code")
 
+      this.StatsService.sendStatScan(this.tresorProperties.terre, this.tresorProperties.name, "OK"); // Stats
+
       this.found = true;
 
       that.CookieService.set('scoutocaching_caches_' + this.tresorProperties.terre + "_" + this.tresorProperties.id, "treasureFound");
 
       this.indice = JSON.parse(this.tresorProperties.resultat);
-        
+
       const elementsToBeRemoved = [];
 
       for (let i = 0; i < this.indice.length; i++) {
@@ -281,7 +285,7 @@ export class ModalCacheComponent implements OnInit {
 
         }
         if (element.type == "video" || element.type == "image" ) {
-          
+
           if (element.url != null) {
             element.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(element.url)
             console.log(element.trustedUrl)
@@ -313,6 +317,8 @@ export class ModalCacheComponent implements OnInit {
       //this.activeModal.close(true);
     }
     else { // Sinon, on informe l'utilisateur que le qr code n'a pas été validé pour cette cache
+      this.StatsService.sendStatScan(this.tresorProperties.terre, this.tresorProperties.name, "KO"); // Stats
+
       alert("Ce QR Code ne correspond pas à la cache.");
     }
 
@@ -334,15 +340,17 @@ export class ModalCacheComponent implements OnInit {
     this.scannerOpen=false;
     this.userInputOpen=true;
   }
-  checkInput(){    
+  checkInput(){
     const answer = (<HTMLInputElement>document.getElementById("code")).value;
     this.onCodeResult(answer);
   }
-  
+
   startScanner(id) {
 
     this.scannerOpen = true;
     this.userInputOpen = false;
+
+
 
     //console.log(id)
     //this.id = id; // Id cache
@@ -360,7 +368,7 @@ export class ModalCacheComponent implements OnInit {
 
   help() {
     if(this.tresorProperties.solution !== undefined) {
-      if(confirm("Regarder l'indice supplémentaire ?")) {  
+      if(confirm("Regarder l'indice supplémentaire ?")) {
         if(this.tresorProperties.solution !== undefined) {
           //alert(this.tresorProperties.solution)
 
