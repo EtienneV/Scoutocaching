@@ -74,13 +74,11 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": [
-        {
-          "type": "image",
-          "url": "assets/content/gones/page_de_garde.png",
-          "trustedUrl": {}
-        }
-      ]
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/page_de_garde.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 3,
@@ -119,13 +117,11 @@
           "text": "To wo mkmro cyec vo qbkxn ombkx"
         }
       ],
-      "resultat": [
-        {
-          "type": "image",
-          "url": "assets/content/gones/concours.jpg",
-          "trustedUrl": {}
-        }
-      ]
+      "resultat": [{
+        "type": "image",
+        "url": "assets/content/gones/concours.png",
+        "trustedUrl": {}
+      }]
     },
     {
       "id": 5,

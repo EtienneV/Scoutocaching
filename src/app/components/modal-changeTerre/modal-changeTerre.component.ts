@@ -12,38 +12,17 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ModalChangeTerreComponent implements OnInit {
 
-  private lumieres_loader;
-  private gones_loader;
-  private canuts_loader;
-  showStart = true
+  lumieres_loader;
+  gones_loader;
+  canuts_loader;
+  showStart = false
   showTerreContent = false
-  showTerreChoice = false
+  showTerreChoice = true
   header: any;
   footer: any;
   title = "Territoire Lyon levant"
   choice: string;
   content = [
-    // {
-    //   type: "titre",
-    //   text: "Titre de l'indice"
-    // },
-    // {
-    //   type: "paragraphe",
-    //   text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat tempus ipsum, ac accumsan enim malesuada sed. Integer dictum lectus ex. In elementum mi id magna dignissim vehicula. Praesent sit amet vulputate nulla. Donec arcu sem, aliquet nec ligula a, varius aliquet nunc. Sed vestibulum ipsum quam, in auctor nisl finibus vitae. Quisque a faucibus turpis. Mauris mauris metus, rhoncus in iaculis luctus, rutrum at lectus. Vivamus facilisis et elit nec cursus. Mauris dignissim pretium erat. In eleifend varius commodo. Curabitur et pulvinar elit, sit amet fermentum nunc. Integer cursus elementum urna eget auctor."
-    // },
-    // {
-    //   type: "titre",
-    //   text: "Vidéo"
-    // },
-    // {
-    //   type: "video",
-    //   url: "https://www.youtube.com/embed/1Rk1K5Mmnbg",
-    //   trustedUrl: {}
-    // },
-    // {
-    //   type: "titre",
-    //   text: "Image"
-    // },
     {
       type: "bouton",
       text: "Terre des Gones",
@@ -64,9 +43,15 @@ export class ModalChangeTerreComponent implements OnInit {
     }
   ]
 
-  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private cookieService: CookieService) { }
+  constructor(public activeModal: NgbActiveModal, private sanitizer: DomSanitizer, private cookieService: CookieService) {
+    // this.gones_loader= gones_loader;
+    // this.lumieres_loader =lumieres_loader;
+    // this.canuts_loader=canuts_loader;
+   }
 
   async ngOnInit(): Promise<void> {
+  // ngOnInit(){
+    this.start();
     await import("../../../assets/content/lumieres_loader.json").then(data => {
       this.lumieres_loader = data;
     });
@@ -76,10 +61,10 @@ export class ModalChangeTerreComponent implements OnInit {
     await import("../../../assets/content/gones_loader.json").then(data => {
       this.gones_loader = data;
     });
-    this.start();
   }
 
   validContent(): void {
+    console.log(this.content)
     const elementsToBeRemoved = [];
     for (let i = 0; i < this.content.length; i++) {
       const element = this.content[i];
@@ -102,10 +87,14 @@ export class ModalChangeTerreComponent implements OnInit {
     for (var i = elementsToBeRemoved.length - 1; i >= 0; i--) {
       this.content.splice(elementsToBeRemoved[i], 1);
     }
+    console.log(this.content)
   }
   start(): void {
+    this.header = null;
+    this.footer = null;
     this.showStart = false;
     this.showTerreChoice = true;
+    this.showTerreContent=false;
     this.title = "Changer de Terre"
     this.content = [
     {
@@ -141,21 +130,25 @@ export class ModalChangeTerreComponent implements OnInit {
     if (e === "Terre des Gones") {
       this.choice = "gones";
       this.content = this.deepCopy(this.gones_loader.description);
+      // this.content = this.deepCopy(this.gones_loader.description);
     }
     else if (e === "Terre des Lumieres") {
       this.choice = "lumieres";
       this.content = this.deepCopy(this.lumieres_loader.description);
+      // this.content = this.deepCopy(this.lumieres_loader.description);
       // console.log("Lumières");
     }
     else {
       this.choice = "canuts";
       this.content = this.deepCopy(this.canuts_loader.description);
+      // this.content = this.deepCopy(this.canuts_loader.description);
       // const json:any = lumiere_loader;
       // console.log("Canuts");
     }
     this.title = e;
     this.validContent();
     this.showTerreChoice = false;
+    this.showStart = false;
     this.showTerreContent = true;
     this.header = this.content.splice(0, 1)[0];
     this.footer = this.content.pop();
