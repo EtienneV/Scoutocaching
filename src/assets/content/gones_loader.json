@@ -45,22 +45,26 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": [{
-        "type":"titre",
-        "text":"Albert, chef de clan des Grand Trou"
-      },
-      {"type": "paragraphe",
-        "text": "On était au champ de la Garde jeudi après-midi. Les Clochettes nous ont attaqué pour voler notre trésor de guerre… elles étaient bien trop nombreuses, on a dû le leur laisser. Mais on compte bien le récupérer, la prochaine fois ! On va mieux se préparer et tous les gars seront présents cette fois-ci, on ne va pas se refaire avoir ! Jeudi n’était pas un bon jour pour nous…"
-      },
-      {"type": "paragraphe",
-        "text": "Vous savez, cette guerre avec les Clochettes dure depuis des années, nos grands frères avant nous les ont combattus, et cela depuis plusieurs générations. Et au fur et à mesure le trésor grossit ! J’avoue que je ne sais pas vraiment pourquoi tout cela a commencé, mais maintenant c’est une question d’honneur ! En tant que chef de clan je me dois de maintenir cet honneur sauf, et de ramener le trésor à Grand Trou ! "
-      },
-      {"type": "paragraphe",
-        "text": "Déjà qu’il y a deux semaines de ça tout le monde s’est moqué quand on est rentrés les mains pleines de colle… On voulait juste deux trois pommes pour le goûter, on ne faisait pas de mal…"
-      },
-      {"type": "paragraphe",
-        "text": "L’honneur doit être sauvé ! "
-      }]
+      "resultat": [
+        {
+          "type": "titre",
+          "text": "Albert, chef de clan des Grand Trou"
+        },
+        {
+          "type": "paragraphe",
+          "text": "On était au champ de la Garde jeudi après-midi. Les Clochettes nous ont attaqué pour voler notre trésor de guerre… elles étaient bien trop nombreuses, on a dû le leur laisser. Mais on compte bien le récupérer, la prochaine fois ! On va mieux se préparer et tous les gars seront présents cette fois-ci, on ne va pas se refaire avoir ! Jeudi n’était pas un bon jour pour nous…"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Vous savez, cette guerre avec les Clochettes dure depuis des années, nos grands frères avant nous les ont combattus, et cela depuis plusieurs générations. Et au fur et à mesure le trésor grossit ! J’avoue que je ne sais pas vraiment pourquoi tout cela a commencé, mais maintenant c’est une question d’honneur ! En tant que chef de clan je me dois de maintenir cet honneur sauf, et de ramener le trésor à Grand Trou ! "
+        },
+        {
+          "type": "paragraphe",
+          "text": "Déjà qu’il y a deux semaines de ça tout le monde s’est moqué quand on est rentrés les mains pleines de colle… On voulait juste deux trois pommes pour le goûter, on ne faisait pas de mal…"
+        },
+        { "type": "paragraphe", "text": "L’honneur doit être sauvé ! " }
+      ],
+      "solution": "assets/solutions/gones/felix_faure.jpg"
     },
     {
       "id": 2,
@@ -74,11 +78,14 @@
           "trustedUrl": {}
         }
       ],
-      "resultat": [{
-        "type": "image",
-        "url": "assets/content/gones/page_de_garde.png",
-        "trustedUrl": {}
-      }]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/content/gones/page_de_garde.png",
+          "trustedUrl": {}
+        }
+      ],
+      "solution": "assets/solutions/gones/confluence.jpg"
     },
     {
       "id": 3,
@@ -97,14 +104,15 @@
           "type": "audio",
           "url": "assets/content/gones/Clochettes.mp3",
           "trustedUrl": {},
-          "playlist" : []
+          "playlist": []
         },
         {
           "type": "image",
           "url": "assets/content/gones/gerland.gif",
           "trustedUrl": {}
         }
-      ]
+      ],
+      "solution": "assets/solutions/gones/gerland.jpg"
     },
     {
       "id": 4,
@@ -121,11 +129,13 @@
           "text": "To wo mkmro cyec vo qbkxn ombkx"
         }
       ],
-      "resultat": [{
-        "type": "image",
-        "url": "assets/content/gones/concours.png",
-        "trustedUrl": {}
-      }],
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/content/gones/concours.png",
+          "trustedUrl": {}
+        }
+      ],
       "solution": "assets/solutions/gones/monplaisir.jpg"
     },
     {
@@ -144,9 +154,10 @@
           "type": "audio",
           "url": "assets/content/gones/Charreard.mp3",
           "trustedUrl": {},
-          "playlist" : []
+          "playlist": []
         }
-      ]
+      ],
+      "solution": "assets/solutions/gones/parilly.jpg"
     },
     {
       "id": 6,
@@ -159,47 +170,59 @@
           "text": "A l’abri des intempéries, sous la lumière qui illumine la nuit"
         }
       ],
-      "resultat": [ {
-        "type": "image",
-        "url": "assets/content/gones/Lignes_ecriture.jpg",
-        "trustedUrl": {}
-      },
-      {
-        "type":"titre",
-        "text":"« Le Bouillon », surveillant de l’école de Corbas"
-      },
-      {
-        "type":"paragraphe",
-        "text":"Jeudi après-midi tous les petits étaient avec moi. Vous ne croyez pas que je les aurais laissés libres après les dérangements de la veille ? Il faut qu’ils apprennent ces petits garnements qu’ici ce n’est pas eux qui font la loi… A croire que tout leur est permis à la maison ! Heureusement que je suis là pour les reprendre en main, après qu’est-ce que ça va donner… de la racaille, c’est tout ce qu’ils vont devenir ! Regardez, ils ont passé l’après-midi à recopier ces lignes d’écriture. Ça leur apprendra à se battre comme des chiffonniers. Y’en a bien un ou deux qui a essayé de s’échapper de la retenue, mais j’ai l’œil, pas un seul n’a pu sortir d’ici avant tard le soir !"
-      },
-      {
-        "type":"paragraphe",
-        "text":"Vous savez, c’est ici que se fait leur éducation, ils manquent de personnes pouvant leur tenir tête ! Si seulement Madame Faure n’était pas partie à la retraite… Elle les menait à la baguette ! Enfin à la règle si je peux me permettre un peu d’humour… »"
-      }
-    ]
+      "resultat": [
+        {
+          "type": "image",
+          "url": "assets/content/gones/Lignes_ecriture.jpg",
+          "trustedUrl": {}
+        },
+        {
+          "type": "titre",
+          "text": "« Le Bouillon », surveillant de l’école de Corbas"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Jeudi après-midi tous les petits étaient avec moi. Vous ne croyez pas que je les aurais laissés libres après les dérangements de la veille ? Il faut qu’ils apprennent ces petits garnements qu’ici ce n’est pas eux qui font la loi… A croire que tout leur est permis à la maison ! Heureusement que je suis là pour les reprendre en main, après qu’est-ce que ça va donner… de la racaille, c’est tout ce qu’ils vont devenir ! Regardez, ils ont passé l’après-midi à recopier ces lignes d’écriture. Ça leur apprendra à se battre comme des chiffonniers. Y’en a bien un ou deux qui a essayé de s’échapper de la retenue, mais j’ai l’œil, pas un seul n’a pu sortir d’ici avant tard le soir !"
+        },
+        {
+          "type": "paragraphe",
+          "text": "Vous savez, c’est ici que se fait leur éducation, ils manquent de personnes pouvant leur tenir tête ! Si seulement Madame Faure n’était pas partie à la retraite… Elle les menait à la baguette ! Enfin à la règle si je peux me permettre un peu d’humour… »"
+        }
+      ],
+      "solution": "assets/solutions/gones/desgenettes.jpg"
     }
   ],
-  "resolutionTitre":"Qui a donc volé Félix à la mère Faure ?",
-  "resolutionPersonnages":[
-    {"id":1,
-    "name":"Charreard",
-    "image":"assets/content/gones/Accusation_Charreard.jpeg",
-    "coupable":false},
-    {"id":2,
-    "name":"Clochettes",
-    "image":"assets/content/gones/Accusation_Clochettes.jpeg",
-    "coupable":false},
-    {"id":3,
-      "name":"La Mouche",
-      "image":"assets/content/gones/Accusation_La_Mouche.jpeg",
-      "coupable":false},
-    {"id":4,
-      "name":"Corbas",
-      "image":"assets/content/gones/Accusation_Corbas.jpg",
-      "coupable":false},
-      {"id":5,
-        "name":"Grand Trou",
-        "image":"assets/content/gones/Accusation_Grand_Trou.jpeg",
-        "coupable":true}
-      ]
+  "resolutionTitre": "Qui a donc volé Félix à la mère Faure ?",
+  "resolutionPersonnages": [
+    {
+      "id": 1,
+      "name": "Charreard",
+      "image": "assets/content/gones/Accusation_Charreard.jpeg",
+      "coupable": false
+    },
+    {
+      "id": 2,
+      "name": "Clochettes",
+      "image": "assets/content/gones/Accusation_Clochettes.jpeg",
+      "coupable": false
+    },
+    {
+      "id": 3,
+      "name": "La Mouche",
+      "image": "assets/content/gones/Accusation_La_Mouche.jpeg",
+      "coupable": false
+    },
+    {
+      "id": 4,
+      "name": "Corbas",
+      "image": "assets/content/gones/Accusation_Corbas.jpg",
+      "coupable": false
+    },
+    {
+      "id": 5,
+      "name": "Grand Trou",
+      "image": "assets/content/gones/Accusation_Grand_Trou.jpeg",
+      "coupable": true
+    }
+  ]
 }
