@@ -227,13 +227,12 @@
     {
       "id": 5,
       "name": "Bellecombe",
-      "coords": "45.765152978333475, 4.866998094635761",
+      "coords": "45.765883, 4.867144",
       "qr_secret": "57131559",
       "indice": [
         {
-          "type": "image",
-          "url": "assets/images/indice_bellecombe.png",
-          "trustedUrl": {}
+          "type": "paragraphe",
+          "text": "Il est important de regarder les règles pour stationner sa voiture"
         }
       ],
       "resultat": [
