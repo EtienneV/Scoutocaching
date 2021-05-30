@@ -341,7 +341,7 @@ export class ModalCacheComponent implements OnInit {
     this.userInputOpen=true;
   }
   checkInput(){
-    const answer = (<HTMLInputElement>document.getElementById("code")).value;
+    const answer = (<HTMLInputElement>document.getElementById("codeManuel")).value;
     this.onCodeResult(answer);
   }
 
