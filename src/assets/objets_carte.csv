@@ -4,7 +4,7 @@ id;type;name;coords;icon;terre;indice_title;indice_text;indice_image;indice_vide
 3;Groupe;Presqu'île;45.75608485326355 4.832188003085623;presquile;;;;;;;secret
 4;Groupe;St Pothin;45.766172421950294, 4.846091036600093;stpothin;;;;;;;secret
 5;Groupe;La Guillotière;45.74664447933739, 4.8392979099123545;guillotiere;;;;;;;secret
-6;Group;Saint Vincent de Croix Rousse;45.77636542111537, 4.824826111286139;croixrousse;;;;;;;secret
+6;Groupe;Saint Vincent de Croix Rousse;45.77636542111537, 4.824826111286139;croixrousse;;;;;;;secret
 8;Groupe;Saint Nom de Jésus;45.76819585428337, 4.852575625127017;saintnomdejesus;;;;;;;secret
 9;Groupe;Saint Eucher;45.77971826550136, 4.831579998144369;sainteucher;;;;;;;secret
 10;Groupe;Immaculée Conception Saint sacrement;45.75807840076235, 4.851240726979787;immac;;;;;;;secret
