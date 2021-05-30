@@ -70,7 +70,7 @@ export class ModalOnBoardingComponent implements OnInit {
     },
     {
       type: "paragraphe",
-      text: "Bienvenue dans ce jeu de piste"
+      text: "Bienvenue dans ce <b>ScoutoCaching</b> !"
     }];
 
     this.validContent();
@@ -123,19 +123,49 @@ export class ModalOnBoardingComponent implements OnInit {
     this.showExplaination = true;
     this.content = [
       {
+        "type": "titre",
+        "text": "Comment jouer ?"
+      },
+      {
         type:"paragraphe",
-        text:"Le ScoutoGéocaching est la combinaison d’une chasse au trésor et d’un Cluedo."
-      },{
+        text:"Le <b>ScoutoCaching</b>, c'est la combinaison d’une chasse au trésor 🗺️, d'un jeu de géocaching 🧭 et d’un Cluedo 🕵️ !"
+      },
+      {
         type:"paragraphe",
-        text:"Votre objectif : reconstituer l’histoire à partir de différents fragments, auxquels vous accédrez en scannant sur le site les QR codes trouvés dans les caches. "
-      },{
+        text:"Une fois ton parcours choisi (il y en a un par Terre), tu verras sur la carte les endroits où chercher des indices pour résoudre l'enquête 🔍"
+      },
+      {
         type:"paragraphe",
-        text:"Les caches peuvent prendre différentes formes et tailles. Elles sont situées aux coordonnées GPS indiquées sur la carte. Une fois sur place, il vous suffit de les chercher à l’aide de l’indice qui vous est donné. Le QR code se trouve à l’intérieur de la cache. Nous comptons sur vous pour bien les remettre à l’intérieur, et repositionner la cache au même endroit pour les prochains !"
-      },{
+        text:"Un clic sur la position d'un indice te dévoilera l'énigme correspondante. Rends-toi sur place et résouds l'énigme, tu trouveras la cachette contenant le précieux sésame !"
+      },
+      {
         type:"paragraphe",
-        text:"Chaque terre a son histoire, pour trois fois plus de plaisir ! Bonne partie !"
-      }
+        text:"Les cachettes peuvent prendre plusieurs formes, mais ce sont en général de toutes petites boîtes aimantées contenant un QR Code."
+      },
+      {
+        type:"paragraphe",
+        text:"En scannant ce QR code, tu obtiendras l'indice te permettant de progresser dans l'enquête"
+      },
+      {
+        type:"paragraphe",
+        text:"⚠ Attention à bien prendre soin des QR codes et à bien repositionner les caches pour les suivants 😉"
+      },
+      {
+        type:"paragraphe",
+        text:"<b>Bonne chance !!</b>"
+      },
+
     ]
+
+
+
+    /*
+
+
+    Trois parcours (un par Terre de Lyon Levant) te sont proposés.
+
+
+    */
 
   }
   start(): void {

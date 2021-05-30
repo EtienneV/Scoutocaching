@@ -14,7 +14,7 @@
         </div>
 
         <div *ngIf="item.type == 'paragraphe'">
-          <p>{{item.text}}</p>
+          <div [innerHTML]="item.text"></div>
         </div>
 
         <div *ngIf="item.type == 'video'">
@@ -50,7 +50,7 @@
         </div>
 
         <div *ngIf="item.type == 'paragraphe'">
-          <p>{{item.text}}</p>
+          <div [innerHTML]="item.text"></div>
         </div>
 
         <div *ngIf="item.type == 'video'">
@@ -92,7 +92,7 @@
       </div>
 
       <div *ngIf="item.type == 'paragraphe'">
-        <p>{{item.text}}</p>
+        <div [innerHTML]="item.text"></div>
       </div>
 
       <div *ngIf="item.type == 'video'">
@@ -137,7 +137,6 @@
       </div>
 
       <div *ngIf="item.type == 'paragraphe'">
-        <!-- <p>{{item.text}}</p> -->
         <div [innerHTML]="item.text"></div>
       </div>
 

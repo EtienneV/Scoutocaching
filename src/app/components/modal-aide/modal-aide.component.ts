@@ -19,7 +19,7 @@ export class ModalAideComponent implements OnInit {
     },
     {
       type: "paragraphe",
-      text: "A cela:"
+      text: "Ce sont la plupart du temps de petites boîtes aimantées contenant un QR code :"
     },
     {
       type: "image",
@@ -28,7 +28,7 @@ export class ModalAideComponent implements OnInit {
     },
     {
       type: "paragraphe",
-      text: "Même si certaines caches peuvent prendre différentes formes"
+      text: "Dans certains cas, la boîte peut prendre une autre forme."
     },
     {
       type: "titre",
@@ -36,7 +36,7 @@ export class ModalAideComponent implements OnInit {
     },
     {
       type: "paragraphe",
-      text: "Tu trouveras au dos de chaque QR code un code que tu peux renseigner en appuyant sur « Saisie Manuelle »"
+      text: "Les QR codes sont fragiles et il peut arriver qu'ils s'abîment après un certain nombre de manipulations. <br>Dans ce cas, tu trouveras au dos de chaque QR code une suite de chiffres que tu peux renseigner en appuyant sur le bouton <b>« Saisie Manuelle »</b>"
     },
     {
       type: "titre",
@@ -44,7 +44,7 @@ export class ModalAideComponent implements OnInit {
     },
     {
       type: "paragraphe",
-      text: "Non, tu peux continuer ta partie dans plus tard "
+      text: "Non, tu peux continuer ta partie dans plus tard. Ta progression est sauvegardée dans ton navigateur. <br>Tu peux noter les codes de chaque cache découverte pour être sûr de ne pas repartir à zéro."
     },
     {
       type: "titre",
@@ -125,7 +125,7 @@ export class ModalAideComponent implements OnInit {
 
   }
 
-  
+
 
   validContent(): void {
     const elementsToBeRemoved = [];
