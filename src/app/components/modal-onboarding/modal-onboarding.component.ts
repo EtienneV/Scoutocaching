@@ -154,6 +154,15 @@ export class ModalOnBoardingComponent implements OnInit {
         type:"paragraphe",
         text:"<b>Bonne chance !!</b>"
       },
+      {
+        type: "paragraphe",
+        text: "Exemple de cache :"
+      },
+      {
+        type: "image",
+        url: "assets/images/nano_cache_example.jpg",
+        trustedUrl: this.sanitizer.bypassSecurityTrustResourceUrl("assets/images/nano_cache_example.jpg")
+      },
 
     ]
 
