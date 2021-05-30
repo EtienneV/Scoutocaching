@@ -24,7 +24,7 @@
         </div>
 
         <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
-          <img [src]="item.trustedUrl">
+          <img class="imageIndice" [src]="item.trustedUrl">
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div *ngIf="item.type == 'image'" class="ml-auto mr-auto">
-          <img [src]="item.trustedUrl">
+          <img class="imageIndice" [src]="item.trustedUrl">
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
       </div>
 
       <div *ngIf="item.type == 'image'" class="ml-auto mr-auto divImg">
-        <img [src]="item.trustedUrl">
+        <img class="imageIndice" [src]="item.trustedUrl">
       </div>
 
       <div *ngIf="item.type == 'bouton'">
@@ -148,7 +148,7 @@
       </div>
 
       <div *ngIf="item.type == 'image'" class="ml-auto mr-auto divImg">
-        <img class="divImg" [src]="item.trustedUrl">
+        <img  class="imageIndice" [src]="item.trustedUrl">
       </div>
       <div *ngIf="item.type == 'bouton'">
         <button (click)="selectTerre(item.text)"><img [src]="item.url" /> {{item.text}}</button>

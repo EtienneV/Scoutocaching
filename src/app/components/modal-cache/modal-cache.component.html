@@ -46,7 +46,7 @@
             </div>
 
             <div *ngIf="item.type == 'image'">
-              <img style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
+              <img class="imageIndice" [src]="item.trustedUrl">
             </div>
             <div *ngIf="item.type == 'audio'">
               <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false"
@@ -148,7 +148,7 @@
           </div>
 
           <div *ngIf="item.type == 'image'">
-            <img class="ml-auto mr-auto" style="box-sizing: border-box;width: 100%;padding: 5px;" [src]="item.trustedUrl">
+            <img class="ml-auto mr-auto imageIndice" [src]="item.trustedUrl">
           </div>
           <div *ngIf="item.type == 'audio'">
             <ngx-audio-player [playlist]="item.playlist" [displayTitle]="false" [autoPlay]="false"

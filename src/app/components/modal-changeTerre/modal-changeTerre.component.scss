@@ -12,7 +12,7 @@
   border-radius: 4px;
   width: 90%;
 }
-.modal-body > div > div {    
+.modal-body > div > div {
     width: 99%;
     padding: 0.5rem 0.25rem;
     text-align: center;
@@ -110,4 +110,10 @@ div.modal-header > button.terreContent {
 
 .btn-icon {
   width: 25px;
+}
+
+.imageIndice {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
 }
